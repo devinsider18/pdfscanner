@@ -1,11 +1,11 @@
 package ua.com.devinsider.pdfscanner.ui.components
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Article
+import androidx.compose.material.icons.automirrored.filled.Article
+import androidx.compose.material.icons.automirrored.outlined.Article
 import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.History
-import androidx.compose.material.icons.outlined.Article
 import androidx.compose.material.icons.outlined.Bookmark
 import androidx.compose.material.icons.outlined.Build
 import androidx.compose.material.icons.outlined.History
@@ -24,7 +24,7 @@ enum class BottomTab(
     val selectedIcon: ImageVector,
     val unselectedIcon: ImageVector
 ) {
-    DOCUMENTS(R.string.nav_documents, Icons.Filled.Article, Icons.Outlined.Article),
+    DOCUMENTS(R.string.nav_documents, Icons.AutoMirrored.Filled.Article, Icons.AutoMirrored.Outlined.Article),
     RECENT(R.string.nav_recent, Icons.Filled.History, Icons.Outlined.History),
     BOOKMARKS(R.string.nav_bookmarks, Icons.Filled.Bookmark, Icons.Outlined.Bookmark),
     TOOLS(R.string.nav_tools, Icons.Filled.Build, Icons.Outlined.Build)

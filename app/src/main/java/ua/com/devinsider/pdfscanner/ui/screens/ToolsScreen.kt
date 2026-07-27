@@ -23,7 +23,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import android.net.Uri
-import android.provider.OpenableColumns
 import android.widget.Toast
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.Dispatchers
@@ -31,7 +30,9 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
 import ua.com.devinsider.pdfscanner.utils.PdfConverter
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.compose.material.icons.automirrored.filled.CallMerge
+import androidx.compose.material.icons.automirrored.filled.CallSplit
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.google.mlkit.vision.documentscanner.GmsDocumentScannerOptions
 import com.google.mlkit.vision.documentscanner.GmsDocumentScannerOptions.RESULT_FORMAT_PDF
 import com.google.mlkit.vision.documentscanner.GmsDocumentScannerOptions.SCANNER_MODE_FULL
@@ -41,7 +42,6 @@ import ua.com.devinsider.pdfscanner.data.model.DocumentItem
 import ua.com.devinsider.pdfscanner.data.model.DocumentType
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.selection.toggleable
 
 @Composable
 fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
@@ -52,6 +52,14 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
     val documents by viewModel.documents.collectAsState()
     val pdfDocuments = documents.filter { it.type == DocumentType.PDF }
     
+    val convertingToLongImageMsg = stringResource(R.string.converting_to_long_image)
+    val convertingToImagesMsg = stringResource(R.string.converting_to_images)
+    val mergingPdfsMsg = stringResource(R.string.merging_pdfs)
+    val splittingPdfMsg = stringResource(R.string.splitting_pdf)
+    val savedToPicturesMsg = stringResource(R.string.saved_to_pictures)
+    val savedToDownloadsMsg = stringResource(R.string.saved_to_downloads)
+    val failedToConvertMsg = stringResource(R.string.failed_to_convert)
+
     var showMergePicker by remember { mutableStateOf(false) }
     var showSplitPicker by remember { mutableStateOf(false) }
     var showLanguagePicker by remember { mutableStateOf(false) }
@@ -76,11 +84,11 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
         uri?.let {
             scope.launch {
                 isConverting = true
-                Toast.makeText(context, context.getString(R.string.converting_to_long_image), Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, convertingToLongImageMsg, Toast.LENGTH_SHORT).show()
                 val path = uriToTempFile(it)
                 if (path != null) {
                     val success = PdfConverter.convertPdfToLongImage(context, path)
-                    Toast.makeText(context, if (success) context.getString(R.string.saved_to_pictures) else context.getString(R.string.failed_to_convert), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, if (success) savedToPicturesMsg else failedToConvertMsg, Toast.LENGTH_SHORT).show()
                 }
                 isConverting = false
             }
@@ -91,38 +99,12 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
         uri?.let {
             scope.launch {
                 isConverting = true
-                Toast.makeText(context, context.getString(R.string.converting_to_images), Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, convertingToImagesMsg, Toast.LENGTH_SHORT).show()
                 val path = uriToTempFile(it)
                 if (path != null) {
                     val success = PdfConverter.convertPdfToImages(context, path) { _, _ -> }
-                    Toast.makeText(context, if (success) context.getString(R.string.saved_to_pictures) else context.getString(R.string.failed_to_convert), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, if (success) savedToPicturesMsg else failedToConvertMsg, Toast.LENGTH_SHORT).show()
                 }
-                isConverting = false
-            }
-        }
-    }
-
-
-
-    val mergePdfsLauncher = rememberLauncherForActivityResult(ActivityResultContracts.GetMultipleContents()) { uris ->
-        if (uris.isNotEmpty()) {
-            scope.launch {
-                isConverting = true
-                Toast.makeText(context, context.getString(R.string.merging_pdfs), Toast.LENGTH_SHORT).show()
-                val success = PdfConverter.mergePdfs(context, uris)
-                Toast.makeText(context, if (success) context.getString(R.string.saved_to_downloads) else context.getString(R.string.failed_to_convert), Toast.LENGTH_SHORT).show()
-                isConverting = false
-            }
-        }
-    }
-    
-    val splitPdfLauncher = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-        uri?.let {
-            scope.launch {
-                isConverting = true
-                Toast.makeText(context, context.getString(R.string.splitting_pdf), Toast.LENGTH_SHORT).show()
-                val success = PdfConverter.splitPdf(context, it)
-                Toast.makeText(context, if (success) context.getString(R.string.saved_to_downloads) else context.getString(R.string.failed_to_convert), Toast.LENGTH_SHORT).show()
                 isConverting = false
             }
         }
@@ -133,7 +115,7 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
     ) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             val scanResult = com.google.mlkit.vision.documentscanner.GmsDocumentScanningResult.fromActivityResultIntent(result.data)
-            scanResult?.pdf?.let { pdf ->
+            scanResult?.pdf?.let {
                 // Saved PDF logic
             }
         }
@@ -166,8 +148,8 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
         })
         ToolButton(icon = Icons.Default.Image, text = stringResource(R.string.pdf_to_long_image), onClick = { pdfToLongImageLauncher.launch("application/pdf") })
         ToolButton(icon = Icons.Default.PhotoLibrary, text = stringResource(R.string.pdf_to_image), onClick = { pdfToImagesLauncher.launch("application/pdf") })
-        ToolButton(icon = Icons.Default.CallMerge, text = stringResource(R.string.merge_pdfs), onClick = { showMergePicker = true })
-        ToolButton(icon = Icons.Default.CallSplit, text = stringResource(R.string.split_pdf), onClick = { showSplitPicker = true })
+        ToolButton(icon = Icons.AutoMirrored.Filled.CallMerge, text = stringResource(R.string.merge_pdfs), onClick = { showMergePicker = true })
+        ToolButton(icon = Icons.AutoMirrored.Filled.CallSplit, text = stringResource(R.string.split_pdf), onClick = { showSplitPicker = true })
 
         if (showMergePicker) {
             DocumentPickerDialog(
@@ -179,9 +161,9 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
                     val uris = selectedDocs.map { Uri.fromFile(File(it.path)) }
                     scope.launch {
                         isConverting = true
-                        Toast.makeText(context, context.getString(R.string.merging_pdfs), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, mergingPdfsMsg, Toast.LENGTH_SHORT).show()
                         val success = PdfConverter.mergePdfs(context, uris)
-                        Toast.makeText(context, if (success) context.getString(R.string.saved_to_downloads) else context.getString(R.string.failed_to_convert), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, if (success) savedToDownloadsMsg else failedToConvertMsg, Toast.LENGTH_SHORT).show()
                         isConverting = false
                     }
                 }
@@ -199,9 +181,9 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
                         val uri = Uri.fromFile(File(doc.path))
                         scope.launch {
                             isConverting = true
-                            Toast.makeText(context, context.getString(R.string.splitting_pdf), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, splittingPdfMsg, Toast.LENGTH_SHORT).show()
                             val success = PdfConverter.splitPdf(context, uri)
-                            Toast.makeText(context, if (success) context.getString(R.string.saved_to_downloads) else context.getString(R.string.failed_to_convert), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, if (success) savedToDownloadsMsg else failedToConvertMsg, Toast.LENGTH_SHORT).show()
                             isConverting = false
                         }
                     }

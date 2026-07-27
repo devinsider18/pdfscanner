@@ -1,11 +1,8 @@
 package ua.com.devinsider.pdfscanner.ui.screens
 
-import android.Manifest
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Build
 import android.provider.Settings
 import android.os.Environment
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -24,11 +21,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.compose.material.icons.automirrored.filled.CallMerge
+import androidx.compose.material.icons.automirrored.filled.Sort
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.google.mlkit.vision.documentscanner.GmsDocumentScannerOptions
 import com.google.mlkit.vision.documentscanner.GmsDocumentScannerOptions.RESULT_FORMAT_PDF
 import com.google.mlkit.vision.documentscanner.GmsDocumentScannerOptions.SCANNER_MODE_FULL
@@ -47,7 +46,6 @@ import kotlinx.coroutines.withContext
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.Date
-import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -61,6 +59,17 @@ fun DocumentListScreen(
     val searchQuery by viewModel.searchQuery.collectAsState()
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
+    
+    val mergingPdfsMsg = stringResource(R.string.merging_pdfs)
+    val savedToDownloadsMsg = stringResource(R.string.saved_to_downloads)
+    val failedToMergeMsg = stringResource(R.string.failed_to_merge)
+    val shareTitleMsg = stringResource(R.string.share)
+    val convertingToImagesMsg = stringResource(R.string.converting_to_images)
+    val savedToPicturesMsg = stringResource(R.string.saved_to_pictures)
+    val failedToConvertMsg = stringResource(R.string.failed_to_convert)
+    val convertingToLongImageMsg = stringResource(R.string.converting_to_long_image)
+    val splittingPdfMsg = stringResource(R.string.splitting_pdf)
+    val failedToSplitMsg = stringResource(R.string.failed_to_split)
     
     var isSelectionMode by remember { mutableStateOf(false) }
     val selectedDocs = remember { mutableStateListOf<DocumentItem>() }
@@ -190,14 +199,14 @@ fun DocumentListScreen(
                         IconButton(onClick = {
                             val uris = selectedDocs.map { Uri.fromFile(File(it.path)) }
                             scope.launch {
-                                Toast.makeText(context, context.getString(R.string.merging_pdfs), Toast.LENGTH_SHORT).show()
+                                Toast.makeText(context, mergingPdfsMsg, Toast.LENGTH_SHORT).show()
                                 val success = PdfConverter.mergePdfs(context, uris)
-                                conversionResultMessage = if (success) context.getString(R.string.saved_to_downloads) else context.getString(R.string.failed_to_merge)
+                                conversionResultMessage = if (success) savedToDownloadsMsg else failedToMergeMsg
                                 isSelectionMode = false
                                 selectedDocs.clear()
                             }
                         }) {
-                            Icon(Icons.Default.CallMerge, stringResource(R.string.merge_pdfs))
+                            Icon(Icons.AutoMirrored.Filled.CallMerge, stringResource(R.string.merge_pdfs))
                         }
                     }
                     
@@ -210,7 +219,7 @@ fun DocumentListScreen(
                             putParcelableArrayListExtra(Intent.EXTRA_STREAM, ArrayList(uris))
                             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                         }
-                        context.startActivity(Intent.createChooser(intent, context.getString(R.string.share)))
+                        context.startActivity(Intent.createChooser(intent, shareTitleMsg))
                         isSelectionMode = false
                         selectedDocs.clear()
                     }) {
@@ -229,7 +238,7 @@ fun DocumentListScreen(
                     }
                     Box {
                         IconButton(onClick = { sortMenuExpanded = true }) {
-                            Icon(Icons.Default.Sort, stringResource(R.string.sort))
+                            Icon(Icons.AutoMirrored.Filled.Sort, stringResource(R.string.sort))
                         }
                         DropdownMenu(
                             expanded = sortMenuExpanded,
@@ -323,28 +332,28 @@ fun DocumentListScreen(
                             putExtra(Intent.EXTRA_STREAM, uri)
                             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                         }
-                        context.startActivity(Intent.createChooser(intent, context.getString(R.string.share)))
+                        context.startActivity(Intent.createChooser(intent, shareTitleMsg))
                     },
                     onDeleteClick = { documentToDelete = doc },
                     onConvertPdfClick = {
                         scope.launch {
-                            Toast.makeText(context, context.getString(R.string.converting_to_images), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, convertingToImagesMsg, Toast.LENGTH_SHORT).show()
                             val success = PdfConverter.convertPdfToImages(context, doc.path) { _, _ -> }
-                            conversionResultMessage = if (success) context.getString(R.string.saved_to_pictures) else context.getString(R.string.failed_to_convert)
+                            conversionResultMessage = if (success) savedToPicturesMsg else failedToConvertMsg
                         }
                     },
                     onConvertToLongImageClick = {
                         scope.launch {
-                            Toast.makeText(context, context.getString(R.string.converting_to_long_image), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, convertingToLongImageMsg, Toast.LENGTH_SHORT).show()
                             val success = PdfConverter.convertPdfToLongImage(context, doc.path)
-                            conversionResultMessage = if (success) context.getString(R.string.saved_to_pictures) else context.getString(R.string.failed_to_convert)
+                            conversionResultMessage = if (success) savedToPicturesMsg else failedToConvertMsg
                         }
                     },
                     onSplitPdfClick = {
                         scope.launch {
-                            Toast.makeText(context, context.getString(R.string.splitting_pdf), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, splittingPdfMsg, Toast.LENGTH_SHORT).show()
                             val success = PdfConverter.splitPdf(context, Uri.fromFile(File(doc.path)))
-                            conversionResultMessage = if (success) context.getString(R.string.saved_to_downloads) else context.getString(R.string.failed_to_split)
+                            conversionResultMessage = if (success) savedToDownloadsMsg else failedToSplitMsg
                         }
                     },
                     onInfoClick = { documentForInfo = doc }
@@ -401,7 +410,8 @@ fun DocumentListScreen(
             onDismissRequest = { documentForInfo = null },
             title = { Text(stringResource(R.string.file_info)) },
             text = {
-                val sdf = SimpleDateFormat("dd MMM yyyy, HH:mm", Locale.getDefault())
+                val currentLocale = LocalConfiguration.current.locales[0]
+                val sdf = SimpleDateFormat("dd MMM yyyy, HH:mm", currentLocale)
                 Column {
                     Text("${stringResource(R.string.name)}: ${doc.name}")
                     Spacer(modifier = Modifier.height(4.dp))

@@ -1,16 +1,14 @@
 package ua.com.devinsider.pdfscanner.ui.screens
 
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.pdf.PdfRenderer
-import android.net.Uri
 import android.os.ParcelFileDescriptor
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Image
 import androidx.compose.material.icons.filled.PhotoLibrary
 import androidx.compose.material3.*
@@ -31,6 +29,7 @@ import androidx.navigation.NavController
 import ua.com.devinsider.pdfscanner.utils.PdfConverter
 import ua.com.devinsider.pdfscanner.R
 import androidx.compose.ui.res.stringResource
+import androidx.core.graphics.createBitmap
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -39,6 +38,11 @@ fun PdfViewerScreen(
     navController: NavController
 ) {
     val context = LocalContext.current
+    val convertingToLongImageMsg = stringResource(R.string.converting_to_long_image)
+    val convertingToImagesMsg = stringResource(R.string.converting_to_images)
+    val savedToPicturesMsg = stringResource(R.string.saved_to_pictures)
+    val failedToConvertMsg = stringResource(R.string.failed_to_convert)
+
     var pdfRenderer by remember { mutableStateOf<PdfRenderer?>(null) }
     var fileDescriptor by remember { mutableStateOf<ParcelFileDescriptor?>(null) }
     var pageCount by remember { mutableIntStateOf(0) }
@@ -79,7 +83,7 @@ fun PdfViewerScreen(
                 title = { Text(File(filePath).name) },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(Icons.Default.ArrowBack, "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, "Back")
                     }
                 },
                 actions = {
@@ -88,10 +92,10 @@ fun PdfViewerScreen(
                             if (isConverting) return@IconButton
                             isConverting = true
                             scope.launch {
-                                snackbarHostState.showSnackbar(context.getString(R.string.converting_to_long_image))
+                                snackbarHostState.showSnackbar(convertingToLongImageMsg)
                                 val success = PdfConverter.convertPdfToLongImage(context, filePath)
                                 isConverting = false
-                                snackbarHostState.showSnackbar(if (success) context.getString(R.string.saved_to_pictures) else context.getString(R.string.failed_to_convert))
+                                snackbarHostState.showSnackbar(if (success) savedToPicturesMsg else failedToConvertMsg)
                             }
                         }
                     ) {
@@ -102,10 +106,10 @@ fun PdfViewerScreen(
                             if (isConverting) return@IconButton
                             isConverting = true
                             scope.launch {
-                                snackbarHostState.showSnackbar(context.getString(R.string.converting_to_images))
-                                val success = PdfConverter.convertPdfToImages(context, filePath) { current, total -> }
+                                snackbarHostState.showSnackbar(convertingToImagesMsg)
+                                val success = PdfConverter.convertPdfToImages(context, filePath) { _, _ -> }
                                 isConverting = false
-                                snackbarHostState.showSnackbar(if (success) context.getString(R.string.saved_to_pictures) else context.getString(R.string.failed_to_convert))
+                                snackbarHostState.showSnackbar(if (success) savedToPicturesMsg else failedToConvertMsg)
                             }
                         }
                     ) {
@@ -151,10 +155,9 @@ fun PdfPageImage(pdfRenderer: PdfRenderer?, pageIndex: Int) {
             try {
                 val page = pdfRenderer.openPage(pageIndex)
                 // Render at a higher resolution for clarity (e.g. 2x)
-                val destBitmap = Bitmap.createBitmap(
+                val destBitmap = createBitmap(
                     (page.width * density).toInt(),
-                    (page.height * density).toInt(),
-                    Bitmap.Config.ARGB_8888
+                    (page.height * density).toInt()
                 )
                 // White background
                 destBitmap.eraseColor(android.graphics.Color.WHITE)
