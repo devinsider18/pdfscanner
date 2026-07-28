@@ -5,28 +5,24 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlin.serialization)
 }
-
 android {
     namespace = "ua.com.devinsider.pdfscanner"
     compileSdk = 37
     defaultConfig {
         applicationId = "ua.com.devinsider.pdfscanner"
-        minSdk = 31
+        minSdk = 23
         targetSdk = 37
-        versionCode = 2
+        versionCode = 3
         versionName = "1.1"
-
         testInstrumentationRunner = "ua.com.devinsider.pdfscanner.HiltTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
-
         ndk {
-            abiFilters += setOf("arm64-v8a", "x86_64")
+            abiFilters += setOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
             debugSymbolLevel = "FULL"
         }
     }
-
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
@@ -37,25 +33,21 @@ android {
             }
         }
     }
-
     buildFeatures {
         compose = true
         aidl = false
         buildConfig = false
         shaders = false
     }
-
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
 }
-
 ksp {
     arg("room.schemaLocation", "$projectDir/schemas")
 }
-
 dependencies {
     val composeBom = platform(libs.androidx.compose.bom)
     implementation(composeBom)

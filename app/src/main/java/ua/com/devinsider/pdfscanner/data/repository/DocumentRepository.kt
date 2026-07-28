@@ -55,28 +55,11 @@ class DocumentRepository @Inject constructor(
             MediaStore.Files.FileColumns.MIME_TYPE
         )
         
-        val selection = "${MediaStore.Files.FileColumns.MIME_TYPE} IN (?, ?, ?, ?, ?, ?, ?, ?) OR " +
-                "${MediaStore.Files.FileColumns.DATA} LIKE ? OR " +
-                "${MediaStore.Files.FileColumns.DATA} LIKE ? OR " +
-                "${MediaStore.Files.FileColumns.DATA} LIKE ? OR " +
-                "${MediaStore.Files.FileColumns.DATA} LIKE ? OR " +
-                "${MediaStore.Files.FileColumns.DATA} LIKE ? OR " +
-                "${MediaStore.Files.FileColumns.DATA} LIKE ? OR " +
-                "${MediaStore.Files.FileColumns.DATA} LIKE ?"
+        val selection = "${MediaStore.Files.FileColumns.MIME_TYPE} = ? OR ${MediaStore.Files.FileColumns.DATA} LIKE ?"
         
         val selectionArgs = arrayOf(
             "application/pdf",
-            "application/msword",
-            "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-            "application/vnd.ms-excel",
-            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-            "application/vnd.ms-powerpoint",
-            "application/vnd.openxmlformats-officedocument.presentationml.presentation",
-            "text/plain", // Adding just in case, though not requested
-            "%.pdf",
-            "%.doc", "%.docx",
-            "%.xls", "%.xlsx",
-            "%.ppt", "%.pptx"
+            "%.pdf"
         )
         
         try {
@@ -193,13 +176,6 @@ class DocumentRepository @Inject constructor(
     }
 
     private fun determineType(name: String): DocumentType {
-        val lowerName = name.lowercase()
-        return when {
-            lowerName.endsWith(".pdf") -> DocumentType.PDF
-            lowerName.endsWith(".doc") || lowerName.endsWith(".docx") -> DocumentType.WORD
-            lowerName.endsWith(".xls") || lowerName.endsWith(".xlsx") -> DocumentType.EXCEL
-            lowerName.endsWith(".ppt") || lowerName.endsWith(".pptx") -> DocumentType.PPT
-            else -> DocumentType.OTHER
-        }
+        return DocumentType.PDF
     }
 }

@@ -63,19 +63,13 @@ fun DocumentCard(
         ) {
             // Type Badge
             Surface(
-                color = when (document.type) {
-                    DocumentType.PDF -> Color.Red.copy(alpha = 0.2f)
-                    DocumentType.WORD -> Color.Blue.copy(alpha = 0.2f)
-                    DocumentType.EXCEL -> Color.Green.copy(alpha = 0.2f)
-                    DocumentType.PPT -> Color.Unspecified // Orange equivalent later
-                    else -> Color.Gray.copy(alpha = 0.2f)
-                },
+                color = Color.Red.copy(alpha = 0.2f),
                 shape = MaterialTheme.shapes.small,
                 modifier = Modifier.size(48.dp)
             ) {
                 Box(contentAlignment = Alignment.Center) {
                     Text(
-                        text = document.type.name,
+                        text = "PDF",
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.onSurface
                     )
@@ -143,29 +137,27 @@ fun DocumentCard(
                                 onShareClick()
                             }
                         )
-                        if (document.type == DocumentType.PDF) {
-                            DropdownMenuItem(
-                                text = { Text(stringResource(R.string.pdf_to_image)) },
-                                onClick = {
-                                    expandedMenu = false
-                                    onConvertPdfClick()
-                                }
-                            )
-                            DropdownMenuItem(
-                                text = { Text(stringResource(R.string.pdf_to_long_image)) },
-                                onClick = {
-                                    expandedMenu = false
-                                    onConvertToLongImageClick()
-                                }
-                            )
-                            DropdownMenuItem(
-                                text = { Text(stringResource(R.string.split_pdf)) },
-                                onClick = {
-                                    expandedMenu = false
-                                    onSplitPdfClick()
-                                }
-                            )
-                        }
+                        DropdownMenuItem(
+                            text = { Text(stringResource(R.string.pdf_to_image)) },
+                            onClick = {
+                                expandedMenu = false
+                                onConvertPdfClick()
+                            }
+                        )
+                        DropdownMenuItem(
+                            text = { Text(stringResource(R.string.pdf_to_long_image)) },
+                            onClick = {
+                                expandedMenu = false
+                                onConvertToLongImageClick()
+                            }
+                        )
+                        DropdownMenuItem(
+                            text = { Text(stringResource(R.string.split_pdf)) },
+                            onClick = {
+                                expandedMenu = false
+                                onSplitPdfClick()
+                            }
+                        )
                         DropdownMenuItem(
                             text = { Text(stringResource(R.string.file_info)) },
                             onClick = {

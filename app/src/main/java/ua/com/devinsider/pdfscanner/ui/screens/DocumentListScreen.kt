@@ -4,7 +4,11 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Environment
+import androidx.core.content.ContextCompat
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
@@ -82,14 +86,37 @@ fun DocumentListScreen(
     var newFileName by remember { mutableStateOf("") }
     var conversionResultMessage by remember { mutableStateOf<String?>(null) }
     
-    // Permission Handling for Android 11+ (minSdk 31)
-    var hasPermission by remember { mutableStateOf(Environment.isExternalStorageManager()) }
+    // Permission Handling supporting Android 5.0+ (minSdk 21)
+    val checkStoragePermission = remember(context) {
+        {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                Environment.isExternalStorageManager()
+            } else {
+                ContextCompat.checkSelfPermission(
+                    context,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ) == PackageManager.PERMISSION_GRANTED
+            }
+        }
+    }
+
+    var hasPermission by remember { mutableStateOf(checkStoragePermission()) }
     
     val manageStorageLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult(),
         onResult = { 
-            hasPermission = Environment.isExternalStorageManager()
+            hasPermission = checkStoragePermission()
             if (hasPermission) {
+                viewModel.refreshDocuments()
+            }
+        }
+    )
+
+    val legacyStorageLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission(),
+        onResult = { granted ->
+            hasPermission = granted
+            if (granted) {
                 viewModel.refreshDocuments()
             }
         }
@@ -149,10 +176,14 @@ fun DocumentListScreen(
             Text(stringResource(R.string.all_files_access_desc), textAlign = TextAlign.Center)
             Spacer(modifier = Modifier.height(24.dp))
             Button(onClick = {
-                val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION).apply {
-                    data = Uri.fromParts("package", context.packageName, null)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION).apply {
+                        data = Uri.fromParts("package", context.packageName, null)
+                    }
+                    manageStorageLauncher.launch(intent)
+                } else {
+                    legacyStorageLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
                 }
-                manageStorageLauncher.launch(intent)
             }) {
                 Text(stringResource(R.string.grant_permission))
             }
@@ -443,13 +474,7 @@ fun DocumentListScreen(
 }
 
 fun DocumentType.toMimeType(): String {
-    return when(this) {
-        DocumentType.PDF -> "application/pdf"
-        DocumentType.WORD -> "application/msword"
-        DocumentType.EXCEL -> "application/vnd.ms-excel"
-        DocumentType.PPT -> "application/vnd.ms-powerpoint"
-        else -> "*/*"
-    }
+    return "application/pdf"
 }
 
 

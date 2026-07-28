@@ -1,6 +1,6 @@
 package ua.com.devinsider.pdfscanner.data.model
 
-enum class DocumentType { PDF, WORD, EXCEL, PPT, OTHER }
+enum class DocumentType { PDF }
 
 enum class SortOption { DATE_DESC, DATE_ASC, NAME_ASC, NAME_DESC }
 
