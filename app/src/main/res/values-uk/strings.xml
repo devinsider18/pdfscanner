@@ -54,4 +54,12 @@
     <string name="invalid_pdf">Недійсний формат PDF або файл пошкоджено.</string>
     <string name="nav_recent">Недавні</string>
     <string name="nav_bookmarks">Закладки</string>
+    <string name="scanner_launch_error">Помилка запуску сканера. Перевірте оновлення Google Play Services.</string>
+    <string name="task_merge_bg">Завдання об\'єднання додано у фоновий режим</string>
+    <string name="task_convert_bg">Конвертацію запущено у фоні</string>
+    <string name="task_long_image_bg">Створення картинки у фоні</string>
+    <string name="task_split_bg">Розділення PDF у фоні</string>
+    <string name="task_success">Операцію з PDF успішно завершено</string>
+    <string name="task_error">Помилка при обробці PDF</string>
+    <string name="task_critical_error">Критична помилка обробки PDF</string>
 </resources>

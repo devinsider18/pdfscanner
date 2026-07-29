@@ -150,8 +150,11 @@ fun PdfPageImage(pdfRenderer: PdfRenderer?, pageIndex: Int) {
     var bitmap by remember { mutableStateOf<Bitmap?>(null) }
     val density = LocalDensity.current.density
 
-    LaunchedEffect(pdfRenderer, pageIndex) {
-        withContext(Dispatchers.IO) {
+    val scope = rememberCoroutineScope()
+
+    DisposableEffect(pdfRenderer, pageIndex) {
+        var currentBitmap: Bitmap? = null
+        val job = scope.launch(Dispatchers.IO) {
             try {
                 val page = pdfRenderer.openPage(pageIndex)
                 // Render at a higher resolution for clarity (e.g. 2x)
@@ -164,9 +167,15 @@ fun PdfPageImage(pdfRenderer: PdfRenderer?, pageIndex: Int) {
                 page.render(destBitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
                 page.close()
                 bitmap = destBitmap
+                currentBitmap = destBitmap
             } catch (e: Exception) {
                 e.printStackTrace()
             }
+        }
+        onDispose {
+            job.cancel()
+            currentBitmap?.recycle()
+            bitmap = null
         }
     }
 

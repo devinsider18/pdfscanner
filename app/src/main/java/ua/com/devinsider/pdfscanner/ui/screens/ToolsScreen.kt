@@ -158,7 +158,7 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
                 onDismiss = { showMergePicker = false },
                 onConfirm = { selectedDocs ->
                     showMergePicker = false
-                    val uris = selectedDocs.map { Uri.fromFile(File(it.path)) }
+                    val uris = selectedDocs.map { Uri.parse(it.uriString) }
                     scope.launch {
                         isConverting = true
                         Toast.makeText(context, mergingPdfsMsg, Toast.LENGTH_SHORT).show()
@@ -178,7 +178,7 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
                 onConfirm = { selectedDocs ->
                     showSplitPicker = false
                     selectedDocs.firstOrNull()?.let { doc ->
-                        val uri = Uri.fromFile(File(doc.path))
+                        val uri = Uri.parse(doc.uriString)
                         scope.launch {
                             isConverting = true
                             Toast.makeText(context, splittingPdfMsg, Toast.LENGTH_SHORT).show()

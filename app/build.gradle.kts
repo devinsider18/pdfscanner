@@ -83,4 +83,6 @@ dependencies {
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.test.runner)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.work.runtime.ktx)
+    implementation("com.tom-roush:pdfbox-android:2.0.27.0")
 }

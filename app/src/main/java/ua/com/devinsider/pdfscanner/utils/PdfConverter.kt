@@ -13,8 +13,13 @@ import android.provider.MediaStore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
+import com.tom_roush.pdfbox.multipdf.PDFMergerUtility
+import com.tom_roush.pdfbox.multipdf.Splitter
+import com.tom_roush.pdfbox.pdmodel.PDDocument
 
 object PdfConverter {
+    private const val MAX_HEIGHT_FOR_LONG_IMAGE = 15000
+    private const val MAX_PAGES_FOR_LONG_IMAGE = 5
 
     suspend fun convertPdfToImages(context: Context, filePath: String, onProgress: (Int, Int) -> Unit): Boolean = withContext(Dispatchers.IO) {
         try {
@@ -41,7 +46,7 @@ object PdfConverter {
             renderer.close()
             fd.close()
             return@withContext true
-        } catch (e: Exception) {
+        } catch (e: Throwable) {
             e.printStackTrace()
             return@withContext false
         }
@@ -71,6 +76,13 @@ object PdfConverter {
                 page.close()
             }
             
+            // Предотвращение OutOfMemoryError: если высота слишком большая, отказываемся клеить
+            if (totalHeight > MAX_HEIGHT_FOR_LONG_IMAGE || pageCount > MAX_PAGES_FOR_LONG_IMAGE) {
+                renderer.close()
+                fd.close()
+                return@withContext false
+            }
+            
             val longBitmap = Bitmap.createBitmap(maxWidth, totalHeight, Bitmap.Config.ARGB_8888)
             val canvas = Canvas(longBitmap)
             canvas.drawColor(android.graphics.Color.WHITE)
@@ -94,7 +106,7 @@ object PdfConverter {
             renderer.close()
             fd.close()
             return@withContext true
-        } catch (e: Exception) {
+        } catch (e: Throwable) {
             e.printStackTrace()
             return@withContext false
         }
@@ -121,36 +133,23 @@ object PdfConverter {
     suspend fun mergePdfs(context: Context, uris: List<Uri>): Boolean = withContext(Dispatchers.IO) {
         try {
             if (uris.isEmpty()) return@withContext false
-            val newPdf = PdfDocument()
-            
+            val merger = PDFMergerUtility()
+            val tempOutputFile = File(context.cacheDir, "merged_temp_${System.currentTimeMillis()}.pdf")
+            merger.destinationFileName = tempOutputFile.absolutePath
+
             for (uri in uris) {
-                val fd = context.contentResolver.openFileDescriptor(uri, "r") ?: continue
-                val renderer = PdfRenderer(fd)
-                val pageCount = renderer.pageCount
-                
-                for (i in 0 until pageCount) {
-                    val page = renderer.openPage(i)
-                    val width = page.width * 2
-                    val height = page.height * 2
-                    val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-                    bitmap.eraseColor(android.graphics.Color.WHITE)
-                    page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
-                    page.close()
-                    
-                    val pageInfo = PdfDocument.PageInfo.Builder(width, height, newPdf.pages.size + 1).create()
-                    val pdfPage = newPdf.startPage(pageInfo)
-                    pdfPage.canvas.drawBitmap(bitmap, 0f, 0f, null)
-                    newPdf.finishPage(pdfPage)
-                    bitmap.recycle()
+                val inputStream = context.contentResolver.openInputStream(uri)
+                if (inputStream != null) {
+                    merger.addSource(inputStream)
                 }
-                renderer.close()
-                fd.close()
             }
             
-            savePdfToMediaStore(context, newPdf, "Merged_Document_${System.currentTimeMillis()}.pdf")
-            newPdf.close()
+            merger.mergeDocuments(null)
+            
+            savePdfToMediaStore(context, tempOutputFile, "Merged_Document_${System.currentTimeMillis()}.pdf")
+            tempOutputFile.delete()
             return@withContext true
-        } catch (e: Exception) {
+        } catch (e: Throwable) {
             e.printStackTrace()
             return@withContext false
         }
@@ -158,54 +157,46 @@ object PdfConverter {
 
     suspend fun splitPdf(context: Context, uri: Uri): Boolean = withContext(Dispatchers.IO) {
         try {
-            val fd = context.contentResolver.openFileDescriptor(uri, "r") ?: return@withContext false
-            val renderer = PdfRenderer(fd)
-            val pageCount = renderer.pageCount
+            val inputStream = context.contentResolver.openInputStream(uri) ?: return@withContext false
+            val document = PDDocument.load(inputStream)
             
-            if (pageCount <= 1) {
-                renderer.close()
-                fd.close()
+            if (document.numberOfPages <= 1) {
+                document.close()
                 return@withContext false // Cannot split a 1-page PDF
             }
             
-            val half = pageCount / 2
+            val splitter = Splitter()
+            splitter.setSplitAtPage(document.numberOfPages / 2)
             
-            val pdf1 = PdfDocument()
-            val pdf2 = PdfDocument()
+            val splitDocuments = splitter.split(document)
             
-            for (i in 0 until pageCount) {
-                val page = renderer.openPage(i)
-                val width = page.width * 2
-                val height = page.height * 2
-                val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-                bitmap.eraseColor(android.graphics.Color.WHITE)
-                page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
-                page.close()
+            if (splitDocuments.size >= 2) {
+                val tempFile1 = File(context.cacheDir, "split_1_${System.currentTimeMillis()}.pdf")
+                val tempFile2 = File(context.cacheDir, "split_2_${System.currentTimeMillis()}.pdf")
                 
-                val targetPdf = if (i < half) pdf1 else pdf2
-                val pageInfo = PdfDocument.PageInfo.Builder(width, height, targetPdf.pages.size + 1).create()
-                val pdfPage = targetPdf.startPage(pageInfo)
-                pdfPage.canvas.drawBitmap(bitmap, 0f, 0f, null)
-                targetPdf.finishPage(pdfPage)
-                bitmap.recycle()
+                splitDocuments[0].save(tempFile1)
+                splitDocuments[1].save(tempFile2)
+                
+                savePdfToMediaStore(context, tempFile1, "Split_Part1_${System.currentTimeMillis()}.pdf")
+                savePdfToMediaStore(context, tempFile2, "Split_Part2_${System.currentTimeMillis()}.pdf")
+                
+                tempFile1.delete()
+                tempFile2.delete()
             }
             
-            savePdfToMediaStore(context, pdf1, "Split_Part1_${System.currentTimeMillis()}.pdf")
-            savePdfToMediaStore(context, pdf2, "Split_Part2_${System.currentTimeMillis()}.pdf")
-            
-            pdf1.close()
-            pdf2.close()
-            renderer.close()
-            fd.close()
+            for (doc in splitDocuments) {
+                doc.close()
+            }
+            document.close()
             
             return@withContext true
-        } catch (e: Exception) {
+        } catch (e: Throwable) {
             e.printStackTrace()
             return@withContext false
         }
     }
 
-    private fun savePdfToMediaStore(context: Context, document: PdfDocument, displayName: String) {
+    fun savePdfToMediaStore(context: Context, documentFile: File, displayName: String) {
         val resolver = context.contentResolver
         val contentValues = ContentValues().apply {
             put(MediaStore.MediaColumns.DISPLAY_NAME, displayName)
@@ -218,13 +209,14 @@ object PdfConverter {
         val uri = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
             resolver.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, contentValues)
         } else {
-            // For older API fallback, though minSdk is 31
             resolver.insert(MediaStore.Files.getContentUri("external"), contentValues)
         }
         
         uri?.let {
             resolver.openOutputStream(it)?.use { outputStream ->
-                document.writeTo(outputStream)
+                documentFile.inputStream().use { input ->
+                    input.copyTo(outputStream)
+                }
             }
         }
     }

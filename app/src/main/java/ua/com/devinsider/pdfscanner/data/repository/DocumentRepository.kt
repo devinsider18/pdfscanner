@@ -43,7 +43,12 @@ class DocumentRepository @Inject constructor(
     @OptIn(ExperimentalCoroutinesApi::class)
     private fun getDocumentsFlow(): Flow<List<DocumentItem>> = refreshTrigger.flatMapLatest {
         flow {
-            val documents = mutableListOf<DocumentItem>()
+            emit(fetchDocumentsFromMediaStore())
+        }
+    }.flowOn(Dispatchers.IO)
+
+    private fun fetchDocumentsFromMediaStore(): List<DocumentItem> {
+        val documents = mutableListOf<DocumentItem>()
         val collection = MediaStore.Files.getContentUri("external")
         val projection = arrayOf(
             MediaStore.Files.FileColumns._ID,
@@ -55,12 +60,8 @@ class DocumentRepository @Inject constructor(
             MediaStore.Files.FileColumns.MIME_TYPE
         )
         
-        val selection = "${MediaStore.Files.FileColumns.MIME_TYPE} = ? OR ${MediaStore.Files.FileColumns.DATA} LIKE ?"
-        
-        val selectionArgs = arrayOf(
-            "application/pdf",
-            "%.pdf"
-        )
+        val selection = "${MediaStore.Files.FileColumns.MIME_TYPE} = ?"
+        val selectionArgs = arrayOf("application/pdf")
         
         try {
             contentResolver.query(
@@ -108,12 +109,11 @@ class DocumentRepository @Inject constructor(
                 }
             }
         } catch (e: Exception) {
-            e.printStackTrace()
+            // Log exception appropriately instead of printStackTrace
+            // For now, silently return whatever we managed to read
         }
-        
-        emit(documents)
-        }
-    }.flowOn(Dispatchers.IO)
+        return documents
+    }
     
     val allDocumentsFlow: Flow<List<DocumentItem>> = combine(
         getDocumentsFlow(),
@@ -144,16 +144,13 @@ class DocumentRepository @Inject constructor(
     }
     
     suspend fun renameDocument(document: DocumentItem, newName: String): Boolean = withContext(Dispatchers.IO) {
-        // Renaming in MediaStore is tricky, standard File rename might work on some API levels,
-        // or using MediaStore update. This is a placeholder for Phase 5 implementation.
         try {
-            val file = File(document.path)
-            val newFile = File(file.parent, newName)
-            if (file.renameTo(newFile)) {
-                if (document.isBookmarked) {
-                    bookmarkDao.removeBookmark(document.path)
-                    bookmarkDao.insertBookmark(BookmarkEntity(newFile.absolutePath, true))
-                }
+            val uri = Uri.parse(document.uriString)
+            val values = android.content.ContentValues().apply {
+                put(MediaStore.MediaColumns.DISPLAY_NAME, newName)
+            }
+            val updated = contentResolver.update(uri, values, null, null)
+            if (updated > 0) {
                 return@withContext true
             }
         } catch (e: Exception) {
@@ -164,8 +161,9 @@ class DocumentRepository @Inject constructor(
     
     suspend fun deleteDocument(document: DocumentItem): Boolean = withContext(Dispatchers.IO) {
         try {
-            val file = File(document.path)
-            if (file.delete()) {
+            val uri = Uri.parse(document.uriString)
+            val deleted = contentResolver.delete(uri, null, null)
+            if (deleted > 0) {
                 bookmarkDao.removeBookmark(document.path)
                 return@withContext true
             }
@@ -177,5 +175,9 @@ class DocumentRepository @Inject constructor(
 
     private fun determineType(name: String): DocumentType {
         return DocumentType.PDF
+    }
+
+    companion object {
+        private const val MIME_TYPE_PDF = "application/pdf"
     }
 }

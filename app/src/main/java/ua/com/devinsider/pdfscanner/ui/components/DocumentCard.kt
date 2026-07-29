@@ -87,7 +87,8 @@ fun DocumentCard(
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 Row {
-                    val sdf = SimpleDateFormat("dd MMM yyyy, HH:mm", Locale.getDefault())
+                    val currentLocale = androidx.compose.ui.text.intl.Locale.current.platformLocale
+                    val sdf = SimpleDateFormat("dd MMM yyyy, HH:mm", currentLocale)
                     Text(
                         text = sdf.format(Date(document.dateModifiedMillis)),
                         style = MaterialTheme.typography.bodySmall,

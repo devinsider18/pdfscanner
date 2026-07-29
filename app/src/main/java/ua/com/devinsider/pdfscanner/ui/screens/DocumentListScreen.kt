@@ -74,6 +74,11 @@ fun DocumentListScreen(
     val convertingToLongImageMsg = stringResource(R.string.converting_to_long_image)
     val splittingPdfMsg = stringResource(R.string.splitting_pdf)
     val failedToSplitMsg = stringResource(R.string.failed_to_split)
+    val taskMergeBgMsg = stringResource(R.string.task_merge_bg)
+    val taskConvertBgMsg = stringResource(R.string.task_convert_bg)
+    val taskLongImageBgMsg = stringResource(R.string.task_long_image_bg)
+    val taskSplitBgMsg = stringResource(R.string.task_split_bg)
+    val scannerLaunchErrorMsg = stringResource(R.string.scanner_launch_error)
     
     var isSelectionMode by remember { mutableStateOf(false) }
     val selectedDocs = remember { mutableStateListOf<DocumentItem>() }
@@ -86,45 +91,34 @@ fun DocumentListScreen(
     var newFileName by remember { mutableStateOf("") }
     var conversionResultMessage by remember { mutableStateOf<String?>(null) }
     
-    // Permission Handling supporting Android 5.0+ (minSdk 21)
-    val checkStoragePermission = remember(context) {
-        {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                Environment.isExternalStorageManager()
-            } else {
-                ContextCompat.checkSelfPermission(
-                    context,
-                    Manifest.permission.READ_EXTERNAL_STORAGE
-                ) == PackageManager.PERMISSION_GRANTED
+    // Document Import Launcher
+    val importPdfLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.OpenDocument()
+    ) { uri ->
+        uri?.let {
+            scope.launch(Dispatchers.IO) {
+                try {
+                    context.contentResolver.openInputStream(it)?.use { inputStream ->
+                        val tempFile = File(context.cacheDir, "Imported_${System.currentTimeMillis()}.pdf")
+                        FileOutputStream(tempFile).use { outputStream ->
+                            inputStream.copyTo(outputStream)
+                        }
+                    
+                        PdfConverter.savePdfToMediaStore(context, tempFile, "Imported_${System.currentTimeMillis()}.pdf")
+                        tempFile.delete()
+                    }
+                    
+                    withContext(Dispatchers.Main) {
+                        viewModel.refreshDocuments()
+                        Toast.makeText(context, "PDF Imported", Toast.LENGTH_SHORT).show()
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    withContext(Dispatchers.Main) {
+                        viewModel.errorMessage.value = "Error importing PDF: ${e.message}"
+                    }
+                }
             }
-        }
-    }
-
-    var hasPermission by remember { mutableStateOf(checkStoragePermission()) }
-    
-    val manageStorageLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.StartActivityForResult(),
-        onResult = { 
-            hasPermission = checkStoragePermission()
-            if (hasPermission) {
-                viewModel.refreshDocuments()
-            }
-        }
-    )
-
-    val legacyStorageLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.RequestPermission(),
-        onResult = { granted ->
-            hasPermission = granted
-            if (granted) {
-                viewModel.refreshDocuments()
-            }
-        }
-    )
-
-    LaunchedEffect(hasPermission) {
-        if (hasPermission) {
-            viewModel.refreshDocuments()
         }
     }
 
@@ -137,59 +131,40 @@ fun DocumentListScreen(
             scanResult?.pdf?.let { pdf ->
                 scope.launch(Dispatchers.IO) {
                     try {
-                        val inputStream = context.contentResolver.openInputStream(pdf.uri)
-                        val fileName = "Scanned_${System.currentTimeMillis()}.pdf"
-                        val documentsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
-                        val appDir = File(documentsDir, "PDFScanner")
-                        if (!appDir.exists()) {
-                            appDir.mkdirs()
-                        }
-                        val outputFile = File(appDir, fileName)
-                        val outputStream = FileOutputStream(outputFile)
-                        inputStream?.copyTo(outputStream)
-                        inputStream?.close()
-                        outputStream.close()
-                        
-                        withContext(Dispatchers.Main) {
-                            Toast.makeText(context, "Saved to Documents/PDFScanner", Toast.LENGTH_SHORT).show()
-                            viewModel.addAppCreatedFile(outputFile.absolutePath)
-                            viewModel.refreshDocuments()
+                        try {
+                            context.contentResolver.openInputStream(pdf.uri)?.use { inputStream ->
+                                val fileName = "Scanned_${System.currentTimeMillis()}.pdf"
+                                val tempFile = File(context.cacheDir, fileName)
+                                FileOutputStream(tempFile).use { outputStream ->
+                                    inputStream.copyTo(outputStream)
+                                }
+                                
+                                PdfConverter.savePdfToMediaStore(context, tempFile, fileName)
+                                tempFile.delete()
+                            }
+                            
+                            withContext(Dispatchers.Main) {
+                                Toast.makeText(context, savedToDownloadsMsg, Toast.LENGTH_SHORT).show()
+                                viewModel.refreshDocuments()
+                            }
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                            withContext(Dispatchers.Main) {
+                                viewModel.errorMessage.value = "Error saving scanned PDF: ${e.message}"
+                            }
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()
+                        withContext(Dispatchers.Main) {
+                            viewModel.errorMessage.value = "Scanner error: ${e.message}"
+                        }
                     }
                 }
             }
         }
     }
 
-    if (!hasPermission) {
-        Column(
-            modifier = Modifier.fillMaxSize().padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Icon(Icons.Default.Folder, contentDescription = null, modifier = Modifier.size(64.dp), tint = MaterialTheme.colorScheme.primary)
-            Spacer(modifier = Modifier.height(16.dp))
-            Text(stringResource(R.string.all_files_access_required), style = MaterialTheme.typography.titleLarge)
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(stringResource(R.string.all_files_access_desc), textAlign = TextAlign.Center)
-            Spacer(modifier = Modifier.height(24.dp))
-            Button(onClick = {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                    val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION).apply {
-                        data = Uri.fromParts("package", context.packageName, null)
-                    }
-                    manageStorageLauncher.launch(intent)
-                } else {
-                    legacyStorageLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
-                }
-            }) {
-                Text(stringResource(R.string.grant_permission))
-            }
-        }
-        return
-    }
+
 
     Column(modifier = Modifier.fillMaxSize()) {
         // Top Bar Area
@@ -228,23 +203,25 @@ fun DocumentListScreen(
                     val allPdf = selectedDocs.all { it.type == DocumentType.PDF }
                     if (allPdf && selectedDocs.size > 1) {
                         IconButton(onClick = {
-                            val uris = selectedDocs.map { Uri.fromFile(File(it.path)) }
-                            scope.launch {
-                                Toast.makeText(context, mergingPdfsMsg, Toast.LENGTH_SHORT).show()
-                                val success = PdfConverter.mergePdfs(context, uris)
-                                conversionResultMessage = if (success) savedToDownloadsMsg else failedToMergeMsg
-                                isSelectionMode = false
-                                selectedDocs.clear()
-                            }
+                            val uris = selectedDocs.map { Uri.parse(it.uriString) }
+                            conversionResultMessage = taskMergeBgMsg
+                            val data = androidx.work.Data.Builder()
+                                .putString("action", "merge")
+                                .putStringArray("uris", uris.map { it.toString() }.toTypedArray())
+                                .build()
+                            val request = androidx.work.OneTimeWorkRequestBuilder<ua.com.devinsider.pdfscanner.utils.PdfWorker>()
+                                .setInputData(data)
+                                .build()
+                            androidx.work.WorkManager.getInstance(context).enqueue(request)
+                            isSelectionMode = false
+                            selectedDocs.clear()
                         }) {
                             Icon(Icons.AutoMirrored.Filled.CallMerge, stringResource(R.string.merge_pdfs))
                         }
                     }
                     
                     IconButton(onClick = {
-                        val uris = selectedDocs.map { 
-                            FileProvider.getUriForFile(context, "ua.com.devinsider.pdfscanner.fileprovider", File(it.path))
-                        }
+                        val uris = selectedDocs.map { Uri.parse(it.uriString) }
                         val intent = Intent(Intent.ACTION_SEND_MULTIPLE).apply {
                             type = "*/*"
                             putParcelableArrayListExtra(Intent.EXTRA_STREAM, ArrayList(uris))
@@ -285,38 +262,62 @@ fun DocumentListScreen(
             }
         )
         
-        // Scan Button Card
-        ElevatedCard(
+        // Scan & Import Buttons
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
-                .clickable {
-                    val options = GmsDocumentScannerOptions.Builder()
-                        .setGalleryImportAllowed(true)
-                        .setResultFormats(RESULT_FORMAT_PDF)
-                        .setScannerMode(SCANNER_MODE_FULL)
-                        .build()
-                    val scanner = GmsDocumentScanning.getClient(options)
-                    scanner.getStartScanIntent(context as Activity)
-                        .addOnSuccessListener { intentSender ->
-                            scannerLauncher.launch(
-                                androidx.activity.result.IntentSenderRequest.Builder(intentSender).build()
-                            )
-                        }
-                        .addOnFailureListener { e ->
-                            e.printStackTrace()
-                        }
-                },
-            colors = CardDefaults.elevatedCardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
+                .padding(horizontal = 16.dp, vertical = 8.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            Row(
-                modifier = Modifier.padding(16.dp).fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
+            ElevatedCard(
+                modifier = Modifier
+                    .weight(1f)
+                    .clickable {
+                        val options = GmsDocumentScannerOptions.Builder()
+                            .setGalleryImportAllowed(true)
+                            .setResultFormats(RESULT_FORMAT_PDF)
+                            .setScannerMode(SCANNER_MODE_FULL)
+                            .build()
+                        val scanner = GmsDocumentScanning.getClient(options)
+                        scanner.getStartScanIntent(context as Activity)
+                            .addOnSuccessListener { intentSender ->
+                                scannerLauncher.launch(
+                                    androidx.activity.result.IntentSenderRequest.Builder(intentSender).build()
+                                )
+                            }
+                            .addOnFailureListener { e ->
+                                e.printStackTrace()
+                                conversionResultMessage = scannerLaunchErrorMsg
+                            }
+                    },
+                colors = CardDefaults.elevatedCardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
             ) {
-                Icon(Icons.Default.CameraAlt, contentDescription = stringResource(R.string.scan_document), tint = MaterialTheme.colorScheme.onPrimaryContainer)
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(stringResource(R.string.scan_document), color = MaterialTheme.colorScheme.onPrimaryContainer, style = MaterialTheme.typography.titleMedium)
+                Column(
+                    modifier = Modifier.padding(16.dp).fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Icon(Icons.Default.CameraAlt, contentDescription = stringResource(R.string.scan_document), tint = MaterialTheme.colorScheme.onPrimaryContainer)
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(stringResource(R.string.scan_document), color = MaterialTheme.colorScheme.onPrimaryContainer, style = MaterialTheme.typography.titleSmall)
+                }
+            }
+            
+            ElevatedCard(
+                modifier = Modifier
+                    .weight(1f)
+                    .clickable {
+                        importPdfLauncher.launch(arrayOf("application/pdf"))
+                    },
+                colors = CardDefaults.elevatedCardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)
+            ) {
+                Column(
+                    modifier = Modifier.padding(16.dp).fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Icon(Icons.Default.UploadFile, contentDescription = "Import PDF", tint = MaterialTheme.colorScheme.onSecondaryContainer)
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text("Import PDF", color = MaterialTheme.colorScheme.onSecondaryContainer, style = MaterialTheme.typography.titleSmall)
+                }
             }
         }
         
@@ -340,6 +341,7 @@ fun DocumentListScreen(
                                 context.startActivity(intent)
                             } catch (e: Exception) {
                                 e.printStackTrace()
+                                viewModel.errorMessage.value = "No application found to open this file"
                             }
                         }
                     },
@@ -357,7 +359,7 @@ fun DocumentListScreen(
                         newFileName = doc.name
                     },
                     onShareClick = {
-                        val uri = FileProvider.getUriForFile(context, "ua.com.devinsider.pdfscanner.fileprovider", File(doc.path))
+                        val uri = Uri.parse(doc.uriString)
                         val intent = Intent(Intent.ACTION_SEND).apply {
                             type = doc.type.toMimeType()
                             putExtra(Intent.EXTRA_STREAM, uri)
@@ -367,25 +369,37 @@ fun DocumentListScreen(
                     },
                     onDeleteClick = { documentToDelete = doc },
                     onConvertPdfClick = {
-                        scope.launch {
-                            Toast.makeText(context, convertingToImagesMsg, Toast.LENGTH_SHORT).show()
-                            val success = PdfConverter.convertPdfToImages(context, doc.path) { _, _ -> }
-                            conversionResultMessage = if (success) savedToPicturesMsg else failedToConvertMsg
-                        }
+                        conversionResultMessage = taskConvertBgMsg
+                        val data = androidx.work.Data.Builder()
+                            .putString("action", "convert_images")
+                            .putString("path", doc.path)
+                            .build()
+                        val request = androidx.work.OneTimeWorkRequestBuilder<ua.com.devinsider.pdfscanner.utils.PdfWorker>()
+                            .setInputData(data)
+                            .build()
+                        androidx.work.WorkManager.getInstance(context).enqueue(request)
                     },
                     onConvertToLongImageClick = {
-                        scope.launch {
-                            Toast.makeText(context, convertingToLongImageMsg, Toast.LENGTH_SHORT).show()
-                            val success = PdfConverter.convertPdfToLongImage(context, doc.path)
-                            conversionResultMessage = if (success) savedToPicturesMsg else failedToConvertMsg
-                        }
+                        conversionResultMessage = taskLongImageBgMsg
+                        val data = androidx.work.Data.Builder()
+                            .putString("action", "convert_long_image")
+                            .putString("path", doc.path)
+                            .build()
+                        val request = androidx.work.OneTimeWorkRequestBuilder<ua.com.devinsider.pdfscanner.utils.PdfWorker>()
+                            .setInputData(data)
+                            .build()
+                        androidx.work.WorkManager.getInstance(context).enqueue(request)
                     },
                     onSplitPdfClick = {
-                        scope.launch {
-                            Toast.makeText(context, splittingPdfMsg, Toast.LENGTH_SHORT).show()
-                            val success = PdfConverter.splitPdf(context, Uri.fromFile(File(doc.path)))
-                            conversionResultMessage = if (success) savedToDownloadsMsg else failedToSplitMsg
-                        }
+                        conversionResultMessage = taskSplitBgMsg
+                        val data = androidx.work.Data.Builder()
+                            .putString("action", "split")
+                            .putString("uri", doc.uriString)
+                            .build()
+                        val request = androidx.work.OneTimeWorkRequestBuilder<ua.com.devinsider.pdfscanner.utils.PdfWorker>()
+                            .setInputData(data)
+                            .build()
+                        androidx.work.WorkManager.getInstance(context).enqueue(request)
                     },
                     onInfoClick = { documentForInfo = doc }
                 )
@@ -441,7 +455,7 @@ fun DocumentListScreen(
             onDismissRequest = { documentForInfo = null },
             title = { Text(stringResource(R.string.file_info)) },
             text = {
-                val currentLocale = LocalConfiguration.current.locales[0]
+                val currentLocale = androidx.compose.ui.text.intl.Locale.current.platformLocale
                 val sdf = SimpleDateFormat("dd MMM yyyy, HH:mm", currentLocale)
                 Column {
                     Text("${stringResource(R.string.name)}: ${doc.name}")
@@ -468,6 +482,18 @@ fun DocumentListScreen(
             text = { Text(msg) },
             confirmButton = {
                 TextButton(onClick = { conversionResultMessage = null }) { Text(stringResource(R.string.ok)) }
+            }
+        )
+    }
+
+    val viewModelError by viewModel.errorMessage.collectAsState()
+    viewModelError?.let { msg ->
+        AlertDialog(
+            onDismissRequest = { viewModel.clearErrorMessage() },
+            title = { Text("Error") },
+            text = { Text(msg) },
+            confirmButton = {
+                TextButton(onClick = { viewModel.clearErrorMessage() }) { Text(stringResource(R.string.ok)) }
             }
         )
     }

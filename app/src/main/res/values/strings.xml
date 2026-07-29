@@ -54,4 +54,12 @@
     <string name="invalid_pdf">Invalid PDF format or file is corrupted.</string>
     <string name="nav_recent">Recent</string>
     <string name="nav_bookmarks">Bookmarks</string>
+    <string name="scanner_launch_error">Scanner launch failed. Please update Google Play Services.</string>
+    <string name="task_merge_bg">Merge task added to background</string>
+    <string name="task_convert_bg">Conversion started in background</string>
+    <string name="task_long_image_bg">Image creation started in background</string>
+    <string name="task_split_bg">PDF split started in background</string>
+    <string name="task_success">PDF operation successfully completed</string>
+    <string name="task_error">Error processing PDF</string>
+    <string name="task_critical_error">Critical error processing PDF</string>
 </resources>

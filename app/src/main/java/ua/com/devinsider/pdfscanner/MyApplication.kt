@@ -15,9 +15,14 @@
  */
 
 package ua.com.devinsider.pdfscanner
-
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
+import com.tom_roush.pdfbox.android.PDFBoxResourceLoader
 
 @HiltAndroidApp
-class MyApplication : Application()
+class MyApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        PDFBoxResourceLoader.init(applicationContext)
+    }
+}
