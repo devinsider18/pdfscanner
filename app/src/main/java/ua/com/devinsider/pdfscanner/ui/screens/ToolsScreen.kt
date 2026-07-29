@@ -23,7 +23,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import android.net.Uri
-import android.widget.Toast
+import androidx.core.net.toUri
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -49,6 +49,8 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
     val isDarkMode by viewModel.isDarkMode.collectAsState()
     val scope = rememberCoroutineScope()
     var isConverting by remember { mutableStateOf(false) }
+    var conversionResultMessage by remember { mutableStateOf<String?>(null) }
+    val snackbarHostState = remember { SnackbarHostState() }
     val documents by viewModel.documents.collectAsState()
     val pdfDocuments = documents.filter { it.type == DocumentType.PDF }
     
@@ -84,11 +86,11 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
         uri?.let {
             scope.launch {
                 isConverting = true
-                Toast.makeText(context, convertingToLongImageMsg, Toast.LENGTH_SHORT).show()
+                snackbarHostState.showSnackbar(convertingToLongImageMsg)
                 val path = uriToTempFile(it)
                 if (path != null) {
                     val success = PdfConverter.convertPdfToLongImage(context, path)
-                    Toast.makeText(context, if (success) savedToPicturesMsg else failedToConvertMsg, Toast.LENGTH_SHORT).show()
+                    conversionResultMessage = if (success) savedToPicturesMsg else failedToConvertMsg
                 }
                 isConverting = false
             }
@@ -99,11 +101,11 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
         uri?.let {
             scope.launch {
                 isConverting = true
-                Toast.makeText(context, convertingToImagesMsg, Toast.LENGTH_SHORT).show()
+                snackbarHostState.showSnackbar(convertingToImagesMsg)
                 val path = uriToTempFile(it)
                 if (path != null) {
                     val success = PdfConverter.convertPdfToImages(context, path) { _, _ -> }
-                    Toast.makeText(context, if (success) savedToPicturesMsg else failedToConvertMsg, Toast.LENGTH_SHORT).show()
+                    conversionResultMessage = if (success) savedToPicturesMsg else failedToConvertMsg
                 }
                 isConverting = false
             }
@@ -121,11 +123,15 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
         }
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
+    Scaffold(
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
+    ) { paddingValues ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+                .padding(16.dp)
+        ) {
         Text(stringResource(R.string.pdf_tools), style = MaterialTheme.typography.headlineMedium)
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -158,12 +164,12 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
                 onDismiss = { showMergePicker = false },
                 onConfirm = { selectedDocs ->
                     showMergePicker = false
-                    val uris = selectedDocs.map { Uri.parse(it.uriString) }
+                    val uris = selectedDocs.map { it.uriString.toUri() }
                     scope.launch {
                         isConverting = true
-                        Toast.makeText(context, mergingPdfsMsg, Toast.LENGTH_SHORT).show()
+                        snackbarHostState.showSnackbar(mergingPdfsMsg)
                         val success = PdfConverter.mergePdfs(context, uris)
-                        Toast.makeText(context, if (success) savedToDownloadsMsg else failedToConvertMsg, Toast.LENGTH_SHORT).show()
+                        conversionResultMessage = if (success) savedToDownloadsMsg else failedToConvertMsg
                         isConverting = false
                     }
                 }
@@ -178,12 +184,12 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
                 onConfirm = { selectedDocs ->
                     showSplitPicker = false
                     selectedDocs.firstOrNull()?.let { doc ->
-                        val uri = Uri.parse(doc.uriString)
+                        val uri = doc.uriString.toUri()
                         scope.launch {
                             isConverting = true
-                            Toast.makeText(context, splittingPdfMsg, Toast.LENGTH_SHORT).show()
+                            snackbarHostState.showSnackbar(splittingPdfMsg)
                             val success = PdfConverter.splitPdf(context, uri)
-                            Toast.makeText(context, if (success) savedToDownloadsMsg else failedToConvertMsg, Toast.LENGTH_SHORT).show()
+                            conversionResultMessage = if (success) savedToDownloadsMsg else failedToConvertMsg
                             isConverting = false
                         }
                     }
@@ -249,6 +255,18 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
             Spacer(modifier = Modifier.width(8.dp))
             Text(stringResource(R.string.select_language))
         }
+
+        conversionResultMessage?.let { msg ->
+            AlertDialog(
+                onDismissRequest = { conversionResultMessage = null },
+                title = { Text(stringResource(R.string.conversion_result)) },
+                text = { Text(msg) },
+                confirmButton = {
+                    TextButton(onClick = { conversionResultMessage = null }) { Text(stringResource(R.string.ok)) }
+                }
+            )
+        }
+    }
     }
 }
 

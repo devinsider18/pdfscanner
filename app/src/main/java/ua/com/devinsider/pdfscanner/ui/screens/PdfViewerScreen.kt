@@ -48,6 +48,7 @@ fun PdfViewerScreen(
     var pageCount by remember { mutableIntStateOf(0) }
     var isError by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
+    var conversionResultMessage by remember { mutableStateOf<String?>(null) }
     val snackbarHostState = remember { SnackbarHostState() }
     var isConverting by remember { mutableStateOf(false) }
 
@@ -95,7 +96,7 @@ fun PdfViewerScreen(
                                 snackbarHostState.showSnackbar(convertingToLongImageMsg)
                                 val success = PdfConverter.convertPdfToLongImage(context, filePath)
                                 isConverting = false
-                                snackbarHostState.showSnackbar(if (success) savedToPicturesMsg else failedToConvertMsg)
+                                conversionResultMessage = if (success) savedToPicturesMsg else failedToConvertMsg
                             }
                         }
                     ) {
@@ -109,7 +110,7 @@ fun PdfViewerScreen(
                                 snackbarHostState.showSnackbar(convertingToImagesMsg)
                                 val success = PdfConverter.convertPdfToImages(context, filePath) { _, _ -> }
                                 isConverting = false
-                                snackbarHostState.showSnackbar(if (success) savedToPicturesMsg else failedToConvertMsg)
+                                conversionResultMessage = if (success) savedToPicturesMsg else failedToConvertMsg
                             }
                         }
                     ) {
@@ -140,6 +141,17 @@ fun PdfViewerScreen(
                     Spacer(modifier = Modifier.height(8.dp))
                 }
             }
+        }
+        
+        conversionResultMessage?.let { msg ->
+            AlertDialog(
+                onDismissRequest = { conversionResultMessage = null },
+                title = { Text(stringResource(R.string.conversion_result)) },
+                text = { Text(msg) },
+                confirmButton = {
+                    TextButton(onClick = { conversionResultMessage = null }) { Text(stringResource(R.string.ok)) }
+                }
+            )
         }
     }
 }

@@ -2,12 +2,9 @@ package ua.com.devinsider.pdfscanner.ui.screens
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
-import android.provider.Settings
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
-import android.os.Environment
 import androidx.core.content.ContextCompat
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -25,9 +22,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import androidx.core.content.FileProvider
 import androidx.compose.material.icons.automirrored.filled.CallMerge
 import androidx.compose.material.icons.automirrored.filled.Sort
@@ -43,7 +39,6 @@ import ua.com.devinsider.pdfscanner.data.model.SortOption
 import ua.com.devinsider.pdfscanner.ui.components.DocumentCard
 import ua.com.devinsider.pdfscanner.ui.viewmodels.MainViewModel
 import ua.com.devinsider.pdfscanner.utils.PdfConverter
-import android.widget.Toast
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -64,16 +59,8 @@ fun DocumentListScreen(
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     
-    val mergingPdfsMsg = stringResource(R.string.merging_pdfs)
     val savedToDownloadsMsg = stringResource(R.string.saved_to_downloads)
-    val failedToMergeMsg = stringResource(R.string.failed_to_merge)
     val shareTitleMsg = stringResource(R.string.share)
-    val convertingToImagesMsg = stringResource(R.string.converting_to_images)
-    val savedToPicturesMsg = stringResource(R.string.saved_to_pictures)
-    val failedToConvertMsg = stringResource(R.string.failed_to_convert)
-    val convertingToLongImageMsg = stringResource(R.string.converting_to_long_image)
-    val splittingPdfMsg = stringResource(R.string.splitting_pdf)
-    val failedToSplitMsg = stringResource(R.string.failed_to_split)
     val taskMergeBgMsg = stringResource(R.string.task_merge_bg)
     val taskConvertBgMsg = stringResource(R.string.task_convert_bg)
     val taskLongImageBgMsg = stringResource(R.string.task_long_image_bg)
@@ -90,7 +77,25 @@ fun DocumentListScreen(
     var documentForInfo by remember { mutableStateOf<DocumentItem?>(null) }
     var newFileName by remember { mutableStateOf("") }
     var conversionResultMessage by remember { mutableStateOf<String?>(null) }
+    val snackbarHostState = remember { SnackbarHostState() }
     
+    // Storage Permission Launcher for API <= 28
+    val storagePermissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (!isGranted) {
+            viewModel.errorMessage.value = "Storage permission is required on older Android versions to save files"
+        }
+    }
+    
+    LaunchedEffect(Unit) {
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
+            if (ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                storagePermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            }
+        }
+    }
+
     // Document Import Launcher
     val importPdfLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.OpenDocument()
@@ -110,7 +115,7 @@ fun DocumentListScreen(
                     
                     withContext(Dispatchers.Main) {
                         viewModel.refreshDocuments()
-                        Toast.makeText(context, "PDF Imported", Toast.LENGTH_SHORT).show()
+                        conversionResultMessage = "PDF Imported"
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -144,7 +149,7 @@ fun DocumentListScreen(
                             }
                             
                             withContext(Dispatchers.Main) {
-                                Toast.makeText(context, savedToDownloadsMsg, Toast.LENGTH_SHORT).show()
+                                conversionResultMessage = savedToDownloadsMsg
                                 viewModel.refreshDocuments()
                             }
                         } catch (e: Exception) {
@@ -166,8 +171,11 @@ fun DocumentListScreen(
 
 
 
-    Column(modifier = Modifier.fillMaxSize()) {
-        // Top Bar Area
+    Scaffold(
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
+    ) { paddingValues ->
+        Column(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
+            // Top Bar Area
         TopAppBar(
             title = {
                 if (isSelectionMode) {
@@ -203,8 +211,8 @@ fun DocumentListScreen(
                     val allPdf = selectedDocs.all { it.type == DocumentType.PDF }
                     if (allPdf && selectedDocs.size > 1) {
                         IconButton(onClick = {
-                            val uris = selectedDocs.map { Uri.parse(it.uriString) }
-                            conversionResultMessage = taskMergeBgMsg
+                            val uris = selectedDocs.map { it.uriString.toUri() }
+                            scope.launch { snackbarHostState.showSnackbar(taskMergeBgMsg) }
                             val data = androidx.work.Data.Builder()
                                 .putString("action", "merge")
                                 .putStringArray("uris", uris.map { it.toString() }.toTypedArray())
@@ -221,7 +229,7 @@ fun DocumentListScreen(
                     }
                     
                     IconButton(onClick = {
-                        val uris = selectedDocs.map { Uri.parse(it.uriString) }
+                        val uris = selectedDocs.map { it.uriString.toUri() }
                         val intent = Intent(Intent.ACTION_SEND_MULTIPLE).apply {
                             type = "*/*"
                             putParcelableArrayListExtra(Intent.EXTRA_STREAM, ArrayList(uris))
@@ -359,7 +367,7 @@ fun DocumentListScreen(
                         newFileName = doc.name
                     },
                     onShareClick = {
-                        val uri = Uri.parse(doc.uriString)
+                        val uri = doc.uriString.toUri()
                         val intent = Intent(Intent.ACTION_SEND).apply {
                             type = doc.type.toMimeType()
                             putExtra(Intent.EXTRA_STREAM, uri)
@@ -369,7 +377,7 @@ fun DocumentListScreen(
                     },
                     onDeleteClick = { documentToDelete = doc },
                     onConvertPdfClick = {
-                        conversionResultMessage = taskConvertBgMsg
+                        scope.launch { snackbarHostState.showSnackbar(taskConvertBgMsg) }
                         val data = androidx.work.Data.Builder()
                             .putString("action", "convert_images")
                             .putString("path", doc.path)
@@ -380,7 +388,7 @@ fun DocumentListScreen(
                         androidx.work.WorkManager.getInstance(context).enqueue(request)
                     },
                     onConvertToLongImageClick = {
-                        conversionResultMessage = taskLongImageBgMsg
+                        scope.launch { snackbarHostState.showSnackbar(taskLongImageBgMsg) }
                         val data = androidx.work.Data.Builder()
                             .putString("action", "convert_long_image")
                             .putString("path", doc.path)
@@ -391,7 +399,7 @@ fun DocumentListScreen(
                         androidx.work.WorkManager.getInstance(context).enqueue(request)
                     },
                     onSplitPdfClick = {
-                        conversionResultMessage = taskSplitBgMsg
+                        scope.launch { snackbarHostState.showSnackbar(taskSplitBgMsg) }
                         val data = androidx.work.Data.Builder()
                             .putString("action", "split")
                             .putString("uri", doc.uriString)
@@ -405,6 +413,7 @@ fun DocumentListScreen(
                 )
             }
         }
+    }
     }
 
     // Dialogs
@@ -499,6 +508,7 @@ fun DocumentListScreen(
     }
 }
 
+@Suppress("UnusedReceiverParameter")
 fun DocumentType.toMimeType(): String {
     return "application/pdf"
 }
