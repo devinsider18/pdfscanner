@@ -1,14 +1,17 @@
 package ua.com.devinsider.pdfscanner.ui.viewmodels
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import ua.com.devinsider.pdfscanner.R
 import ua.com.devinsider.pdfscanner.data.model.DocumentItem
 import ua.com.devinsider.pdfscanner.data.model.SortOption
 import ua.com.devinsider.pdfscanner.data.repository.AppPreferencesRepository
@@ -17,6 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
+    @ApplicationContext private val context: Context,
     private val documentRepository: DocumentRepository,
     private val appPreferencesRepository: AppPreferencesRepository
 ) : ViewModel() {
@@ -24,6 +28,7 @@ class MainViewModel @Inject constructor(
     val searchQuery = MutableStateFlow("")
     val sortOption = MutableStateFlow(SortOption.DATE_DESC)
     val errorMessage = MutableStateFlow<String?>(null)
+    val isRefreshing = MutableStateFlow(false)
     
     val documents: StateFlow<List<DocumentItem>> = combine(
         documentRepository.allDocumentsFlow,
@@ -56,7 +61,12 @@ class MainViewModel @Inject constructor(
     val isDarkMode = appPreferencesRepository.isDarkMode.stateIn(viewModelScope, SharingStarted.Lazily, null)
 
     fun refreshDocuments() {
-        documentRepository.refreshDocuments()
+        viewModelScope.launch {
+            isRefreshing.value = true
+            documentRepository.refreshDocuments()
+            kotlinx.coroutines.delay(500)
+            isRefreshing.value = false
+        }
     }
 
     fun toggleBookmark(document: DocumentItem) {
@@ -75,7 +85,7 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             val success = documentRepository.deleteDocument(document)
             if (!success) {
-                errorMessage.value = "Failed to delete document"
+                errorMessage.value = context.getString(R.string.failed_to_delete)
             }
         }
     }
@@ -84,7 +94,7 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             val success = documentRepository.renameDocument(document, newName)
             if (!success) {
-                errorMessage.value = "Failed to rename document"
+                errorMessage.value = context.getString(R.string.failed_to_rename)
             }
         }
     }

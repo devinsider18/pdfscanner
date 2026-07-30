@@ -62,4 +62,27 @@
     <string name="task_success">PDF operation successfully completed</string>
     <string name="task_error">Error processing PDF</string>
     <string name="task_critical_error">Critical error processing PDF</string>
+    <string name="import_pdf">Import PDF</string>
+    <string name="pdf_imported">PDF Imported</string>
+    <string name="error_importing_pdf">Error importing PDF: %1$s</string>
+    <string name="failed_to_delete">Failed to delete document</string>
+    <string name="failed_to_rename">Failed to rename document</string>
+    <string name="storage_permission_required">Storage permission is required on older Android versions to save files</string>
+    <string name="camera_permission_required">Camera permission is required to scan documents</string>
+    <string name="failed_photo_to_pdf">Failed to convert photo to PDF</string>
+    <string name="error_opening_camera">Error opening camera: %1$s</string>
+    <string name="scanner_returned_null">Document scanner returned null result</string>
+    <string name="error_saving_scanned_pdf">Error saving scanned PDF: %1$s</string>
+    <string name="failed_process_scanned_pages">Failed to process scanned pages</string>
+    <string name="page_image_uri_null">Page image URI is null</string>
+    <string name="no_scanned_pdf_returned">No scanned PDF or pages returned</string>
+    <string name="scanner_error">Scanner error: %1$s</string>
+    <string name="activity_not_found">Activity not found</string>
+    <string name="scanner_intent_null">Scanner intent is null</string>
+    <string name="no_app_to_open_file">No application found to open this file</string>
+    <string name="error_title">Error</string>
+    <string name="back">Back</string>
+    <string name="page_number">Page %1$d</string>
+    <string name="toggle_bookmark">Toggle Bookmark</string>
+    <string name="more_options">More Options</string>
 </resources>

@@ -55,13 +55,23 @@ fun PdfViewerScreen(
     LaunchedEffect(filePath) {
         withContext(Dispatchers.IO) {
             try {
-                val file = File(filePath)
-                if (file.exists()) {
-                    val fd = ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY)
+                val fd = if (filePath.startsWith("content://") || filePath.startsWith("file://")) {
+                    context.contentResolver.openFileDescriptor(android.net.Uri.parse(filePath), "r")
+                } else {
+                    val file = File(filePath)
+                    if (file.exists()) {
+                        ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY)
+                    } else {
+                        context.contentResolver.openFileDescriptor(android.net.Uri.parse(filePath), "r")
+                    }
+                }
+                if (fd != null) {
                     fileDescriptor = fd
                     val renderer = PdfRenderer(fd)
                     pdfRenderer = renderer
                     pageCount = renderer.pageCount
+                } else {
+                    isError = true
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -84,7 +94,7 @@ fun PdfViewerScreen(
                 title = { Text(File(filePath).name) },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, stringResource(R.string.back))
                     }
                 },
                 actions = {
@@ -168,16 +178,17 @@ fun PdfPageImage(pdfRenderer: PdfRenderer?, pageIndex: Int) {
         var currentBitmap: Bitmap? = null
         val job = scope.launch(Dispatchers.IO) {
             try {
-                val page = pdfRenderer.openPage(pageIndex)
-                // Render at a higher resolution for clarity (e.g. 2x)
-                val destBitmap = createBitmap(
-                    (page.width * density).toInt(),
-                    (page.height * density).toInt()
-                )
-                // White background
-                destBitmap.eraseColor(android.graphics.Color.WHITE)
-                page.render(destBitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
-                page.close()
+                val destBitmap = synchronized(pdfRenderer) {
+                    val page = pdfRenderer.openPage(pageIndex)
+                    val bitmapRes = createBitmap(
+                        (page.width * density).toInt(),
+                        (page.height * density).toInt()
+                    )
+                    bitmapRes.eraseColor(android.graphics.Color.WHITE)
+                    page.render(bitmapRes, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
+                    page.close()
+                    bitmapRes
+                }
                 bitmap = destBitmap
                 currentBitmap = destBitmap
             } catch (e: Exception) {
@@ -194,7 +205,7 @@ fun PdfPageImage(pdfRenderer: PdfRenderer?, pageIndex: Int) {
     if (bitmap != null) {
         Image(
             bitmap = bitmap!!.asImageBitmap(),
-            contentDescription = "Page ${pageIndex + 1}",
+            contentDescription = stringResource(R.string.page_number, pageIndex + 1),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 8.dp),

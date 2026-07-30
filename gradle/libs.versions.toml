@@ -17,11 +17,13 @@ hiltNavigationCompose = "1.4.0"
 junit = "4.13.2"
 kotlin = "2.4.10"
 ksp = "2.3.9"
-nav3Core = "1.1.4"
+nav3Core = "1.1.5"
 lifecycleViewmodelNav3 = "2.11.0"
 navigationCompose = "2.9.8"
 playServicesMlkitDocumentScanner = "16.0.0"
-workRuntimeKtx = "2.9.0"
+workRuntimeKtx = "2.11.2"
+camerax = "1.4.0"
+mlkitText = "16.0.1"
 
 [libraries]
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
@@ -59,6 +61,11 @@ androidx-navigation3-ui = { module = "androidx.navigation3:navigation3-ui", vers
 androidx-lifecycle-viewmodel-navigation3 = { module = "androidx.lifecycle:lifecycle-viewmodel-navigation3", version.ref = "lifecycleViewmodelNav3" }
 play-services-mlkit-document-scanner = { module = "com.google.android.gms:play-services-mlkit-document-scanner", version.ref = "playServicesMlkitDocumentScanner" }
 androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "workRuntimeKtx" }
+androidx-camera-core = { module = "androidx.camera:camera-core", version.ref = "camerax" }
+androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "camerax" }
+androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "camerax" }
+androidx-camera-view = { module = "androidx.camera:camera-view", version.ref = "camerax" }
+mlkit-text-recognition = { module = "com.google.mlkit:text-recognition", version.ref = "mlkitText" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }

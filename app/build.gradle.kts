@@ -12,7 +12,7 @@ android {
         applicationId = "ua.com.devinsider.pdfscanner"
         minSdk = 23
         targetSdk = 37
-        versionCode = 3
+        versionCode = 4
         versionName = "1.1"
         testInstrumentationRunner = "ua.com.devinsider.pdfscanner.HiltTestRunner"
         vectorDrawables {
@@ -84,5 +84,10 @@ dependencies {
     androidTestImplementation(libs.androidx.test.runner)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.androidx.camera.core)
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.androidx.camera.view)
+    implementation(libs.mlkit.text.recognition)
     implementation("com.tom-roush:pdfbox-android:2.0.27.0")
 }

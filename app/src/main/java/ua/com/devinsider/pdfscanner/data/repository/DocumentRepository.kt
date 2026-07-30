@@ -60,7 +60,7 @@ class DocumentRepository @Inject constructor(
             MediaStore.Files.FileColumns.MIME_TYPE
         )
         
-        val selection = "${MediaStore.Files.FileColumns.MIME_TYPE} = ?"
+        val selection = "${MediaStore.Files.FileColumns.MIME_TYPE} = ? OR ${MediaStore.Files.FileColumns.DISPLAY_NAME} LIKE '%.pdf' OR ${MediaStore.Files.FileColumns.DATA} LIKE '%.pdf'"
         val selectionArgs = arrayOf("application/pdf")
         
         try {

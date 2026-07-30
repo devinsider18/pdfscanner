@@ -62,4 +62,27 @@
     <string name="task_success">Операция с PDF успешно завершена</string>
     <string name="task_error">Ошибка при обработке PDF</string>
     <string name="task_critical_error">Критическая ошибка обработки PDF</string>
+    <string name="import_pdf">Импортировать PDF</string>
+    <string name="pdf_imported">PDF импортирован</string>
+    <string name="error_importing_pdf">Ошибка импорта PDF: %1$s</string>
+    <string name="failed_to_delete">Не удалось удалить документ</string>
+    <string name="failed_to_rename">Не удалось переименовать документ</string>
+    <string name="storage_permission_required">Требуется разрешение на хранилище для сохранения файлов</string>
+    <string name="camera_permission_required">Требуется разрешение на камеру для сканирования документов</string>
+    <string name="failed_photo_to_pdf">Не удалось конвертировать фото в PDF</string>
+    <string name="error_opening_camera">Ошибка открытия камеры: %1$s</string>
+    <string name="scanner_returned_null">Сканер документов вернул пустой результат</string>
+    <string name="error_saving_scanned_pdf">Ошибка сохранения отсканированного PDF: %1$s</string>
+    <string name="failed_process_scanned_pages">Не удалось обработать отсканированные страницы</string>
+    <string name="page_image_uri_null">URI изображения страницы пуст</string>
+    <string name="no_scanned_pdf_returned">Не возвращено отсканированных PDF или страниц</string>
+    <string name="scanner_error">Ошибка сканера: %1$s</string>
+    <string name="activity_not_found">Активность не найдена</string>
+    <string name="scanner_intent_null">Интент сканера пуст</string>
+    <string name="no_app_to_open_file">Не найдено приложение для открытия этого файла</string>
+    <string name="error_title">Ошибка</string>
+    <string name="back">Назад</string>
+    <string name="page_number">Страница %1$d</string>
+    <string name="toggle_bookmark">Закладка</string>
+    <string name="more_options">Дополнительные опции</string>
 </resources>

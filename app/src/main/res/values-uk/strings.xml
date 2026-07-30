@@ -62,4 +62,27 @@
     <string name="task_success">Операцію з PDF успішно завершено</string>
     <string name="task_error">Помилка при обробці PDF</string>
     <string name="task_critical_error">Критична помилка обробки PDF</string>
+    <string name="import_pdf">Імпортувати PDF</string>
+    <string name="pdf_imported">PDF імпортовано</string>
+    <string name="error_importing_pdf">Помилка імпорту PDF: %1$s</string>
+    <string name="failed_to_delete">Не вдалося видалити документ</string>
+    <string name="failed_to_rename">Не вдалося перейменувати документ</string>
+    <string name="storage_permission_required">Потрібен доступ до сховища для збереження файлів</string>
+    <string name="camera_permission_required">Потрібен дозвіл на камеру для сканування документів</string>
+    <string name="failed_photo_to_pdf">Не вдалося конвертувати фото в PDF</string>
+    <string name="error_opening_camera">Помилка відкриття камери: %1$s</string>
+    <string name="scanner_returned_null">Сканер документів повернув порожній результат</string>
+    <string name="error_saving_scanned_pdf">Помилка збереження відсканованого PDF: %1$s</string>
+    <string name="failed_process_scanned_pages">Не вдалося обробити відскановані сторінки</string>
+    <string name="page_image_uri_null">URI зображення сторінки порожній</string>
+    <string name="no_scanned_pdf_returned">Не повернуто відсканованих PDF або сторінок</string>
+    <string name="scanner_error">Помилка сканера: %1$s</string>
+    <string name="activity_not_found">Активність не знайдена</string>
+    <string name="scanner_intent_null">Інтент сканера порожній</string>
+    <string name="no_app_to_open_file">Не знайдено програму для відкриття цього файлу</string>
+    <string name="error_title">Помилка</string>
+    <string name="back">Назад</string>
+    <string name="page_number">Сторінка %1$d</string>
+    <string name="toggle_bookmark">Закладка</string>
+    <string name="more_options">Додаткові опції</string>
 </resources>

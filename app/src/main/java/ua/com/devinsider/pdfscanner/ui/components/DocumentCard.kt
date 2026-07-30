@@ -112,13 +112,13 @@ fun DocumentCard(
                 IconButton(onClick = onToggleBookmark) {
                     Icon(
                         imageVector = if (document.isBookmarked) Icons.Filled.Bookmark else Icons.Outlined.BookmarkBorder,
-                        contentDescription = "Toggle Bookmark",
+                        contentDescription = stringResource(R.string.toggle_bookmark),
                         tint = if (document.isBookmarked) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
                 Box {
                     IconButton(onClick = { expandedMenu = true }) {
-                        Icon(Icons.Default.MoreVert, contentDescription = "More Options")
+                        Icon(Icons.Default.MoreVert, contentDescription = stringResource(R.string.more_options))
                     }
                     DropdownMenu(
                         expanded = expandedMenu,
