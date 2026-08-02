@@ -84,7 +84,9 @@ class MainViewModel @Inject constructor(
     fun deleteDocument(document: DocumentItem) {
         viewModelScope.launch {
             val success = documentRepository.deleteDocument(document)
-            if (!success) {
+            if (success) {
+                documentRepository.refreshDocuments()
+            } else {
                 errorMessage.value = context.getString(R.string.failed_to_delete)
             }
         }
@@ -93,7 +95,9 @@ class MainViewModel @Inject constructor(
     fun renameDocument(document: DocumentItem, newName: String) {
         viewModelScope.launch {
             val success = documentRepository.renameDocument(document, newName)
-            if (!success) {
+            if (success) {
+                documentRepository.refreshDocuments()
+            } else {
                 errorMessage.value = context.getString(R.string.failed_to_rename)
             }
         }

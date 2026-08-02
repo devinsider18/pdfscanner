@@ -9,6 +9,8 @@ import android.net.Uri
 import android.os.Environment
 import android.os.ParcelFileDescriptor
 import android.provider.MediaStore
+import androidx.core.graphics.createBitmap
+import androidx.core.net.toUri
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
@@ -24,13 +26,13 @@ object PdfConverter {
     private fun openFileDescriptor(context: Context, pathOrUri: String): ParcelFileDescriptor? {
         return try {
             if (pathOrUri.startsWith("content://") || pathOrUri.startsWith("file://")) {
-                context.contentResolver.openFileDescriptor(Uri.parse(pathOrUri), "r")
+                context.contentResolver.openFileDescriptor(pathOrUri.toUri(), "r")
             } else {
                 val file = File(pathOrUri)
                 if (file.exists()) {
                     ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY)
                 } else {
-                    context.contentResolver.openFileDescriptor(Uri.parse(pathOrUri), "r")
+                    context.contentResolver.openFileDescriptor(pathOrUri.toUri(), "r")
                 }
             }
         } catch (e: Exception) {
@@ -49,7 +51,7 @@ object PdfConverter {
             
             for (i in 0 until pageCount) {
                 val page = renderer.openPage(i)
-                val bitmap = Bitmap.createBitmap(page.width * 2, page.height * 2, Bitmap.Config.ARGB_8888)
+                val bitmap = createBitmap(page.width * 2, page.height * 2, Bitmap.Config.ARGB_8888)
                 bitmap.eraseColor(android.graphics.Color.WHITE)
                 page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
                 page.close()
@@ -96,14 +98,14 @@ object PdfConverter {
                 return@withContext false
             }
             
-            val longBitmap = Bitmap.createBitmap(maxWidth, totalHeight, Bitmap.Config.ARGB_8888)
+            val longBitmap = createBitmap(maxWidth, totalHeight, Bitmap.Config.ARGB_8888)
             val canvas = Canvas(longBitmap)
             canvas.drawColor(android.graphics.Color.WHITE)
             
             var currentY = 0f
             for (i in 0 until pageCount) {
                 val page = renderer.openPage(i)
-                val pageBitmap = Bitmap.createBitmap(page.width * 2, page.height * 2, Bitmap.Config.ARGB_8888)
+                val pageBitmap = createBitmap(page.width * 2, page.height * 2, Bitmap.Config.ARGB_8888)
                 pageBitmap.eraseColor(android.graphics.Color.WHITE)
                 page.render(pageBitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
                 page.close()
@@ -255,51 +257,6 @@ object PdfConverter {
             document.save(tempFile)
             document.close()
             bitmap.recycle()
-
-            savePdfToMediaStore(context, tempFile, fileName)
-            tempFile.delete()
-            return@withContext true
-        } catch (e: Exception) {
-            e.printStackTrace()
-            return@withContext false
-        }
-    }
-
-    suspend fun convertImagesToPdf(context: Context, imageUris: List<Uri>): Boolean = withContext(Dispatchers.IO) {
-        if (imageUris.isEmpty()) return@withContext false
-        try {
-            val document = PDDocument()
-            for (uri in imageUris) {
-                val inputStream = context.contentResolver.openInputStream(uri) ?: continue
-                val bitmap = android.graphics.BitmapFactory.decodeStream(inputStream)
-                inputStream.close()
-                if (bitmap == null) continue
-
-                val page = com.tom_roush.pdfbox.pdmodel.PDPage(
-                    com.tom_roush.pdfbox.pdmodel.common.PDRectangle(bitmap.width.toFloat(), bitmap.height.toFloat())
-                )
-                document.addPage(page)
-
-                val pdImage = try {
-                    com.tom_roush.pdfbox.pdmodel.graphics.image.JPEGFactory.createFromImage(document, bitmap)
-                } catch (_: Exception) {
-                    com.tom_roush.pdfbox.pdmodel.graphics.image.LosslessFactory.createFromImage(document, bitmap)
-                }
-                val contentStream = com.tom_roush.pdfbox.pdmodel.PDPageContentStream(document, page)
-                contentStream.drawImage(pdImage, 0f, 0f, bitmap.width.toFloat(), bitmap.height.toFloat())
-                contentStream.close()
-                bitmap.recycle()
-            }
-
-            if (document.numberOfPages == 0) {
-                document.close()
-                return@withContext false
-            }
-
-            val fileName = "Scanned_${System.currentTimeMillis()}.pdf"
-            val tempFile = File(context.cacheDir, fileName)
-            document.save(tempFile)
-            document.close()
 
             savePdfToMediaStore(context, tempFile, fileName)
             tempFile.delete()

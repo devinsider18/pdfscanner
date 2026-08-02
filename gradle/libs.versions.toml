@@ -22,10 +22,12 @@ lifecycleViewmodelNav3 = "2.11.0"
 navigationCompose = "2.9.8"
 playServicesMlkitDocumentScanner = "16.0.0"
 workRuntimeKtx = "2.11.2"
-camerax = "1.4.0"
+camerax = "1.6.1"
 mlkitText = "16.0.1"
+pdfboxAndroid = "2.0.27.0"
 
 [libraries]
+pdfbox-android = { module = "com.tom-roush:pdfbox-android", version.ref = "pdfboxAndroid" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidxActivity" }

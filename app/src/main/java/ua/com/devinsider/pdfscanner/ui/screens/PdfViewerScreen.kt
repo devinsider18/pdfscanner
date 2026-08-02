@@ -26,6 +26,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
 import androidx.navigation.NavController
+import androidx.core.net.toUri
 import ua.com.devinsider.pdfscanner.utils.PdfConverter
 import ua.com.devinsider.pdfscanner.R
 import androidx.compose.ui.res.stringResource
@@ -56,13 +57,13 @@ fun PdfViewerScreen(
         withContext(Dispatchers.IO) {
             try {
                 val fd = if (filePath.startsWith("content://") || filePath.startsWith("file://")) {
-                    context.contentResolver.openFileDescriptor(android.net.Uri.parse(filePath), "r")
+                    context.contentResolver.openFileDescriptor(filePath.toUri(), "r")
                 } else {
                     val file = File(filePath)
                     if (file.exists()) {
                         ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY)
                     } else {
-                        context.contentResolver.openFileDescriptor(android.net.Uri.parse(filePath), "r")
+                        context.contentResolver.openFileDescriptor(filePath.toUri(), "r")
                     }
                 }
                 if (fd != null) {
@@ -202,9 +203,10 @@ fun PdfPageImage(pdfRenderer: PdfRenderer?, pageIndex: Int) {
         }
     }
 
-    if (bitmap != null) {
+    val currentBmp = bitmap
+    if (currentBmp != null) {
         Image(
-            bitmap = bitmap!!.asImageBitmap(),
+            bitmap = currentBmp.asImageBitmap(),
             contentDescription = stringResource(R.string.page_number, pageIndex + 1),
             modifier = Modifier
                 .fillMaxWidth()

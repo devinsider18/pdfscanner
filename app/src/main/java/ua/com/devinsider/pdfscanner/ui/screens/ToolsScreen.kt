@@ -75,6 +75,9 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
     val cameraPermissionRequiredMsg = stringResource(R.string.camera_permission_required)
     val activityNotFoundMsg = stringResource(R.string.activity_not_found)
     val scannerIntentNullMsg = stringResource(R.string.scanner_intent_null)
+    val errorOpeningCameraFormat = stringResource(R.string.error_opening_camera)
+    val errorSavingScannedPdfFormat = stringResource(R.string.error_saving_scanned_pdf)
+    val scannerErrorFormat = stringResource(R.string.scanner_error)
 
     var showMergePicker by remember { mutableStateOf(false) }
     var showSplitPicker by remember { mutableStateOf(false) }
@@ -107,7 +110,12 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
                 val path = uriToTempFile(it)
                 if (path != null) {
                     val success = PdfConverter.convertPdfToLongImage(context, path)
-                    conversionResultMessage = if (success) savedToPicturesMsg else failedToConvertMsg
+                    if (success) {
+                        conversionResultMessage = savedToPicturesMsg
+                        viewModel.refreshDocuments()
+                    } else {
+                        conversionResultMessage = failedToConvertMsg
+                    }
                 }
                 isConverting = false
             }
@@ -122,7 +130,12 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
                 val path = uriToTempFile(it)
                 if (path != null) {
                     val success = PdfConverter.convertPdfToImages(context, path) { _, _ -> }
-                    conversionResultMessage = if (success) savedToPicturesMsg else failedToConvertMsg
+                    if (success) {
+                        conversionResultMessage = savedToPicturesMsg
+                        viewModel.refreshDocuments()
+                    } else {
+                        conversionResultMessage = failedToConvertMsg
+                    }
                 }
                 isConverting = false
             }
@@ -145,6 +158,8 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
                         viewModel.errorMessage.value = failedPhotoToPdfMsg
                     }
                 }
+            } else {
+                viewModel.errorMessage.value = failedPhotoToPdfMsg
             }
         }
     }
@@ -157,7 +172,7 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
             fallbackCameraLauncher.launch(photoUri)
         } catch (e: Exception) {
             e.printStackTrace()
-            viewModel.errorMessage.value = context.getString(R.string.error_opening_camera, e.localizedMessage ?: e.message ?: e.toString())
+            viewModel.errorMessage.value = String.format(errorOpeningCameraFormat, e.localizedMessage ?: e.message ?: e.toString())
         }
     }
 
@@ -177,25 +192,31 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
                 if (pdfUri != null) {
                     scope.launch(Dispatchers.IO) {
                         try {
-                            context.contentResolver.openInputStream(pdfUri)?.use { inputStream ->
-                                val fileName = "Scanned_${System.currentTimeMillis()}.pdf"
-                                val tempFile = File(context.cacheDir, fileName)
-                                FileOutputStream(tempFile).use { outputStream ->
-                                    inputStream.copyTo(outputStream)
+                            val inputStream = context.contentResolver.openInputStream(pdfUri)
+                            if (inputStream != null) {
+                                inputStream.use { stream ->
+                                    val fileName = "Scanned_${System.currentTimeMillis()}.pdf"
+                                    val tempFile = File(context.cacheDir, fileName)
+                                    FileOutputStream(tempFile).use { outputStream ->
+                                        stream.copyTo(outputStream)
+                                    }
+                                    
+                                    PdfConverter.savePdfToMediaStore(context, tempFile, fileName)
+                                    tempFile.delete()
                                 }
-                                
-                                PdfConverter.savePdfToMediaStore(context, tempFile, fileName)
-                                tempFile.delete()
-                            }
-                            
-                            withContext(Dispatchers.Main) {
-                                conversionResultMessage = savedToDownloadsMsg
-                                viewModel.refreshDocuments()
+                                withContext(Dispatchers.Main) {
+                                    conversionResultMessage = savedToDownloadsMsg
+                                    viewModel.refreshDocuments()
+                                }
+                            } else {
+                                withContext(Dispatchers.Main) {
+                                    viewModel.errorMessage.value = String.format(errorSavingScannedPdfFormat, "InputStream is null")
+                                }
                             }
                         } catch (e: Exception) {
                             e.printStackTrace()
                             withContext(Dispatchers.Main) {
-                                viewModel.errorMessage.value = context.getString(R.string.error_saving_scanned_pdf, e.localizedMessage ?: e.message ?: e.toString())
+                                viewModel.errorMessage.value = String.format(errorSavingScannedPdfFormat, e.localizedMessage ?: e.message ?: e.toString())
                             }
                         }
                     }
@@ -219,7 +240,7 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
-                viewModel.errorMessage.value = context.getString(R.string.scanner_error, e.localizedMessage ?: e.message ?: e.toString())
+                viewModel.errorMessage.value = String.format(scannerErrorFormat, e.localizedMessage ?: e.message ?: e.toString())
             }
         }
     }
@@ -264,13 +285,21 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
                     .addOnFailureListener { e ->
                         e.printStackTrace()
                         val err = e.localizedMessage ?: e.message ?: e.toString()
-                        viewModel.errorMessage.value = context.getString(R.string.scanner_error, err)
+                        viewModel.errorMessage.value = String.format(scannerErrorFormat, err)
                     }
             } catch (e: Exception) {
                 e.printStackTrace()
                 val err = e.localizedMessage ?: e.message ?: e.toString()
-                viewModel.errorMessage.value = context.getString(R.string.scanner_error, err)
+                viewModel.errorMessage.value = String.format(scannerErrorFormat, err)
             }
+        }
+    }
+
+    val checkAndStartScanTools: () -> Unit = {
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            startScanningTools()
+        } else {
+            cameraPermissionLauncher.launch(Manifest.permission.CAMERA)
         }
     }
 
@@ -294,7 +323,7 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
         Spacer(modifier = Modifier.height(16.dp))
 
         ToolButton(icon = Icons.Default.CameraAlt, text = stringResource(R.string.scan_document), onClick = {
-            startScanningTools()
+            checkAndStartScanTools()
         })
         ToolButton(icon = Icons.Default.Image, text = stringResource(R.string.pdf_to_long_image), onClick = { pdfToLongImageLauncher.launch("application/pdf") })
         ToolButton(icon = Icons.Default.PhotoLibrary, text = stringResource(R.string.pdf_to_image), onClick = { pdfToImagesLauncher.launch("application/pdf") })
@@ -313,7 +342,12 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
                         isConverting = true
                         snackbarHostState.showSnackbar(mergingPdfsMsg)
                         val success = PdfConverter.mergePdfs(context, uris)
-                        conversionResultMessage = if (success) savedToDownloadsMsg else failedToConvertMsg
+                        if (success) {
+                            conversionResultMessage = savedToDownloadsMsg
+                            viewModel.refreshDocuments()
+                        } else {
+                            conversionResultMessage = failedToConvertMsg
+                        }
                         isConverting = false
                     }
                 }
@@ -333,7 +367,12 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
                             isConverting = true
                             snackbarHostState.showSnackbar(splittingPdfMsg)
                             val success = PdfConverter.splitPdf(context, uri)
-                            conversionResultMessage = if (success) savedToDownloadsMsg else failedToConvertMsg
+                            if (success) {
+                                conversionResultMessage = savedToDownloadsMsg
+                                viewModel.refreshDocuments()
+                            } else {
+                                conversionResultMessage = failedToConvertMsg
+                            }
                             isConverting = false
                         }
                     }

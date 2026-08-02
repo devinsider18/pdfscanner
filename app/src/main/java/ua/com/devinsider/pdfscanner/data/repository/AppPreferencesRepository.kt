@@ -5,7 +5,6 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
@@ -23,26 +22,15 @@ class AppPreferencesRepository @Inject constructor(
 
     companion object {
         val DARK_MODE_KEY = booleanPreferencesKey("dark_mode")
-        val LANGUAGE_KEY = stringPreferencesKey("language")
     }
 
     val isDarkMode: Flow<Boolean?> = dataStore.data.map { preferences ->
         preferences[DARK_MODE_KEY]
     }
 
-    val language: Flow<String?> = dataStore.data.map { preferences ->
-        preferences[LANGUAGE_KEY]
-    }
-
     suspend fun setDarkMode(isDark: Boolean) {
         dataStore.edit { preferences ->
             preferences[DARK_MODE_KEY] = isDark
-        }
-    }
-
-    suspend fun setLanguage(languageCode: String) {
-        dataStore.edit { preferences ->
-            preferences[LANGUAGE_KEY] = languageCode
         }
     }
 }

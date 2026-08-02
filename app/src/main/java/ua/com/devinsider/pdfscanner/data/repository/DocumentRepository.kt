@@ -6,6 +6,7 @@ import android.content.Context
 import android.net.Uri
 import android.provider.MediaStore
 import android.webkit.MimeTypeMap
+import androidx.core.net.toUri
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -145,7 +146,7 @@ class DocumentRepository @Inject constructor(
     
     suspend fun renameDocument(document: DocumentItem, newName: String): Boolean = withContext(Dispatchers.IO) {
         try {
-            val uri = Uri.parse(document.uriString)
+            val uri = document.uriString.toUri()
             val values = android.content.ContentValues().apply {
                 put(MediaStore.MediaColumns.DISPLAY_NAME, newName)
             }
@@ -161,7 +162,7 @@ class DocumentRepository @Inject constructor(
     
     suspend fun deleteDocument(document: DocumentItem): Boolean = withContext(Dispatchers.IO) {
         try {
-            val uri = Uri.parse(document.uriString)
+            val uri = document.uriString.toUri()
             val deleted = contentResolver.delete(uri, null, null)
             if (deleted > 0) {
                 bookmarkDao.removeBookmark(document.path)

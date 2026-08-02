@@ -12,8 +12,8 @@ android {
         applicationId = "ua.com.devinsider.pdfscanner"
         minSdk = 23
         targetSdk = 37
-        versionCode = 4
-        versionName = "1.1"
+        versionCode = 6
+        versionName = "1.2"
         testInstrumentationRunner = "ua.com.devinsider.pdfscanner.HiltTestRunner"
         vectorDrawables {
             useSupportLibrary = true
@@ -89,5 +89,5 @@ dependencies {
     implementation(libs.androidx.camera.lifecycle)
     implementation(libs.androidx.camera.view)
     implementation(libs.mlkit.text.recognition)
-    implementation("com.tom-roush:pdfbox-android:2.0.27.0")
+    implementation(libs.pdfbox.android)
 }

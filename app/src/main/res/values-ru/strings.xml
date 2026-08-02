@@ -1,9 +1,6 @@
 <resources>
     <string name="app_name">PDF Сканер</string>
-    <string name="all_files_access_required">Требуется доступ ко всем файлам</string>
-    <string name="all_files_access_desc">Нам нужен «Доступ ко всем файлам», чтобы находить и отображать PDF документы на вашем устройстве.</string>
-    <string name="grant_permission">Предоставить разрешение</string>
-    <string name="search">Поиск...</string>
+    <string name="search">Поиск&#8230;</string>
     <string name="merge_pdfs">Объединить PDF</string>
     <string name="split_pdf">Разделить PDF</string>
     <string name="share">Поделиться</string>
@@ -39,18 +36,21 @@
     <string name="select_language">Выбрать язык</string>
     <string name="nav_documents">Документы</string>
     <string name="nav_tools">Инструменты</string>
-    <string name="converting_to_images">Конвертация в изображения...</string>
-    <string name="converting_to_long_image">Конвертация в длинное изображение...</string>
-    <string name="splitting_pdf">Разделение PDF...</string>
-    <string name="merging_pdfs">Объединение PDF...</string>
+    <string name="converting_to_images">Конвертация в изображения&#8230;</string>
+    <string name="converting_to_long_image">Конвертация в длинное изображение&#8230;</string>
+    <string name="splitting_pdf">Разделение PDF&#8230;</string>
+    <string name="merging_pdfs">Объединение PDF&#8230;</string>
     <string name="saved_to_pictures">Успешно сохранено в Pictures/PDFScanner</string>
     <string name="saved_to_downloads">Успешно сохранено в Downloads/PDFScanner</string>
     <string name="failed_to_convert">Не удалось конвертировать PDF</string>
-    <string name="failed_to_merge">Не удалось объединить PDF</string>
-    <string name="failed_to_split">Не удалось разделить PDF</string>
     <string name="close_selection">Закрыть выделение</string>
-    <string name="selected_count">Выбрано: %1$d</string>
-    <string name="loading_pdf">Загрузка...</string>
+    <plurals name="selected_count">
+        <item quantity="one">Выбран %1$d файл</item>
+        <item quantity="few">Выбрано %1$d файла</item>
+        <item quantity="many">Выбрано %1$d файлов</item>
+        <item quantity="other">Выбрано %1$d файлов</item>
+    </plurals>
+    <string name="loading_pdf">Загрузка&#8230;</string>
     <string name="invalid_pdf">Неверный формат PDF или файл поврежден.</string>
     <string name="nav_recent">Недавние</string>
     <string name="nav_bookmarks">Закладки</string>

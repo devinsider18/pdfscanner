@@ -1,9 +1,6 @@
 <resources>
     <string name="app_name">PDF Scanner</string>
-    <string name="all_files_access_required">All Files Access Required</string>
-    <string name="all_files_access_desc">We need \'All Files Access\' to find and display PDF documents from across your device.</string>
-    <string name="grant_permission">Grant Permission</string>
-    <string name="search">Search...</string>
+    <string name="search">Search&#8230;</string>
     <string name="merge_pdfs">Merge PDFs</string>
     <string name="split_pdf">Split PDF</string>
     <string name="share">Share</string>
@@ -39,18 +36,19 @@
     <string name="select_language">Select Language</string>
     <string name="nav_documents">Documents</string>
     <string name="nav_tools">Tools</string>
-    <string name="converting_to_images">Converting to Images...</string>
-    <string name="converting_to_long_image">Converting to Long Image...</string>
-    <string name="splitting_pdf">Splitting PDF...</string>
-    <string name="merging_pdfs">Merging PDFs...</string>
+    <string name="converting_to_images">Converting to Images&#8230;</string>
+    <string name="converting_to_long_image">Converting to Long Image&#8230;</string>
+    <string name="splitting_pdf">Splitting PDF&#8230;</string>
+    <string name="merging_pdfs">Merging PDFs&#8230;</string>
     <string name="saved_to_pictures">Successfully saved to Pictures/PDFScanner</string>
     <string name="saved_to_downloads">Successfully saved to Downloads/PDFScanner</string>
     <string name="failed_to_convert">Failed to convert PDF</string>
-    <string name="failed_to_merge">Failed to merge PDFs</string>
-    <string name="failed_to_split">Failed to split PDF</string>
     <string name="close_selection">Close Selection</string>
-    <string name="selected_count">%1$d selected</string>
-    <string name="loading_pdf">Loading...</string>
+    <plurals name="selected_count">
+        <item quantity="one">%1$d selected</item>
+        <item quantity="other">%1$d selected</item>
+    </plurals>
+    <string name="loading_pdf">Loading&#8230;</string>
     <string name="invalid_pdf">Invalid PDF format or file is corrupted.</string>
     <string name="nav_recent">Recent</string>
     <string name="nav_bookmarks">Bookmarks</string>

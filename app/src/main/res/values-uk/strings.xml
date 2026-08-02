@@ -1,9 +1,6 @@
 <resources>
     <string name="app_name">PDF Сканер</string>
-    <string name="all_files_access_required">Потрібен доступ до всіх файлів</string>
-    <string name="all_files_access_desc">Нам потрібен «Доступ до всіх файлів», щоб знаходити та відображати PDF документи на вашому пристрої.</string>
-    <string name="grant_permission">Надати дозвіл</string>
-    <string name="search">Пошук...</string>
+    <string name="search">Пошук&#8230;</string>
     <string name="merge_pdfs">Об\'єднати PDF</string>
     <string name="split_pdf">Розділити PDF</string>
     <string name="share">Поділитися</string>
@@ -39,18 +36,21 @@
     <string name="select_language">Вибрати мову</string>
     <string name="nav_documents">Документи</string>
     <string name="nav_tools">Інструменти</string>
-    <string name="converting_to_images">Конвертація в зображення...</string>
-    <string name="converting_to_long_image">Конвертація в довге зображення...</string>
-    <string name="splitting_pdf">Розділення PDF...</string>
-    <string name="merging_pdfs">Об\'єднання PDF...</string>
+    <string name="converting_to_images">Конвертація в зображення&#8230;</string>
+    <string name="converting_to_long_image">Конвертація в довге зображення&#8230;</string>
+    <string name="splitting_pdf">Розділення PDF&#8230;</string>
+    <string name="merging_pdfs">Об\'єднання PDF&#8230;</string>
     <string name="saved_to_pictures">Успішно збережено в Pictures/PDFScanner</string>
     <string name="saved_to_downloads">Успішно збережено в Downloads/PDFScanner</string>
     <string name="failed_to_convert">Не вдалося конвертувати PDF</string>
-    <string name="failed_to_merge">Не вдалося об\'єднати PDF</string>
-    <string name="failed_to_split">Не вдалося розділити PDF</string>
     <string name="close_selection">Закрити виділення</string>
-    <string name="selected_count">Вибрано: %1$d</string>
-    <string name="loading_pdf">Завантаження...</string>
+    <plurals name="selected_count">
+        <item quantity="one">Вибрано %1$d файл</item>
+        <item quantity="few">Вибрано %1$d файли</item>
+        <item quantity="many">Вибрано %1$d файлів</item>
+        <item quantity="other">Вибрано %1$d файлів</item>
+    </plurals>
+    <string name="loading_pdf">Завантаження&#8230;</string>
     <string name="invalid_pdf">Недійсний формат PDF або файл пошкоджено.</string>
     <string name="nav_recent">Недавні</string>
     <string name="nav_bookmarks">Закладки</string>
@@ -66,7 +66,7 @@
     <string name="pdf_imported">PDF імпортовано</string>
     <string name="error_importing_pdf">Помилка імпорту PDF: %1$s</string>
     <string name="failed_to_delete">Не вдалося видалити документ</string>
-    <string name="failed_to_rename">Не вдалося перейменувати документ</string>
+    <string name="failed_to_rename">Не вдалося перейменовувати документ</string>
     <string name="storage_permission_required">Потрібен доступ до сховища для збереження файлів</string>
     <string name="camera_permission_required">Потрібен дозвіл на камеру для сканування документів</string>
     <string name="failed_photo_to_pdf">Не вдалося конвертувати фото в PDF</string>
