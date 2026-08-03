@@ -10,14 +10,12 @@ android {
     compileSdk = 37
     defaultConfig {
         applicationId = "ua.com.devinsider.pdfscanner"
-        minSdk = 23
+        minSdk = 24
         targetSdk = 37
-        versionCode = 6
-        versionName = "1.2"
+        versionCode = 7
+        versionName = "1.3"
         testInstrumentationRunner = "ua.com.devinsider.pdfscanner.HiltTestRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+
         ndk {
             abiFilters += setOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
             debugSymbolLevel = "FULL"
@@ -49,9 +47,8 @@ ksp {
     arg("room.schemaLocation", "$projectDir/schemas")
 }
 dependencies {
-    val composeBom = platform(libs.androidx.compose.bom)
-    implementation(composeBom)
-    androidTestImplementation(composeBom)
+    implementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -62,8 +59,6 @@ dependencies {
     ksp(libs.hilt.compiler)
     androidTestImplementation(libs.hilt.android.testing)
     kspAndroidTest(libs.hilt.android.compiler)
-    testImplementation(libs.hilt.android.testing)
-    kspTest(libs.hilt.android.compiler)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.hilt.navigation.compose)
