@@ -1,9 +1,10 @@
 # Project ProGuard rules
 
 # ML Kit Document Scanner & Google Play Services
--keep class com.google.mlkit.vision.documentscanner.** { *; }
--keep class com.google.android.gms.vision.documentscanner.** { *; }
--keep class com.google.android.gms.tasks.** { *; }
+-keep class com.google.mlkit.** { *; }
+-keep class com.google.android.gms.internal.mlkit_vision_document_scanner.** { *; }
+-keep class com.google.android.gms.internal.mlkit_document_scanner.** { *; }
+-keep class com.google.android.gms.internal.mlkit.** { *; }
 -dontwarn com.google.mlkit.**
 -dontwarn com.google.android.gms.**
 
