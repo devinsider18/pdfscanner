@@ -1,23 +1,35 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+# Project ProGuard rules
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+# ML Kit Document Scanner & Google Play Services
+-keep class com.google.mlkit.vision.documentscanner.** { *; }
+-keep class com.google.android.gms.vision.documentscanner.** { *; }
+-keep class com.google.android.gms.tasks.** { *; }
+-dontwarn com.google.mlkit.**
+-dontwarn com.google.android.gms.**
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
-
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
-
+# PDFBox Android & Security Providers
+-keep class com.tom_roush.pdfbox.pdmodel.** { *; }
+-keep class com.tom_roush.pdfbox.multipdf.** { *; }
+-keep class com.tom_roush.pdfbox.rendering.** { *; }
+-keep class org.bouncycastle.jcajce.** { *; }
+-dontwarn com.tom_roush.pdfbox.**
+-dontwarn org.bouncycastle.**
 -dontwarn com.gemalto.jp2.**
+
+# Room Database & App Data Models
+-keep class * extends androidx.room.RoomDatabase
+-keep class ua.com.devinsider.pdfscanner.data.model.** { *; }
+-keep class ua.com.devinsider.pdfscanner.data.local.** { *; }
+-keep @androidx.room.Entity class * { *; }
+-keep @androidx.room.Dao interface * { *; }
+
+# WorkManager Workers
+-keep class * extends androidx.work.ListenableWorker { *; }
+
+# Dependency Injection (Inject constructors)
+-keepclassmembers class * {
+    @javax.inject.Inject <init>(...);
+}
+
+# Preserve Annotations, Signatures and Stacktrace details
+-keepattributes *Annotation*, Signature, InnerClasses, EnclosingMethod, SourceFile, LineNumberTable

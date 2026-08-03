@@ -38,8 +38,6 @@ import androidx.compose.material.icons.automirrored.filled.CallMerge
 import androidx.compose.material.icons.automirrored.filled.CallSplit
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.google.mlkit.vision.documentscanner.GmsDocumentScannerOptions
-import com.google.mlkit.vision.documentscanner.GmsDocumentScannerOptions.RESULT_FORMAT_PDF
-import com.google.mlkit.vision.documentscanner.GmsDocumentScannerOptions.SCANNER_MODE_FULL
 import com.google.mlkit.vision.documentscanner.GmsDocumentScanning
 import ua.com.devinsider.pdfscanner.ui.viewmodels.MainViewModel
 import ua.com.devinsider.pdfscanner.data.model.DocumentItem
@@ -68,16 +66,12 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
     val savedToDownloadsMsg = stringResource(R.string.saved_to_downloads)
     val failedToConvertMsg = stringResource(R.string.failed_to_convert)
     val failedPhotoToPdfMsg = stringResource(R.string.failed_photo_to_pdf)
-    val scannerReturnedNullMsg = stringResource(R.string.scanner_returned_null)
     val failedProcessScannedPagesMsg = stringResource(R.string.failed_process_scanned_pages)
     val pageImageUriNullMsg = stringResource(R.string.page_image_uri_null)
-    val noScannedPdfReturnedMsg = stringResource(R.string.no_scanned_pdf_returned)
     val cameraPermissionRequiredMsg = stringResource(R.string.camera_permission_required)
     val activityNotFoundMsg = stringResource(R.string.activity_not_found)
-    val scannerIntentNullMsg = stringResource(R.string.scanner_intent_null)
     val errorOpeningCameraFormat = stringResource(R.string.error_opening_camera)
     val errorSavingScannedPdfFormat = stringResource(R.string.error_saving_scanned_pdf)
-    val scannerErrorFormat = stringResource(R.string.scanner_error)
 
     var showMergePicker by remember { mutableStateOf(false) }
     var showSplitPicker by remember { mutableStateOf(false) }
@@ -184,7 +178,7 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
             try {
                 val scanResult = com.google.mlkit.vision.documentscanner.GmsDocumentScanningResult.fromActivityResultIntent(result.data)
                 if (scanResult == null) {
-                    viewModel.errorMessage.value = scannerReturnedNullMsg
+                    launchFallbackCameraTools()
                     return@rememberLauncherForActivityResult
                 }
                 val pdfUri = scanResult.pdf?.uri
@@ -236,11 +230,11 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
                         viewModel.errorMessage.value = pageImageUriNullMsg
                     }
                 } else {
-                    viewModel.errorMessage.value = noScannedPdfReturnedMsg
+                    launchFallbackCameraTools()
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
-                viewModel.errorMessage.value = String.format(scannerErrorFormat, e.localizedMessage ?: e.message ?: e.toString())
+                launchFallbackCameraTools()
             }
         }
     }
@@ -279,18 +273,16 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
                                 androidx.activity.result.IntentSenderRequest.Builder(intentSender).build()
                             )
                         } else {
-                            viewModel.errorMessage.value = scannerIntentNullMsg
+                            launchFallbackCameraTools()
                         }
                     }
                     .addOnFailureListener { e ->
                         e.printStackTrace()
-                        val err = e.localizedMessage ?: e.message ?: e.toString()
-                        viewModel.errorMessage.value = String.format(scannerErrorFormat, err)
+                        launchFallbackCameraTools()
                     }
             } catch (e: Exception) {
                 e.printStackTrace()
-                val err = e.localizedMessage ?: e.message ?: e.toString()
-                viewModel.errorMessage.value = String.format(scannerErrorFormat, err)
+                launchFallbackCameraTools()
             }
         }
     }

@@ -30,8 +30,6 @@ import androidx.compose.material.icons.automirrored.filled.CallMerge
 import androidx.compose.material.icons.automirrored.filled.Sort
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.google.mlkit.vision.documentscanner.GmsDocumentScannerOptions
-import com.google.mlkit.vision.documentscanner.GmsDocumentScannerOptions.RESULT_FORMAT_PDF
-import com.google.mlkit.vision.documentscanner.GmsDocumentScannerOptions.SCANNER_MODE_FULL
 import com.google.mlkit.vision.documentscanner.GmsDocumentScanning
 import android.net.Uri
 import java.io.File
@@ -67,22 +65,17 @@ fun DocumentListScreen(
     val taskConvertBgMsg = stringResource(R.string.task_convert_bg)
     val taskLongImageBgMsg = stringResource(R.string.task_long_image_bg)
     val taskSplitBgMsg = stringResource(R.string.task_split_bg)
-    val scannerLaunchErrorMsg = stringResource(R.string.scanner_launch_error)
     val storagePermissionRequiredMsg = stringResource(R.string.storage_permission_required)
     val pdfImportedMsg = stringResource(R.string.pdf_imported)
     val failedPhotoToPdfMsg = stringResource(R.string.failed_photo_to_pdf)
-    val scannerReturnedNullMsg = stringResource(R.string.scanner_returned_null)
     val failedProcessScannedPagesMsg = stringResource(R.string.failed_process_scanned_pages)
     val pageImageUriNullMsg = stringResource(R.string.page_image_uri_null)
-    val noScannedPdfReturnedMsg = stringResource(R.string.no_scanned_pdf_returned)
     val cameraPermissionRequiredMsg = stringResource(R.string.camera_permission_required)
     val activityNotFoundMsg = stringResource(R.string.activity_not_found)
-    val scannerIntentNullMsg = stringResource(R.string.scanner_intent_null)
     val noAppToOpenFileMsg = stringResource(R.string.no_app_to_open_file)
     val errorImportingPdfFormat = stringResource(R.string.error_importing_pdf)
     val errorOpeningCameraFormat = stringResource(R.string.error_opening_camera)
     val errorSavingScannedPdfFormat = stringResource(R.string.error_saving_scanned_pdf)
-    val scannerErrorFormat = stringResource(R.string.scanner_error)
     var isSelectionMode by remember { mutableStateOf(false) }
     val selectedDocs = remember { mutableStateListOf<DocumentItem>() }
     var sortMenuExpanded by remember { mutableStateOf(false) }
@@ -178,7 +171,7 @@ fun DocumentListScreen(
             try {
                 val scanResult = com.google.mlkit.vision.documentscanner.GmsDocumentScanningResult.fromActivityResultIntent(result.data)
                 if (scanResult == null) {
-                    viewModel.errorMessage.value = scannerReturnedNullMsg
+                    launchFallbackCamera()
                     return@rememberLauncherForActivityResult
                 }
                 val pdfUri = scanResult.pdf?.uri
@@ -230,11 +223,11 @@ fun DocumentListScreen(
                         viewModel.errorMessage.value = pageImageUriNullMsg
                     }
                 } else {
-                    viewModel.errorMessage.value = noScannedPdfReturnedMsg
+                    launchFallbackCamera()
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
-                viewModel.errorMessage.value = String.format(scannerErrorFormat, e.localizedMessage ?: e.message ?: e.toString())
+                launchFallbackCamera()
             }
         }
     }
@@ -271,18 +264,16 @@ fun DocumentListScreen(
                                 androidx.activity.result.IntentSenderRequest.Builder(intentSender).build()
                             )
                         } else {
-                            viewModel.errorMessage.value = scannerIntentNullMsg
+                            launchFallbackCamera()
                         }
                     }
                     .addOnFailureListener { e ->
                         e.printStackTrace()
-                        val err = e.localizedMessage ?: e.message ?: e.toString()
-                        viewModel.errorMessage.value = String.format(scannerErrorFormat, err)
+                        launchFallbackCamera()
                     }
             } catch (e: Exception) {
                 e.printStackTrace()
-                val err = e.localizedMessage ?: e.message ?: e.toString()
-                viewModel.errorMessage.value = String.format(scannerErrorFormat, err)
+                launchFallbackCamera()
             }
         }
     }
