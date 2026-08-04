@@ -44,6 +44,8 @@ import ua.com.devinsider.pdfscanner.data.model.DocumentItem
 import ua.com.devinsider.pdfscanner.data.model.DocumentType
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.LaunchedEffect
 import androidx.core.content.FileProvider
 
@@ -395,8 +397,19 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
                 onDismissRequest = { showLanguagePicker = false },
                 title = { Text(stringResource(R.string.select_language)) },
                 text = {
-                    Column {
-                        val languages = listOf("en" to "English", "ru" to "Русский", "uk" to "Українська")
+                    Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+                        val languages = listOf(
+                            "en" to "English", "ar" to "العربية", "cs" to "Čeština",
+                            "da" to "Dansk", "de" to "Deutsch", "es" to "Español",
+                            "es-US" to "Español (US)", "fi" to "Suomi", "fr" to "Français",
+                            "hi" to "हिन्दी", "hu" to "Magyar", "id" to "Bahasa Indonesia",
+                            "it" to "Italiano", "he" to "עברית", "ja" to "日本語",
+                            "ko" to "한국어", "nb" to "Norsk bokmål", "nl" to "Nederlands",
+                            "pl" to "Polski", "pt-BR" to "Português (BR)", "ro" to "Română",
+                            "ru" to "Русский", "sk" to "Slovenčina", "sv" to "Svenska",
+                            "th" to "ไทย", "tr" to "Türkçe", "uk" to "Українська",
+                            "vi" to "Tiếng Việt", "zh-CN" to "中文 (简体)"
+                        )
                         languages.forEach { (tag, name) ->
                             Text(
                                 text = name,

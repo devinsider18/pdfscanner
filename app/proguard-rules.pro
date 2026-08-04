@@ -9,9 +9,8 @@
 -dontwarn com.google.android.gms.**
 
 # PDFBox Android & Security Providers
--keep class com.tom_roush.pdfbox.pdmodel.** { *; }
--keep class com.tom_roush.pdfbox.multipdf.** { *; }
--keep class com.tom_roush.pdfbox.rendering.** { *; }
+-keep class com.tom_roush.pdfbox.** { *; }
+-keep class com.tom_roush.fontbox.** { *; }
 -keep class org.bouncycastle.jcajce.** { *; }
 -dontwarn com.tom_roush.pdfbox.**
 -dontwarn org.bouncycastle.**

@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import ua.com.devinsider.pdfscanner.R
+import ua.com.devinsider.pdfscanner.utils.getLocalizedContext
 import ua.com.devinsider.pdfscanner.data.model.DocumentItem
 import ua.com.devinsider.pdfscanner.data.model.SortOption
 import ua.com.devinsider.pdfscanner.data.repository.AppPreferencesRepository
@@ -87,7 +88,7 @@ class MainViewModel @Inject constructor(
             if (success) {
                 documentRepository.refreshDocuments()
             } else {
-                errorMessage.value = context.getString(R.string.failed_to_delete)
+                errorMessage.value = context.getLocalizedContext().getString(R.string.failed_to_delete)
             }
         }
     }
@@ -98,7 +99,7 @@ class MainViewModel @Inject constructor(
             if (success) {
                 documentRepository.refreshDocuments()
             } else {
-                errorMessage.value = context.getString(R.string.failed_to_rename)
+                errorMessage.value = context.getLocalizedContext().getString(R.string.failed_to_rename)
             }
         }
     }

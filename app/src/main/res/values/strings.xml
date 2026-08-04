@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">PDF Scanner</string>
     <string name="search">Search&#8230;</string>
     <string name="merge_pdfs">Merge PDFs</string>
@@ -44,7 +44,7 @@
     <string name="saved_to_downloads">Successfully saved to Downloads/PDFScanner</string>
     <string name="failed_to_convert">Failed to convert PDF</string>
     <string name="close_selection">Close Selection</string>
-    <plurals name="selected_count">
+    <plurals name="selected_count" tools:ignore="MissingQuantity,UnusedQuantity">
         <item quantity="one">%1$d selected</item>
         <item quantity="other">%1$d selected</item>
     </plurals>

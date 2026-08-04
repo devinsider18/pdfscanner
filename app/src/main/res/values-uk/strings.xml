@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">PDF Сканер</string>
     <string name="search">Пошук&#8230;</string>
     <string name="merge_pdfs">Об\'єднати PDF</string>
@@ -44,7 +44,7 @@
     <string name="saved_to_downloads">Успішно збережено в Downloads/PDFScanner</string>
     <string name="failed_to_convert">Не вдалося конвертувати PDF</string>
     <string name="close_selection">Закрити виділення</string>
-    <plurals name="selected_count">
+    <plurals name="selected_count" tools:ignore="MissingQuantity,UnusedQuantity">
         <item quantity="one">Вибрано %1$d файл</item>
         <item quantity="few">Вибрано %1$d файли</item>
         <item quantity="many">Вибрано %1$d файлів</item>
