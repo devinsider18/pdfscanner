@@ -12,8 +12,8 @@ android {
         applicationId = "ua.com.devinsider.pdfscanner"
         minSdk = 24
         targetSdk = 37
-        versionCode = 7
-        versionName = "1.3"
+        versionCode = 8
+        versionName = "1.4"
         testInstrumentationRunner = "ua.com.devinsider.pdfscanner.HiltTestRunner"
 
         ndk {
