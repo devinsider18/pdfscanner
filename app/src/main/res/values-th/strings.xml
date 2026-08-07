@@ -84,4 +84,12 @@
     <string name="page_number">หน้า %1$d</string>
     <string name="toggle_bookmark">สลับบุ๊กมาร์ก</string>
     <string name="more_options">ตัวเลือกเพิ่มเติม</string>
+    <string name="error_conversion_dialog_title">ไม่สามารถแปลง PDF ได้</string>
+    <string name="error_pdf_password_protected">ไฟล์ PDF นี้ได้รับความคุ้มครองด้วยรหัสผ่าน โปรดปลดล็อกรหัสผ่านก่อนแปลงเป็นรูปภาพ</string>
+    <string name="error_pdf_file_corrupted">ไฟล์ PDF นี้เสียหายหรือรูปแบบไม่ถูกต้อง โปรดลองใช้เอกสารอื่น</string>
+    <string name="error_pdf_file_not_found">ไม่สามารถอ่านไฟล์ได้ อาจถูกลบหรือย้ายไปแล้ว</string>
+    <string name="error_pdf_memory_limit">เอกสารนี้มีขนาดใหญ่เกินไปสำหรับหน่วยความจำของอุปกรณ์ ลองแปลงทีละส่วน</string>
+    <string name="error_pdf_empty_document">เอกสารนี้ไม่มีหน้าที่ต้องการแปลง</string>
+    <string name="error_pdf_unknown">เกิดข้อผิดพลาดที่ไม่คาดคิดขณะอ่านไฟล์ PDF โปรดลองอีกครั้ง</string>
+    <string name="dialog_ok">รับทราบ</string>
 </resources>

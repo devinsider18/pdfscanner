@@ -33,6 +33,8 @@ import android.Manifest
 import android.content.pm.PackageManager
 import androidx.core.content.ContextCompat
 import ua.com.devinsider.pdfscanner.utils.PdfConverter
+import ua.com.devinsider.pdfscanner.utils.ConversionResult
+import ua.com.devinsider.pdfscanner.ui.components.ConversionErrorDialog
 import ua.com.devinsider.pdfscanner.utils.findActivity
 import androidx.compose.material.icons.automirrored.filled.CallMerge
 import androidx.compose.material.icons.automirrored.filled.CallSplit
@@ -78,6 +80,7 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
     var showMergePicker by remember { mutableStateOf(false) }
     var showSplitPicker by remember { mutableStateOf(false) }
     var showLanguagePicker by remember { mutableStateOf(false) }
+    var conversionErrorDialogState by remember { mutableStateOf<ConversionResult.Error?>(null) }
 
     var shouldLaunchScanAfterPermission by remember { mutableStateOf(false) }
     var tempCameraImageUri by remember { mutableStateOf<Uri?>(null) }
@@ -105,12 +108,12 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
                 snackbarHostState.showSnackbar(convertingToLongImageMsg)
                 val path = uriToTempFile(it)
                 if (path != null) {
-                    val success = PdfConverter.convertPdfToLongImage(context, path)
-                    if (success) {
+                    val result = PdfConverter.convertPdfToLongImageWithResult(context, path)
+                    if (result is ConversionResult.Success) {
                         conversionResultMessage = savedToPicturesMsg
                         viewModel.refreshDocuments()
-                    } else {
-                        conversionResultMessage = failedToConvertMsg
+                    } else if (result is ConversionResult.Error) {
+                        conversionErrorDialogState = result
                     }
                 }
                 isConverting = false
@@ -125,12 +128,12 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
                 snackbarHostState.showSnackbar(convertingToImagesMsg)
                 val path = uriToTempFile(it)
                 if (path != null) {
-                    val success = PdfConverter.convertPdfToImages(context, path) { _, _ -> }
-                    if (success) {
+                    val result = PdfConverter.convertPdfToImagesWithResult(context, path) { _, _ -> }
+                    if (result is ConversionResult.Success) {
                         conversionResultMessage = savedToPicturesMsg
                         viewModel.refreshDocuments()
-                    } else {
-                        conversionResultMessage = failedToConvertMsg
+                    } else if (result is ConversionResult.Error) {
+                        conversionErrorDialogState = result
                     }
                 }
                 isConverting = false
@@ -199,6 +202,7 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
                                     
                                     PdfConverter.savePdfToMediaStore(context, tempFile, fileName)
                                     tempFile.delete()
+                                    ua.com.devinsider.pdfscanner.utils.AnalyticsHelper.logEvent(context, "scan_document_success")
                                 }
                                 withContext(Dispatchers.Main) {
                                     conversionResultMessage = savedToDownloadsMsg
@@ -452,6 +456,13 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
                 confirmButton = {
                     TextButton(onClick = { conversionResultMessage = null }) { Text(stringResource(R.string.ok)) }
                 }
+            )
+        }
+
+        conversionErrorDialogState?.let { error ->
+            ConversionErrorDialog(
+                error = error,
+                onDismiss = { conversionErrorDialogState = null }
             )
         }
     }

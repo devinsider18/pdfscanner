@@ -84,4 +84,12 @@
     <string name="page_number">%1$d oldal</string>
     <string name="toggle_bookmark">Kapcsolja be a Könyvjelzőt</string>
     <string name="more_options">További lehetőségek</string>
+    <string name="error_conversion_dialog_title">A PDF nem konvertálható</string>
+    <string name="error_pdf_password_protected">Ez a PDF-fájl jelszóval védett. Kérjük, távolítsa el a jelszóvédelmet, mielőtt képekké konvertálná.</string>
+    <string name="error_pdf_file_corrupted">Ez a PDF-fájl sérült vagy érvénytelen formátumú. Próbáljon meg egy másik dokumentumot.</string>
+    <string name="error_pdf_file_not_found">A fájl nem olvasható. Lehet, hogy törölték vagy áthelyezték.</string>
+    <string name="error_pdf_memory_limit">Ez a dokumentum túl nagy a készülék memóriájához. Próbálja meg részekben konvertálni.</string>
+    <string name="error_pdf_empty_document">Ez a dokumentum nem tartalmaz konvertálandó oldalakat.</string>
+    <string name="error_pdf_unknown">Váratlan hiba történt a PDF-fájl olvasása közben. Kérjük, próbálja újra.</string>
+    <string name="dialog_ok">Értem</string>
 </resources>

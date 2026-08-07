@@ -84,4 +84,12 @@
     <string name="page_number">Sivu %1$d</string>
     <string name="toggle_bookmark">Vaihda kirjanmerkki</string>
     <string name="more_options">Lisää vaihtoehtoja</string>
+    <string name="error_conversion_dialog_title">PDF-tiedostoa ei voi muuntaa</string>
+    <string name="error_pdf_password_protected">Tämä PDF-tiedosto on salasanalassuojattu. Poista salasanasuojaus ennen kuin muunnat sen kuviksi.</string>
+    <string name="error_pdf_file_corrupted">Tämä PDF-tiedosto on vioittunut tai sen muoto on virheellinen. Kokeile toista asiakirjaa.</string>
+    <string name="error_pdf_file_not_found">Tiedostoa ei voitu lukea. Se on saattanut tulla poistetuksi tai siirretyksi.</string>
+    <string name="error_pdf_memory_limit">Tämä asiakirja on liian suuri laitteesi muistille. Kokeile muuntaa se osissa.</string>
+    <string name="error_pdf_empty_document">Tämä asiakirja ei sisällä muunnettavia sivuja.</string>
+    <string name="error_pdf_unknown">PDF-tiedostoa luettaessa tapahtui odottamaton virhe. Yritä uudelleen.</string>
+    <string name="dialog_ok">Selvä</string>
 </resources>

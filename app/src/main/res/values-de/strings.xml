@@ -84,4 +84,12 @@
     <string name="page_number">Seite %1$d</string>
     <string name="toggle_bookmark">Lesezeichen umschalten</string>
     <string name="more_options">Weitere Optionen</string>
+    <string name="error_conversion_dialog_title">PDF kann nicht konvertiert werden</string>
+    <string name="error_pdf_password_protected">Diese PDF-Datei ist passwortgeschützt. Bitte entfernen Sie den Passwortschutz, bevor Sie sie in Bilder konvertieren.</string>
+    <string name="error_pdf_file_corrupted">Diese PDF-Datei ist beschädigt oder hat ein ungültiges Format. Bitte versuchen Sie ein anderes Dokument.</string>
+    <string name="error_pdf_file_not_found">Die Datei konnte nicht gelesen werden. Sie wurde möglicherweise gelöscht oder verschoben.</string>
+    <string name="error_pdf_memory_limit">Dieses Dokument ist zu groß für den Speicher Ihres Geräts. Bitte versuchen Sie kleinere Abschnitte.</string>
+    <string name="error_pdf_empty_document">Dieses Dokument enthält keine Seiten zum Konvertieren.</string>
+    <string name="error_pdf_unknown">Beim Lesen der PDF-Datei ist ein unerwarteter Fehler aufgetreten. Bitte versuchen Sie es erneut.</string>
+    <string name="dialog_ok">Verstanden</string>
 </resources>

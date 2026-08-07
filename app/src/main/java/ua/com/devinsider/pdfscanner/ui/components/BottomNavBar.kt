@@ -20,7 +20,7 @@ import androidx.compose.ui.res.stringResource
 import ua.com.devinsider.pdfscanner.R
 
 enum class BottomTab(
-    @StringRes val titleRes: Int,
+    @param:StringRes val titleRes: Int,
     val selectedIcon: ImageVector,
     val unselectedIcon: ImageVector
 ) {

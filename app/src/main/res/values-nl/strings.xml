@@ -84,4 +84,12 @@
     <string name="page_number">Pagina %1$d</string>
     <string name="toggle_bookmark">Schakel bladwijzer in</string>
     <string name="more_options">Meer opties</string>
+    <string name="error_conversion_dialog_title">Kan PDF niet converteren</string>
+    <string name="error_pdf_password_protected">Dit PDF-bestand is beveiligd met een wachtwoord. Verwijder het wachtwoord voordat u het naar afbeeldingen converteert.</string>
+    <string name="error_pdf_file_corrupted">Dit PDF-bestand is beschadigd of heeft een ongeldige indeling. Probeer een ander document.</string>
+    <string name="error_pdf_file_not_found">Kan het bestand niet lezen. Het is mogelijk verwijderd of verplaatst.</string>
+    <string name="error_pdf_memory_limit">Dit document is te groot voor het geheugen van uw apparaat. Probeer het in kleinere delen te converteren.</string>
+    <string name="error_pdf_empty_document">Dit document bevat geen pagina\'s om te converteren.</string>
+    <string name="error_pdf_unknown">Er is een onverwachte fout opgetreden bij het lezen van het PDF-bestand. Probeer het opnieuw.</string>
+    <string name="dialog_ok">Begrepen</string>
 </resources>

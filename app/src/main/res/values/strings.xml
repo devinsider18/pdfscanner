@@ -83,4 +83,12 @@
     <string name="page_number">Page %1$d</string>
     <string name="toggle_bookmark">Toggle Bookmark</string>
     <string name="more_options">More Options</string>
+    <string name="error_conversion_dialog_title">Cannot Convert PDF</string>
+    <string name="error_pdf_password_protected">This PDF file is password-protected. Please remove the password protection before converting it into images.</string>
+    <string name="error_pdf_file_corrupted">This PDF file is damaged or has an invalid structure. Please try another document.</string>
+    <string name="error_pdf_file_not_found">The file could not be read. It may have been deleted, moved, or permission was denied.</string>
+    <string name="error_pdf_memory_limit">This document is too large for your device\'s available memory. Please try converting smaller sections.</string>
+    <string name="error_pdf_empty_document">This document contains no pages to convert.</string>
+    <string name="error_pdf_unknown">An unexpected error occurred while reading the PDF file. Please try again or select another document.</string>
+    <string name="dialog_ok">Got it</string>
 </resources>

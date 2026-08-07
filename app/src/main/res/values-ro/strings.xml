@@ -84,4 +84,12 @@
     <string name="page_number">Pagina %1$d</string>
     <string name="toggle_bookmark">Comutați Marcaj</string>
     <string name="more_options">Mai multe opțiuni</string>
+    <string name="error_conversion_dialog_title">Nu se poate converti PDF-ul</string>
+    <string name="error_pdf_password_protected">Acest fișier PDF este protejat prin parolă. Vă rugăm să eliminați parola înainte de a-l converti în imagini.</string>
+    <string name="error_pdf_file_corrupted">Acest fișier PDF este deteriorat sau are un format nevalid. Vă rugăm să încercați alt document.</string>
+    <string name="error_pdf_file_not_found">Fișierul nu a putut fi citit. Este posibil să fi fost șters sau mutat.</string>
+    <string name="error_pdf_memory_limit">Acest document este prea mare pentru memoria dispozitivului dvs. Încercați să îl convertiți pe părți.</string>
+    <string name="error_pdf_empty_document">Acest document nu conține pagini de convertit.</string>
+    <string name="error_pdf_unknown">A apărut o eroare neașteptată la citirea fișierului PDF. Vă rugăm să încercați din nou.</string>
+    <string name="dialog_ok">Am înțeles</string>
 </resources>

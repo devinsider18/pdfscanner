@@ -85,4 +85,12 @@
     <string name="page_number">Сторінка %1$d</string>
     <string name="toggle_bookmark">Закладка</string>
     <string name="more_options">Додаткові опції</string>
+    <string name="error_conversion_dialog_title">Не вдалося конвертувати PDF</string>
+    <string name="error_pdf_password_protected">Цей PDF-файл захищено паролем. Щоб конвертувати його в зображення, спочатку зніміть з нього пароль.</string>
+    <string name="error_pdf_file_corrupted">Файл пошкоджено або він має невірний формат PDF. Спробуйте відкрити інший документ.</string>
+    <string name="error_pdf_file_not_found">Не вдалося прочитати файл. Можливо, його було видалено, переміщено або немає доступу.</string>
+    <string name="error_pdf_memory_limit">Документ занадто великий для оперативної пам’яті вашого пристрою. Спробуйте конвертувати файл частинами.</string>
+    <string name="error_pdf_empty_document">Цей документ порожній і не містить сторінок для конвертації.</string>
+    <string name="error_pdf_unknown">Сталася невідома помилка під час читання файлу. Спробуйте знову або виберіть інший файл.</string>
+    <string name="dialog_ok">Зрозуміло</string>
 </resources>

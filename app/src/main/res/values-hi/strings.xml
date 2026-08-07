@@ -84,4 +84,12 @@
     <string name="page_number">पेज %1$d</string>
     <string name="toggle_bookmark">बुकमार्क टॉगल करें</string>
     <string name="more_options">अधिक विकल्प</string>
+    <string name="error_conversion_dialog_title">पीडीएफ को परिवर्तित नहीं किया जा सका</string>
+    <string name="error_pdf_password_protected">यह पीडीएफ फाइल पासवर्ड से सुरक्षित है। कृपया इसे छवियों में बदलने से पहले पासवर्ड सुरक्षा हटा दें।</string>
+    <string name="error_pdf_file_corrupted">यह पीडीएफ फाइल क्षतिग्रस्त है या इसका प्रारूप अमान्य है। कृपया कोई अन्य दस्तावेज़ आज़माएं।</string>
+    <string name="error_pdf_file_not_found">फ़ाइल पढ़ी नहीं जा सकी. हो सकता है कि इसे हटा दिया गया हो या स्थानांतरित कर दिया गया हो।</string>
+    <string name="error_pdf_memory_limit">यह दस्तावेज़ आपके डिवाइस की मेमोरी के लिए बहुत बड़ा है। कृपया इसे भागों में परिवर्तित करने का प्रयास करें।</string>
+    <string name="error_pdf_empty_document">इस दस्तावेज़ में परिवर्तित करने के लिए कोई पृष्ठ नहीं है।</string>
+    <string name="error_pdf_unknown">पीडीएफ फाइल पढ़ते समय एक अप्रत्याशित त्रुटि हुई। कृपया पुनः प्रयास करें।</string>
+    <string name="dialog_ok">समझ गया</string>
 </resources>

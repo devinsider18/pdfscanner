@@ -84,4 +84,12 @@
     <string name="page_number">Sida %1$d</string>
     <string name="toggle_bookmark">Växla bokmärke</string>
     <string name="more_options">Fler alternativ</string>
+    <string name="error_conversion_dialog_title">Det går inte att konvertera PDF</string>
+    <string name="error_pdf_password_protected">Den här PDF-filen är lösenordsskyddad. Ta bort lösenordsskyddet innan du konverterar den till bilder.</string>
+    <string name="error_pdf_file_corrupted">Den här PDF-filen är skadad eller har ett ogiltigt format. Försök med ett annat dokument.</string>
+    <string name="error_pdf_file_not_found">Filen kunde inte läsas. Den kan ha raderats eller flyttats.</string>
+    <string name="error_pdf_memory_limit">Det här dokumentet är för stort för enhetens minne. Försök att konvertera i mindre delar.</string>
+    <string name="error_pdf_empty_document">Det här dokumentet innehåller inga sidor att konvertera.</string>
+    <string name="error_pdf_unknown">Ett oväntat fel uppstod när PDF-filen lästes. Försök igen.</string>
+    <string name="dialog_ok">Uppfattat</string>
 </resources>

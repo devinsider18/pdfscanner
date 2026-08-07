@@ -84,4 +84,12 @@
     <string name="page_number">Halaman %1$d</string>
     <string name="toggle_bookmark">Alihkan Bookmark</string>
     <string name="more_options">Opsi Lainnya</string>
+    <string name="error_conversion_dialog_title">Tidak Dapat Mengonversi PDF</string>
+    <string name="error_pdf_password_protected">File PDF ini dilindungi kata sandi. Harap hapus perlindungan kata sandi sebelum mengonversinya ke gambar.</string>
+    <string name="error_pdf_file_corrupted">File PDF ini rusak atau memiliki format yang tidak valid. Silakan coba dokumen lain.</string>
+    <string name="error_pdf_file_not_found">File tidak dapat dibaca. Mungkin telah dihapus atau dipindahkan.</string>
+    <string name="error_pdf_memory_limit">Dokumen ini terlalu besar untuk memori perangkat Anda. Coba konversi per bagian.</string>
+    <string name="error_pdf_empty_document">Dokumen ini tidak berisi halaman untuk dikonversi.</string>
+    <string name="error_pdf_unknown">Terjadi kesalahan tak terduga saat membaca file PDF. Silakan coba lagi.</string>
+    <string name="dialog_ok">Paham</string>
 </resources>

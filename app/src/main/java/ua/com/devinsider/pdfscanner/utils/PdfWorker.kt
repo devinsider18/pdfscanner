@@ -50,6 +50,7 @@ class PdfWorker(
             if (success) Result.success() else Result.failure()
         } catch (e: Exception) {
             e.printStackTrace()
+            AnalyticsHelper.recordException(e)
             withContext(Dispatchers.Main) {
                 val localizedContext = applicationContext.getLocalizedContext()
                 showNotification(applicationContext, localizedContext.getString(R.string.app_name), localizedContext.getString(R.string.task_critical_error))

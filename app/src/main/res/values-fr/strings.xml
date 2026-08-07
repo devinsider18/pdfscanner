@@ -84,4 +84,12 @@
     <string name="page_number">Page %1$d</string>
     <string name="toggle_bookmark">Basculer le signet</string>
     <string name="more_options">Plus d\'options</string>
+    <string name="error_conversion_dialog_title">Impossible de convertir le PDF</string>
+    <string name="error_pdf_password_protected">Ce fichier PDF est protégé par mot de passe. Veuillez retirer la protection avant de le convertir en images.</string>
+    <string name="error_pdf_file_corrupted">Ce fichier PDF est endommagé ou au format invalide. Veuillez essayer un autre document.</string>
+    <string name="error_pdf_file_not_found">Le fichier n\'a pas pu être lu. Il a peut-être été supprimé ou déplacé.</string>
+    <string name="error_pdf_memory_limit">Ce document est trop volumineux pour la mémoire de votre appareil. Essayez de le convertir par parties.</string>
+    <string name="error_pdf_empty_document">Ce document ne contient aucune page à convertir.</string>
+    <string name="error_pdf_unknown">Une erreur inattendue s\'est produite lors de la lecture du fichier. Veuillez réessayer.</string>
+    <string name="dialog_ok">Compris</string>
 </resources>

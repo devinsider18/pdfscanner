@@ -41,6 +41,20 @@ class MainActivity : AppCompatActivity() {
                 val navController = rememberNavController()
                 var currentTab by remember { mutableStateOf(BottomTab.DOCUMENTS) }
 
+                androidx.compose.runtime.DisposableEffect(navController) {
+                    val listener = androidx.navigation.NavController.OnDestinationChangedListener { _, destination, _ ->
+                        val screenName = when {
+                            destination.route?.startsWith("viewer") == true -> "PdfViewerScreen"
+                            else -> destination.route ?: "UnknownScreen"
+                        }
+                        ua.com.devinsider.pdfscanner.utils.AnalyticsHelper.logScreenView(applicationContext, screenName)
+                    }
+                    navController.addOnDestinationChangedListener(listener)
+                    onDispose {
+                        navController.removeOnDestinationChangedListener(listener)
+                    }
+                }
+
                 Scaffold(
                     bottomBar = {
                         BottomNavBar(

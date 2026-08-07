@@ -84,4 +84,12 @@
     <string name="page_number">Stránka %1$d</string>
     <string name="toggle_bookmark">Prepnúť záložku</string>
     <string name="more_options">Viac možností</string>
+    <string name="error_conversion_dialog_title">PDF nie je možné konvertovať</string>
+    <string name="error_pdf_password_protected">Tento súbor PDF je chránený heslom. Pred konverziou na obrázky odstráňte ochranu heslom.</string>
+    <string name="error_pdf_file_corrupted">Tento súbor PDF je poškodený alebo má neplatný formát. Skúste iný dokument.</string>
+    <string name="error_pdf_file_not_found">Súbor sa nepodarilo prečítať. Možno bol vymazaný alebo premiestnený.</string>
+    <string name="error_pdf_memory_limit">Tento dokument je príliš veľký pre pamäť vášho zariadenia. Skúste ho konvertovať po častiach.</string>
+    <string name="error_pdf_empty_document">Tento dokument neobsahuje žiadne strany na konverziu.</string>
+    <string name="error_pdf_unknown">Pri čítaní súboru PDF vyskytla neočakávaná chyba. Skúste to znova.</string>
+    <string name="dialog_ok">Rozumiem</string>
 </resources>

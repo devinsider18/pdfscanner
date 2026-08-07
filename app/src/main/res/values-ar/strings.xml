@@ -84,4 +84,12 @@
     <string name="page_number">صفحة %1$d</string>
     <string name="toggle_bookmark">تبديل الإشارة المرجعية</string>
     <string name="more_options">المزيد من الخيارات</string>
+    <string name="error_conversion_dialog_title">تعذر تحويل ملف PDF</string>
+    <string name="error_pdf_password_protected">ملف PDF هذا محمي بكلمة مرور. يرجى إزالة كلمة المرور قبل تحويله إلى صور.</string>
+    <string name="error_pdf_file_corrupted">ملف PDF هذا تالف أو تنسيقه غير صالحة. يرجى تجربة مستند آخر.</string>
+    <string name="error_pdf_file_not_found">تعذرت قراءة الملف. ربما تم حذفه أو نقله.</string>
+    <string name="error_pdf_memory_limit">هذا المستند كبير جدًا بالنسبة لذاكرة جهازك. حاول تحويله على أجزاء.</string>
+    <string name="error_pdf_empty_document">لا يحتوي هذا المستند على أي صفحات لتحويلها.</string>
+    <string name="error_pdf_unknown">حدث خطأ غير متوقع أثناء قراءة ملف PDF. يرجى المحاولة مرة أخرى.</string>
+    <string name="dialog_ok">حسناً</string>
 </resources>

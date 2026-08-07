@@ -84,4 +84,12 @@
     <string name="page_number">Trang %1$d</string>
     <string name="toggle_bookmark">Chuyển đổi dấu trang</string>
     <string name="more_options">Tùy chọn khác</string>
+    <string name="error_conversion_dialog_title">Không thể chuyển đổi PDF</string>
+    <string name="error_pdf_password_protected">Tệp PDF này được bảo vệ bằng mật khẩu. Vui lòng xóa bảo vệ mật khẩu trước khi chuyển đổi sang hình ảnh.</string>
+    <string name="error_pdf_file_corrupted">Tệp PDF này bị hỏng hoặc có định dạng không hợp lệ. Vui lòng thử một tài liệu khác.</string>
+    <string name="error_pdf_file_not_found">Không thể đọc tệp. Tệp có thể đã bị xóa hoặc di chuyển.</string>
+    <string name="error_pdf_memory_limit">Tài liệu này quá lớn đối với bộ nhớ thiết bị của bạn. Hãy thử chuyển đổi theo từng phần.</string>
+    <string name="error_pdf_empty_document">Tài liệu này không chứa trang nào để chuyển đổi.</string>
+    <string name="error_pdf_unknown">Đã xảy ra lỗi không mong muốn khi đọc tệp PDF. Vui lòng thử lại.</string>
+    <string name="dialog_ok">Đã hiểu</string>
 </resources>

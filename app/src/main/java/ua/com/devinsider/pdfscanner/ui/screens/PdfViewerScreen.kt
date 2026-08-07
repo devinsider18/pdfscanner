@@ -28,6 +28,8 @@ import java.io.File
 import androidx.navigation.NavController
 import androidx.core.net.toUri
 import ua.com.devinsider.pdfscanner.utils.PdfConverter
+import ua.com.devinsider.pdfscanner.utils.ConversionResult
+import ua.com.devinsider.pdfscanner.ui.components.ConversionErrorDialog
 import ua.com.devinsider.pdfscanner.R
 import androidx.compose.ui.res.stringResource
 import androidx.core.graphics.createBitmap
@@ -50,6 +52,7 @@ fun PdfViewerScreen(
     var isError by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
     var conversionResultMessage by remember { mutableStateOf<String?>(null) }
+    var conversionErrorDialogState by remember { mutableStateOf<ConversionResult.Error?>(null) }
     val snackbarHostState = remember { SnackbarHostState() }
     var isConverting by remember { mutableStateOf(false) }
 
@@ -105,9 +108,13 @@ fun PdfViewerScreen(
                             isConverting = true
                             scope.launch {
                                 snackbarHostState.showSnackbar(convertingToLongImageMsg)
-                                val success = PdfConverter.convertPdfToLongImage(context, filePath)
+                                val result = PdfConverter.convertPdfToLongImageWithResult(context, filePath)
                                 isConverting = false
-                                conversionResultMessage = if (success) savedToPicturesMsg else failedToConvertMsg
+                                if (result is ConversionResult.Success) {
+                                    conversionResultMessage = savedToPicturesMsg
+                                } else if (result is ConversionResult.Error) {
+                                    conversionErrorDialogState = result
+                                }
                             }
                         }
                     ) {
@@ -119,9 +126,13 @@ fun PdfViewerScreen(
                             isConverting = true
                             scope.launch {
                                 snackbarHostState.showSnackbar(convertingToImagesMsg)
-                                val success = PdfConverter.convertPdfToImages(context, filePath) { _, _ -> }
+                                val result = PdfConverter.convertPdfToImagesWithResult(context, filePath) { _, _ -> }
                                 isConverting = false
-                                conversionResultMessage = if (success) savedToPicturesMsg else failedToConvertMsg
+                                if (result is ConversionResult.Success) {
+                                    conversionResultMessage = savedToPicturesMsg
+                                } else if (result is ConversionResult.Error) {
+                                    conversionErrorDialogState = result
+                                }
                             }
                         }
                     ) {
@@ -155,13 +166,16 @@ fun PdfViewerScreen(
         }
         
         conversionResultMessage?.let { msg ->
-            AlertDialog(
-                onDismissRequest = { conversionResultMessage = null },
-                title = { Text(stringResource(R.string.conversion_result)) },
-                text = { Text(msg) },
-                confirmButton = {
-                    TextButton(onClick = { conversionResultMessage = null }) { Text(stringResource(R.string.ok)) }
-                }
+            LaunchedEffect(msg) {
+                snackbarHostState.showSnackbar(msg)
+                conversionResultMessage = null
+            }
+        }
+
+        conversionErrorDialogState?.let { error ->
+            ConversionErrorDialog(
+                error = error,
+                onDismiss = { conversionErrorDialogState = null }
             )
         }
     }

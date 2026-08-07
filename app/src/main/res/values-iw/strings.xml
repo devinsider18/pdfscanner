@@ -84,4 +84,12 @@
     <string name="page_number">עמוד %1$d</string>
     <string name="toggle_bookmark">החלף סימניה</string>
     <string name="more_options">אפשרויות נוספות</string>
+    <string name="error_conversion_dialog_title">לא ניתן להמיר קובץ PDF</string>
+    <string name="error_pdf_password_protected">קובץ PDF זה מוגן באמצעות סיסמה. אנא הסר את הגנת הסיסמה לפני המרתו לתמונות.</string>
+    <string name="error_pdf_file_corrupted">קובץ PDF זה פגום או בפורמט לא תקין. אנא נסה מסמך אחר.</string>
+    <string name="error_pdf_file_not_found">לא ניתן לקרוא את הקובץ. ייתכן שהוא נמחק או הועבר.</string>
+    <string name="error_pdf_memory_limit">מסמך זה גדול מדי עבור זיכרון המכשיר שלך. נסה להמיר בחלקים.</string>
+    <string name="error_pdf_empty_document">מסמך זה אינו מכיל דפים להמרה.</string>
+    <string name="error_pdf_unknown">אירעה שגיאה בלתי צפויה בעת קריאת קובץ ה-PDF. אנא נסה שוב.</string>
+    <string name="dialog_ok">הבנתי</string>
 </resources>

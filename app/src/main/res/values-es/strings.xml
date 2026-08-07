@@ -84,4 +84,12 @@
     <string name="page_number">Página %1$d</string>
     <string name="toggle_bookmark">Alternar marcador</string>
     <string name="more_options">Más opciones</string>
+    <string name="error_conversion_dialog_title">No se pudo convertir el PDF</string>
+    <string name="error_pdf_password_protected">Este archivo PDF está protegido con contraseña. Elimina la contraseña antes de convertirlo en imágenes.</string>
+    <string name="error_pdf_file_corrupted">Este archivo PDF está dañado o tiene un formato no válido. Intenta con otro documento.</string>
+    <string name="error_pdf_file_not_found">No se pudo leer el archivo. Es posible que se haya eliminado o movido.</string>
+    <string name="error_pdf_memory_limit">Este documento es demasiado grande para la memoria de tu dispositivo. Intenta convertirlo por partes.</string>
+    <string name="error_pdf_empty_document">Este documento no contiene páginas para convertir.</string>
+    <string name="error_pdf_unknown">Ocurrió un error inesperado al leer el archivo PDF. Inténtalo de nuevo.</string>
+    <string name="dialog_ok">Entendido</string>
 </resources>

@@ -84,4 +84,12 @@
     <string name="page_number">Side %1$d</string>
     <string name="toggle_bookmark">Veksle bokmerke</string>
     <string name="more_options">Flere alternativer</string>
+    <string name="error_conversion_dialog_title">Kan ikke konvertere PDF</string>
+    <string name="error_pdf_password_protected">Denne PDF-filen er passordbeskyttet. Fjern passordbeskyttelsen før du konverterer den til bilder.</string>
+    <string name="error_pdf_file_corrupted">Denne PDF-filen er skadet eller har et ugyldig format. Prøv et annet dokument.</string>
+    <string name="error_pdf_file_not_found">Kunne ikke lese filen. Den kan ha blitt slettet eller flyttet.</string>
+    <string name="error_pdf_memory_limit">Dette dokumentet er for stort for enhetens minne. Prøv å konvertere i mindre deler.</string>
+    <string name="error_pdf_empty_document">Dette dokumentet inneholder ingen sider å konvertere.</string>
+    <string name="error_pdf_unknown">Det oppsto en uventet feil ved lesing av PDF-filen. Prøv på nytt.</string>
+    <string name="dialog_ok">Mottatt</string>
 </resources>

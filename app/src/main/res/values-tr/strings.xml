@@ -84,4 +84,12 @@
     <string name="page_number">Sayfa %1$d</string>
     <string name="toggle_bookmark">Yer İmini Değiştir</string>
     <string name="more_options">Daha Fazla Seçenek</string>
+    <string name="error_conversion_dialog_title">PDF Dönüştürülemiyor</string>
+    <string name="error_pdf_password_protected">Bu PDF dosyası şifre korumalıdır. Resimlere dönüştürmeden önce lütfen şifre korumasını kaldırın.</string>
+    <string name="error_pdf_file_corrupted">Bu PDF dosyası bozuk veya geçersiz bir biçime sahip. Lütfen başka bir belge deneyin.</string>
+    <string name="error_pdf_file_not_found">Dosya okunamadı. Silinmiş veya taşınmış olabilir.</string>
+    <string name="error_pdf_memory_limit">Bu belge cihazınızın belleği için çok büyük. Lütfen parçalar halinde dönüştürmeyi deneyin.</string>
+    <string name="error_pdf_empty_document">Bu belge dönüştürülecek sayfa içermiyor.</string>
+    <string name="error_pdf_unknown">PDF dosyası okunurken beklenmeyen bir hata oluştu. Lütfen tekrar deneyin.</string>
+    <string name="dialog_ok">Anlaşıldı</string>
 </resources>

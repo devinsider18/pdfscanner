@@ -84,4 +84,12 @@
     <string name="page_number">Pagina %1$d</string>
     <string name="toggle_bookmark">Attiva/disattiva segnalibro</string>
     <string name="more_options">Più opzioni</string>
+    <string name="error_conversion_dialog_title">Impossibile convertire il PDF</string>
+    <string name="error_pdf_password_protected">Questo file PDF è protetto da password. Rimuovi la password prima di convertirlo in immagini.</string>
+    <string name="error_pdf_file_corrupted">Questo file PDF è danneggiato o ha un formato non valido. Prova un altro documento.</string>
+    <string name="error_pdf_file_not_found">Impossibile leggere il file. Potrebbe essere stato eliminato o spostato.</string>
+    <string name="error_pdf_memory_limit">Questo documento è troppo grande per la memoria del tuo dispositivo. Prova a convertirlo a parti.</string>
+    <string name="error_pdf_empty_document">Questo documento non contiene pagine da convertire.</string>
+    <string name="error_pdf_unknown">Si è verificato un errore imprevisto durante la lettura del file PDF. Riprova.</string>
+    <string name="dialog_ok">Ho capito</string>
 </resources>

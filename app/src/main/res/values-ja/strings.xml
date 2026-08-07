@@ -84,4 +84,12 @@
     <string name="page_number">ページ%1$d</string>
     <string name="toggle_bookmark">ブックマークの切り替え</string>
     <string name="more_options">その他のオプション</string>
+    <string name="error_conversion_dialog_title">PDFを変換できません</string>
+    <string name="error_pdf_password_protected">このPDFファイルはパスワードで保護されています。画像に変換する前にパスワード保護を解除してください。</string>
+    <string name="error_pdf_file_corrupted">このPDFファイルは破損しているか、無効な形式です。別のドキュメントをお試しください。</string>
+    <string name="error_pdf_file_not_found">ファイルを読み込めませんでした。削除されたか移動された可能性があります。</string>
+    <string name="error_pdf_memory_limit">このドキュメントはデバイスのメモリに対して大きすぎます。分割して変換してみてください。</string>
+    <string name="error_pdf_empty_document">このドキュメントには変換するページが含まれていません。</string>
+    <string name="error_pdf_unknown">PDFファイルの読み込み中に予期しないエラーが発生しました。もう一度お試しください。</string>
+    <string name="dialog_ok">了解</string>
 </resources>

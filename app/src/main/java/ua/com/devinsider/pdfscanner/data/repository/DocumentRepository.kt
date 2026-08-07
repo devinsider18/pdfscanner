@@ -29,7 +29,7 @@ import javax.inject.Singleton
 
 @Singleton
 class DocumentRepository @Inject constructor(
-    @ApplicationContext private val context: Context,
+    @param:ApplicationContext private val context: Context,
     private val bookmarkDao: BookmarkDao,
     private val appCreatedFileDao: AppCreatedFileDao
 ) {

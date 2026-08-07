@@ -84,4 +84,12 @@
     <string name="page_number">Strona %1$d</string>
     <string name="toggle_bookmark">Przełącz zakładkę</string>
     <string name="more_options">Więcej opcji</string>
+    <string name="error_conversion_dialog_title">Nie można przekonwertować pliku PDF</string>
+    <string name="error_pdf_password_protected">Ten plik PDF jest chroniony hasłem. Usuń ochronę hasłem przed konwersją na obrazy.</string>
+    <string name="error_pdf_file_corrupted">Ten plik PDF jest uszkodzony lub ma nieprawidłowy format. Spróbuj użyć innego dokumentu.</string>
+    <string name="error_pdf_file_not_found">Nie można odczytać pliku. Mogł zostać usunięty lub przeniesiony.</string>
+    <string name="error_pdf_memory_limit">Ten dokument jest zbyt duży dla pamięci Twojego urządzenia. Spróbuj konwertować go w częściach.</string>
+    <string name="error_pdf_empty_document">Ten dokument nie zawiera stron do konwersji.</string>
+    <string name="error_pdf_unknown">Wystąpił nieoczekiwany błąd podczas odczytu pliku PDF. Spróbuj ponownie.</string>
+    <string name="dialog_ok">Rozumiem</string>
 </resources>

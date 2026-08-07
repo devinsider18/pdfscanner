@@ -84,4 +84,12 @@
     <string name="page_number">页%1$d</string>
     <string name="toggle_bookmark">切换书签</string>
     <string name="more_options">更多选择</string>
+    <string name="error_conversion_dialog_title">无法转换 PDF</string>
+    <string name="error_pdf_password_protected">此 PDF 文件受密码保护。请在转换为图像之前删除密码保护。</string>
+    <string name="error_pdf_file_corrupted">此 PDF 文件已损坏或格式无效。请尝试打开其他文档。</string>
+    <string name="error_pdf_file_not_found">无法读取该文件。它可能已被删除或移动。</string>
+    <string name="error_pdf_memory_limit">此文档对于您设备的内存来说太大了。请尝试分段转换。</string>
+    <string name="error_pdf_empty_document">此文档不包含任何可转换的页面。</string>
+    <string name="error_pdf_unknown">读取 PDF 文件时发生未知错误。请重试。</string>
+    <string name="dialog_ok">好的</string>
 </resources>

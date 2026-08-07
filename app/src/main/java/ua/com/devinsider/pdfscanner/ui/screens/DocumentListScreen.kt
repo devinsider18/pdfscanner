@@ -190,6 +190,7 @@ fun DocumentListScreen(
                                     
                                     PdfConverter.savePdfToMediaStore(context, tempFile, fileName)
                                     tempFile.delete()
+                                    ua.com.devinsider.pdfscanner.utils.AnalyticsHelper.logEvent(context, "scan_document_success")
                                 }
                                 withContext(Dispatchers.Main) {
                                     conversionResultMessage = savedToDownloadsMsg

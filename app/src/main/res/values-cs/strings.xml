@@ -84,4 +84,12 @@
     <string name="page_number">Stránka %1$d</string>
     <string name="toggle_bookmark">Přepnout záložku</string>
     <string name="more_options">Další možnosti</string>
+    <string name="error_conversion_dialog_title">PDF nelze převést</string>
+    <string name="error_pdf_password_protected">Tento soubor PDF je chráněn heslem. Před převodem na obrázky odstraňte ochranu heslem.</string>
+    <string name="error_pdf_file_corrupted">Tento soubor PDF je poškozen nebo má neplatný formát. Zkuste jiný dokument.</string>
+    <string name="error_pdf_file_not_found">Soubor nelze přečíst. Možná byl smazán nebo přemístěn.</string>
+    <string name="error_pdf_memory_limit">Tento dokument je příliš velký pro paměť vašeho zařízení. Zkuste jej převést po částech.</string>
+    <string name="error_pdf_empty_document">Tento dokument neobsahuje žádné stránky k převodu.</string>
+    <string name="error_pdf_unknown">Při čtení souboru PDF došlo k neočekávané chybě. Zkuste to prosím znovu.</string>
+    <string name="dialog_ok">Rozumím</string>
 </resources>

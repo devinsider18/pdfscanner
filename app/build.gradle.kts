@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlin.serialization)
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
 }
 android {
     namespace = "ua.com.devinsider.pdfscanner"
@@ -18,7 +20,6 @@ android {
 
         ndk {
             abiFilters += setOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
-            debugSymbolLevel = "FULL"
         }
     }
     buildTypes {
@@ -47,6 +48,9 @@ ksp {
     arg("room.schemaLocation", "$projectDir/schemas")
 }
 dependencies {
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
     implementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.core.ktx)
@@ -85,4 +89,8 @@ dependencies {
     implementation(libs.androidx.camera.view)
     implementation(libs.mlkit.text.recognition)
     implementation(libs.pdfbox.android)
+}
+
+tasks.matching { it.name.endsWith("ComposeMapping") }.configureEach {
+    enabled = false
 }
