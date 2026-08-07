@@ -90,7 +90,3 @@ dependencies {
     implementation(libs.mlkit.text.recognition)
     implementation(libs.pdfbox.android)
 }
-
-tasks.matching { it.name.endsWith("ComposeMapping") }.configureEach {
-    enabled = false
-}
