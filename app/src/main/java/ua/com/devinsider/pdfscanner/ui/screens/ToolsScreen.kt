@@ -51,6 +51,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.LaunchedEffect
 import androidx.core.content.FileProvider
 
+
 @Composable
 fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
     val context = LocalContext.current
@@ -327,6 +328,8 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
         ToolButton(icon = Icons.Default.PhotoLibrary, text = stringResource(R.string.pdf_to_image), onClick = { pdfToImagesLauncher.launch("application/pdf") })
         ToolButton(icon = Icons.AutoMirrored.Filled.CallMerge, text = stringResource(R.string.merge_pdfs), onClick = { showMergePicker = true })
         ToolButton(icon = Icons.AutoMirrored.Filled.CallSplit, text = stringResource(R.string.split_pdf), onClick = { showSplitPicker = true })
+
+
 
         if (showMergePicker) {
             DocumentPickerDialog(

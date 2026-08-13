@@ -16,6 +16,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.navArgument
 import java.net.URLDecoder
 import java.net.URLEncoder
@@ -28,11 +29,21 @@ import ua.com.devinsider.pdfscanner.ui.screens.PdfViewerScreen
 import ua.com.devinsider.pdfscanner.ui.screens.ToolsScreen
 import ua.com.devinsider.pdfscanner.ui.theme.MyApplicationTheme
 import ua.com.devinsider.pdfscanner.ui.viewmodels.MainViewModel
+import ua.com.devinsider.pdfscanner.BuildConfig
+import com.ironsource.mediationsdk.IronSource
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // Enable Unity LevelPlay test suite and debug mode for development
+        // IronSource.setMetaData("is_test_suite", "enable")
+        // IronSource.setAdaptersDebug(true)
+        
+        // TODO: The IronSource App Key is now read from local.properties to keep it out of public repositories.
+        // Add IRONSOURCE_APP_KEY="your_key" to your local.properties file.
+        IronSource.init(this, BuildConfig.IRONSOURCE_APP_KEY)
         setContent {
             val viewModel: MainViewModel = hiltViewModel()
             val isDarkMode by viewModel.isDarkMode.collectAsState()
@@ -57,19 +68,30 @@ class MainActivity : AppCompatActivity() {
 
                 Scaffold(
                     bottomBar = {
-                        BottomNavBar(
-                            currentTab = currentTab,
-                            onTabSelected = { tab ->
-                                currentTab = tab
-                                navController.navigate(tab.name) {
-                                    popUpTo(navController.graph.startDestinationId) {
-                                        saveState = true
-                                    }
-                                    launchSingleTop = true
-                                    restoreState = true
-                                }
+                        val navBackStackEntry by navController.currentBackStackEntryAsState()
+                        val currentRoute = navBackStackEntry?.destination?.route
+                        val isViewer = currentRoute?.startsWith("viewer") == true
+
+                        androidx.compose.foundation.layout.Column {
+                            if (!isViewer) {
+                                ua.com.devinsider.pdfscanner.ui.components.LevelPlayBanner(
+                                    bannerSize = com.ironsource.mediationsdk.ISBannerSize.BANNER
+                                )
                             }
-                        )
+                            BottomNavBar(
+                                currentTab = currentTab,
+                                onTabSelected = { tab ->
+                                    currentTab = tab
+                                    navController.navigate(tab.name) {
+                                        popUpTo(navController.graph.startDestinationId) {
+                                            saveState = true
+                                        }
+                                        launchSingleTop = true
+                                        restoreState = true
+                                    }
+                                }
+                            )
+                        }
                     }
                 ) { paddingValues ->
                     NavHost(
@@ -118,5 +140,15 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        IronSource.onResume(this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        IronSource.onPause(this)
     }
 }

@@ -1,3 +1,12 @@
+import java.util.Properties
+
+val localProperties = Properties()
+val localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localProperties.load(localPropertiesFile.inputStream())
+}
+val ironSourceAppKey = localProperties.getProperty("IRONSOURCE_APP_KEY") ?: "YOUR_IRONSOURCE_APP_KEY"
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.hilt.gradle)
@@ -21,6 +30,7 @@ android {
         ndk {
             abiFilters += setOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
         }
+        buildConfigField("String", "IRONSOURCE_APP_KEY", "\"$ironSourceAppKey\"")
     }
     buildTypes {
         getByName("release") {
@@ -35,7 +45,7 @@ android {
     buildFeatures {
         compose = true
         aidl = false
-        buildConfig = false
+        buildConfig = true
         shaders = false
     }
     packaging {
@@ -89,4 +99,15 @@ dependencies {
     implementation(libs.androidx.camera.view)
     implementation(libs.mlkit.text.recognition)
     implementation(libs.pdfbox.android)
+    implementation("com.unity3d.ads-mediation:mediation-sdk:8.2.1")
+    implementation("com.google.android.gms:play-services-ads-identifier:18.1.0")
+    implementation("com.google.android.gms:play-services-basement:18.4.0")
+}
+
+configurations.all {
+    resolutionStrategy.eachDependency {
+        if (requested.group == "org.jetbrains.kotlin" && requested.name == "compose-group-mapping") {
+            useVersion("2.4.10")
+        }
+    }
 }

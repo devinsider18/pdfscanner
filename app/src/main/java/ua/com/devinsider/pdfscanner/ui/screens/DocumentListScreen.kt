@@ -47,6 +47,8 @@ import kotlinx.coroutines.withContext
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.Date
+
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DocumentListScreen(
@@ -430,13 +432,15 @@ fun DocumentListScreen(
             }
         }
         val isRefreshing by viewModel.isRefreshing.collectAsState()
-        PullToRefreshBox(
-            isRefreshing = isRefreshing,
-            onRefresh = { viewModel.refreshDocuments() },
-            modifier = Modifier.weight(1f).fillMaxWidth()
-        ) {
-            LazyColumn(modifier = Modifier.fillMaxSize()) {
-                if (filteredDocs.isEmpty()) {
+        Column(modifier = Modifier.weight(1f).fillMaxWidth()) {
+
+            PullToRefreshBox(
+                isRefreshing = isRefreshing,
+                onRefresh = { viewModel.refreshDocuments() },
+                modifier = Modifier.weight(1f).fillMaxWidth()
+            ) {
+                LazyColumn(modifier = Modifier.fillMaxSize()) {
+                    if (filteredDocs.isEmpty()) {
                     item {
                         Box(
                             modifier = Modifier.fillParentMaxSize(),
@@ -623,7 +627,9 @@ fun DocumentListScreen(
             }
         )
     }
+    }
 }
+
 @Suppress("UnusedReceiverParameter")
 fun DocumentType.toMimeType(): String {
     return "application/pdf"
