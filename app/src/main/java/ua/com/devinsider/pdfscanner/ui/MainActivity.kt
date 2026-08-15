@@ -34,16 +34,62 @@ import com.ironsource.mediationsdk.IronSource
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    private var isIronSourceInitialized = false
+    
+    private fun initializeIronSource() {
+        if (isIronSourceInitialized) return
+        isIronSourceInitialized = true
         
-        // Enable Unity LevelPlay test suite and debug mode for development
-        // IronSource.setMetaData("is_test_suite", "enable")
-        // IronSource.setAdaptersDebug(true)
+        if (BuildConfig.DEBUG) {
+            // Enable Unity LevelPlay test suite and debug mode for development
+            IronSource.setMetaData("is_test_suite", "enable")
+            IronSource.setAdaptersDebug(true)
+        }
         
         // TODO: The IronSource App Key is now read from local.properties to keep it out of public repositories.
         // Add IRONSOURCE_APP_KEY="your_key" to your local.properties file.
         IronSource.init(this, BuildConfig.IRONSOURCE_APP_KEY)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        
+        // Request GDPR/UMP consent before initializing ads
+        val consentInformation = com.google.android.ump.UserMessagingPlatform.getConsentInformation(this)
+        
+        val paramsBuilder = com.google.android.ump.ConsentRequestParameters.Builder()
+        
+        if (BuildConfig.DEBUG) {
+            // Force geography to EEA for testing so the form always shows. 
+            // IMPORTANT: Remove ConsentDebugSettings before releasing to production!
+            val debugSettings = com.google.android.ump.ConsentDebugSettings.Builder(this)
+                .setDebugGeography(com.google.android.ump.ConsentDebugSettings.DebugGeography.DEBUG_GEOGRAPHY_EEA)
+                .build()
+            paramsBuilder.setConsentDebugSettings(debugSettings)
+        }
+            
+        val params = paramsBuilder.build()
+        
+        consentInformation.requestConsentInfoUpdate(
+            this,
+            params,
+            {
+                com.google.android.ump.UserMessagingPlatform.loadAndShowConsentFormIfRequired(this) { formError ->
+                    if (consentInformation.canRequestAds()) {
+                        initializeIronSource()
+                    }
+                }
+            },
+            { requestError ->
+                if (consentInformation.canRequestAds()) {
+                    initializeIronSource()
+                }
+            }
+        )
+        
+        if (consentInformation.canRequestAds()) {
+            initializeIronSource()
+        }
         setContent {
             val viewModel: MainViewModel = hiltViewModel()
             val isDarkMode by viewModel.isDarkMode.collectAsState()

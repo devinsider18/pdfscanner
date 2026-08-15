@@ -33,3 +33,17 @@
 
 # Preserve Annotations, Signatures and Stacktrace details
 -keepattributes *Annotation*, Signature, InnerClasses, EnclosingMethod, SourceFile, LineNumberTable
+
+# IronSource Unity LevelPlay & Ad Networks
+-keepclassmembers class com.ironsource.sdk.controller.IronSourceWebView$JSInterface {
+    public *;
+}
+-keep class com.ironsource.adapters.** { *; }
+-dontwarn com.ironsource.mediationsdk.**
+-dontwarn com.ironsource.adapters.**
+-keepclassmembers class com.ironsource.** { public *; }
+-keep public class com.ironsource.**
+
+# Google UMP SDK
+-keep class com.google.android.ump.** { *; }
+-dontwarn com.google.android.ump.**
