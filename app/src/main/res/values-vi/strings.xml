@@ -92,4 +92,15 @@
     <string name="error_pdf_empty_document">Tài liệu này không chứa trang nào để chuyển đổi.</string>
     <string name="error_pdf_unknown">Đã xảy ra lỗi không mong muốn khi đọc tệp PDF. Vui lòng thử lại.</string>
     <string name="dialog_ok">Đã hiểu</string>
+    <string name="gdpr_consent_title">Quyền riêng tư &amp; Dữ liệu</string>
+    <string name="gdpr_consent_message">Ứng dụng này hiển thị quảng cáo để duy trì miễn phí. Để hiển thị cho bạn quảng cáo có liên quan, chúng tôi và đối tác của chúng tôi thu thập và xử lý số nhận dạng thiết bị, dữ liệu sử dụng và dữ liệu tương tác quảng cáo. Dữ liệu này có thể được chia sẻ với các đối tác quảng cáo.</string>
+    <string name="gdpr_consent_details">Bằng cách chấp nhận, bạn đồng ý với việc thu thập và xử lý dữ liệu của mình cho quảng cáo được cá nhân hóa theo GDPR (Điều 6(1)(a)). Bạn có thể rút lại sự đồng ý của mình bất cứ lúc nào trong cài đặt ứng dụng tại mục \"Quảng cáo được cá nhân hóa\". Việc từ chối vẫn sẽ hiển thị quảng cáo, nhưng chúng sẽ không được cá nhân hóa.</string>
+    <string name="gdpr_accept">Chấp nhận</string>
+    <string name="gdpr_decline">Từ chối</string>
+    <string name="settings_section_title">Cài đặt</string>
+    <string name="personalized_ads">Quảng cáo được cá nhân hóa</string>
+    <string name="personalized_ads_description">Cho phép thu thập dữ liệu cho quảng cáo có liên quan</string>
+    <string name="about_app">Giới thiệu ứng dụng</string>
+    <string name="about_version">Phiên bản %1$s</string>
+    <string name="about_description">PDF Scanner là một công cụ miễn phí để quét, xem, chuyển đổi, hợp nhất và tách tài liệu PDF. Được hỗ trợ bởi công nghệ quét tài liệu ML Kit.</string>
 </resources>

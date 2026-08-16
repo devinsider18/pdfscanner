@@ -93,4 +93,15 @@
     <string name="error_pdf_empty_document">Этот документ пуст и не содержит страниц для конвертации.</string>
     <string name="error_pdf_unknown">Произошла неизвестная ошибка при чтении файла. Попробуйте снова или выберите другой файл.</string>
     <string name="dialog_ok">Понятно</string>
+    <string name="gdpr_consent_title">Конфиденциальность</string>
+    <string name="gdpr_consent_message">Это приложение показывает рекламу, чтобы оставаться бесплатным. Для показа релевантной рекламы мы и наши партнёры собираем и обрабатываем идентификаторы устройств, данные об использовании и взаимодействии с рекламой. Эти данные могут передаваться рекламным партнёрам.</string>
+    <string name="gdpr_consent_details">Нажимая «Принять», вы даёте согласие на сбор и обработку ваших данных для персонализированной рекламы в соответствии с GDPR (ст. 6(1)(a)). Вы можете отозвать согласие в любое время в настройках приложения в разделе «Персонализация рекламы». При отказе реклама всё равно будет отображаться, но не будет персонализированной.</string>
+    <string name="gdpr_accept">Принять</string>
+    <string name="gdpr_decline">Отклонить</string>
+    <string name="settings_section_title">Настройки</string>
+    <string name="personalized_ads">Персонализация рекламы</string>
+    <string name="personalized_ads_description">Разрешить сбор данных для релевантной рекламы</string>
+    <string name="about_app">О приложении</string>
+    <string name="about_version">Версия %1$s</string>
+    <string name="about_description">PDF Scanner — бесплатный инструмент для сканирования, просмотра, конвертации, объединения и разделения PDF-документов. Работает на базе технологии ML Kit.</string>
 </resources>

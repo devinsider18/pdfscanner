@@ -23,8 +23,8 @@ android {
         applicationId = "ua.com.devinsider.pdfscanner"
         minSdk = 24
         targetSdk = 37
-        versionCode = 8
-        versionName = "1.4"
+        versionCode = 9
+        versionName = "1.5"
         testInstrumentationRunner = "ua.com.devinsider.pdfscanner.HiltTestRunner"
 
         ndk {
@@ -102,7 +102,6 @@ dependencies {
     implementation("com.unity3d.ads-mediation:mediation-sdk:8.2.1")
     implementation("com.google.android.gms:play-services-ads-identifier:18.1.0")
     implementation("com.google.android.gms:play-services-basement:18.4.0")
-    implementation("com.google.android.ump:user-messaging-platform:3.0.0")
 }
 
 configurations.all {

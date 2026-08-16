@@ -43,7 +43,3 @@
 -dontwarn com.ironsource.adapters.**
 -keepclassmembers class com.ironsource.** { public *; }
 -keep public class com.ironsource.**
-
-# Google UMP SDK
--keep class com.google.android.ump.** { *; }
--dontwarn com.google.android.ump.**

@@ -92,4 +92,15 @@
     <string name="error_pdf_empty_document">Ez a dokumentum nem tartalmaz konvertálandó oldalakat.</string>
     <string name="error_pdf_unknown">Váratlan hiba történt a PDF-fájl olvasása közben. Kérjük, próbálja újra.</string>
     <string name="dialog_ok">Értem</string>
+    <string name="gdpr_consent_title">Adatvédelem és adatok</string>
+    <string name="gdpr_consent_message">Ez az alkalmazás hirdetéseket jelenít meg, hogy ingyenes maradhasson. Ahhoz, hogy releváns hirdetéseket mutathassunk Önnek, mi és partnereink eszközazonosítókat, használati adatokat és hirdetés-interakciós adatokat gyűjtünk és dolgozunk fel. Ezeket az adatokat megoszthatjuk hirdetési partnereinkkel.</string>
+    <string name="gdpr_consent_details">Az elfogadással Ön hozzájárul adatainak személyre szabott hirdetések céljából történő gyűjtéséhez és feldolgozásához a GDPR (6. cikk (1) bekezdés a) pontja) értelmében. Hozzájárulását bármikor visszavonhatja az alkalmazás beállításaiban a \"Személyre szabott hirdetések\" menüpont alatt. Az elutasítás esetén is megjelennek hirdetések, de nem lesznek személyre szabva.</string>
+    <string name="gdpr_accept">Elfogadom</string>
+    <string name="gdpr_decline">Elutasítom</string>
+    <string name="settings_section_title">Beállítások</string>
+    <string name="personalized_ads">Személyre szabott hirdetések</string>
+    <string name="personalized_ads_description">Adatgyűjtés engedélyezése a releváns hirdetésekhez</string>
+    <string name="about_app">Az alkalmazásról</string>
+    <string name="about_version">Verzió: %1$s</string>
+    <string name="about_description">A PDF Scanner egy ingyenes eszköz PDF dokumentumok beolvasására, megtekintésére, konvertálására, egyesítésére és felosztására. Az ML Kit dokumentumszkennelési technológiájával működik.</string>
 </resources>

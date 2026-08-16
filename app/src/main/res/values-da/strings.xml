@@ -91,5 +91,15 @@
     <string name="error_pdf_memory_limit">Dette dokument er for stort til din enheds hukommelse. Prøv at konvertere i mindre dele.</string>
     <string name="error_pdf_empty_document">Dette dokument indeholder ingen sider at konvertere.</string>
     <string name="error_pdf_unknown">Der opstod en uventet fejl under læsning af PDF-filen. Prøv igen.</string>
-    <string name="dialog_ok">Modtaget</string>
+    <string name="gdpr_consent_title">Privatliv &amp; Data</string>
+    <string name="gdpr_consent_message">Denne app viser annoncer for at forblive gratis. For at vise dig relevante annoncer indsamler og behandler vi og vores partnere enhedsidentifikatorer, brugsdata og annonceinteraktionsdata. Disse data kan deles med reklamepartnere.</string>
+    <string name="gdpr_consent_details">Ved at acceptere giver du samtykke til indsamling og behandling af dine data til personlig annoncering i overensstemmelse med GDPR (Art. 6(1)(a)). Du kan til enhver tid trække dit samtykke tilbage i app-indstillingerne under \"Personlige annoncer\". Hvis du afviser, vises annoncer stadig, men de vil ikke være personlige.</string>
+    <string name="gdpr_accept">Accepter</string>
+    <string name="gdpr_decline">Afvis</string>
+    <string name="settings_section_title">Indstillinger</string>
+    <string name="personalized_ads">Personlige annoncer</string>
+    <string name="personalized_ads_description">Tillad dataindsamling til relevante annoncer</string>
+    <string name="about_app">Om appen</string>
+    <string name="about_version">Version %1$s</string>
+    <string name="about_description">PDF Scanner er et gratis værktøj til scanning, visning, konvertering, fletning og opdeling af PDF-dokumenter. Drevet af ML Kit dokumentscanningsteknologi.</string>
 </resources>

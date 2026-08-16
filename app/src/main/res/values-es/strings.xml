@@ -91,5 +91,15 @@
     <string name="error_pdf_memory_limit">Este documento es demasiado grande para la memoria de tu dispositivo. Intenta convertirlo por partes.</string>
     <string name="error_pdf_empty_document">Este documento no contiene páginas para convertir.</string>
     <string name="error_pdf_unknown">Ocurrió un error inesperado al leer el archivo PDF. Inténtalo de nuevo.</string>
-    <string name="dialog_ok">Entendido</string>
+    <string name="gdpr_consent_title">Privacidad y Datos</string>
+    <string name="gdpr_consent_message">Esta aplicación muestra anuncios para seguir siendo gratuita. Para mostrarle anuncios relevantes, nosotros y nuestros socios recopilamos y procesamos identificadores de dispositivos, datos de uso y datos de interacción de anuncios. Estos datos pueden compartirse con socios publicitarios.</string>
+    <string name="gdpr_consent_details">Al aceptar, acepta la recopilación y el procesamiento de sus datos para publicidad personalizada de acuerdo con el RGPD (Art. 6(1)(a)). Puede retirar su consentimiento en cualquier momento en la configuración de la aplicación en \"Anuncios personalizados\". Si lo rechaza, se seguirán mostrando anuncios, pero no estarán personalizados.</string>
+    <string name="gdpr_accept">Aceptar</string>
+    <string name="gdpr_decline">Rechazar</string>
+    <string name="settings_section_title">Ajustes</string>
+    <string name="personalized_ads">Anuncios personalizados</string>
+    <string name="personalized_ads_description">Permitir la recopilación de datos para anuncios relevantes</string>
+    <string name="about_app">Acerca de la aplicación</string>
+    <string name="about_version">Versión %1$s</string>
+    <string name="about_description">PDF Scanner es una herramienta gratuita para escanear, ver, convertir, fusionar y dividir documentos PDF. Impulsado por la tecnología de escaneo de documentos ML Kit.</string>
 </resources>

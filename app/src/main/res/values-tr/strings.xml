@@ -92,4 +92,15 @@
     <string name="error_pdf_empty_document">Bu belge dönüştürülecek sayfa içermiyor.</string>
     <string name="error_pdf_unknown">PDF dosyası okunurken beklenmeyen bir hata oluştu. Lütfen tekrar deneyin.</string>
     <string name="dialog_ok">Anlaşıldı</string>
+    <string name="gdpr_consent_title">Gizlilik ve Veri</string>
+    <string name="gdpr_consent_message">Bu uygulama ücretsiz kalabilmek için reklamlar gösterir. Size alakalı reklamlar göstermek için biz ve ortaklarımız cihaz tanımlayıcılarını, kullanım verilerini ve reklam etkileşimi verilerini toplar ve işleriz. Bu veriler reklam ortaklarıyla paylaşılabilir.</string>
+    <string name="gdpr_consent_details">Kabul ederek, GDPR (Madde 6(1)(a)) uyarınca verilerinizin kişiselleştirilmiş reklamcılık için toplanmasına ve işlenmesine izin vermiş olursunuz. Onayınızı istediğiniz zaman uygulama ayarlarında \"Kişiselleştirilmiş Reklamlar\" altından geri çekebilirsiniz. Reddetmeniz halinde reklamlar gösterilmeye devam eder, ancak kişiselleştirilmez.</string>
+    <string name="gdpr_accept">Kabul Et</string>
+    <string name="gdpr_decline">Reddet</string>
+    <string name="settings_section_title">Ayarlar</string>
+    <string name="personalized_ads">Kişiselleştirilmiş Reklamlar</string>
+    <string name="personalized_ads_description">Alakalı reklamlar için veri toplamaya izin ver</string>
+    <string name="about_app">Uygulama Hakkında</string>
+    <string name="about_version">Sürüm %1$s</string>
+    <string name="about_description">PDF Scanner, PDF belgelerini taramak, görüntülemek, dönüştürmek, birleştirmek ve bölmek için ücretsiz bir araçtır. ML Kit belge tarama teknolojisiyle desteklenmektedir.</string>
 </resources>

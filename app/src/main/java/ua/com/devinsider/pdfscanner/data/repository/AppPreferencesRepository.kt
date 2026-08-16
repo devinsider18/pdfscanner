@@ -22,15 +22,26 @@ class AppPreferencesRepository @Inject constructor(
 
     companion object {
         val DARK_MODE_KEY = booleanPreferencesKey("dark_mode")
+        val GDPR_CONSENT_KEY = booleanPreferencesKey("gdpr_consent")
     }
 
     val isDarkMode: Flow<Boolean?> = dataStore.data.map { preferences ->
         preferences[DARK_MODE_KEY]
     }
 
+    val gdprConsent: Flow<Boolean?> = dataStore.data.map { preferences ->
+        preferences[GDPR_CONSENT_KEY]
+    }
+
     suspend fun setDarkMode(isDark: Boolean) {
         dataStore.edit { preferences ->
             preferences[DARK_MODE_KEY] = isDark
+        }
+    }
+
+    suspend fun setGdprConsent(consent: Boolean) {
+        dataStore.edit { preferences ->
+            preferences[GDPR_CONSENT_KEY] = consent
         }
     }
 }

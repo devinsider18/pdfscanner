@@ -60,6 +60,7 @@ class MainViewModel @Inject constructor(
     }
     
     val isDarkMode = appPreferencesRepository.isDarkMode.stateIn(viewModelScope, SharingStarted.Lazily, null)
+    val gdprConsent = appPreferencesRepository.gdprConsent.stateIn(viewModelScope, SharingStarted.Lazily, null)
 
     fun refreshDocuments() {
         viewModelScope.launch {
@@ -111,6 +112,12 @@ class MainViewModel @Inject constructor(
     fun toggleDarkMode(isDark: Boolean) {
         viewModelScope.launch {
             appPreferencesRepository.setDarkMode(isDark)
+        }
+    }
+
+    fun setGdprConsent(consent: Boolean) {
+        viewModelScope.launch {
+            appPreferencesRepository.setGdprConsent(consent)
         }
     }
 }

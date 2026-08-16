@@ -92,4 +92,15 @@
     <string name="error_pdf_empty_document">このドキュメントには変換するページが含まれていません。</string>
     <string name="error_pdf_unknown">PDFファイルの読み込み中に予期しないエラーが発生しました。もう一度お試しください。</string>
     <string name="dialog_ok">了解</string>
+    <string name="gdpr_consent_title">プライバシーとデータ</string>
+    <string name="gdpr_consent_message">このアプリは無料で提供し続けるために広告を表示します。関連性の高い広告を表示するため、当社およびパートナーはデバイス識別子、使用状況データ、広告操作データを収集および処理します。このデータは広告パートナーと共有される場合があります。</string>
+    <string name="gdpr_consent_details">承諾すると、GDPR (第6条(1)(a)) に従い、パーソナライズされた広告のためにデータが収集および処理されることに同意したことになります。同意は、アプリの設定の「パーソナライズされた広告」からいつでも撤回できます。拒否した場合でも広告は表示されますが、パーソナライズされません。</string>
+    <string name="gdpr_accept">承諾する</string>
+    <string name="gdpr_decline">拒否する</string>
+    <string name="settings_section_title">設定</string>
+    <string name="personalized_ads">パーソナライズされた広告</string>
+    <string name="personalized_ads_description">関連する広告のためのデータ収集を許可する</string>
+    <string name="about_app">アプリについて</string>
+    <string name="about_version">バージョン %1$s</string>
+    <string name="about_description">PDF Scanner は、PDF ドキュメントのスキャン、表示、変換、結合、分割を行うための無料ツールです。ML Kit のドキュメント スキャン テクノロジーを搭載しています。</string>
 </resources>

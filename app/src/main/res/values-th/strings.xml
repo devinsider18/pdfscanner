@@ -92,4 +92,15 @@
     <string name="error_pdf_empty_document">เอกสารนี้ไม่มีหน้าที่ต้องการแปลง</string>
     <string name="error_pdf_unknown">เกิดข้อผิดพลาดที่ไม่คาดคิดขณะอ่านไฟล์ PDF โปรดลองอีกครั้ง</string>
     <string name="dialog_ok">รับทราบ</string>
+    <string name="gdpr_consent_title">ความเป็นส่วนตัวและข้อมูล</string>
+    <string name="gdpr_consent_message">แอปนี้แสดงโฆษณาเพื่อให้ใช้งานได้ฟรี หากต้องการแสดงโฆษณาที่เกี่ยวข้องกับคุณ เราและพาร์ทเนอร์ของเราจะรวบรวมและประมวลผลตัวระบุอุปกรณ์ ข้อมูลการใช้งาน และข้อมูลการโต้ตอบกับโฆษณา ข้อมูลนี้อาจแชร์กับพาร์ทเนอร์โฆษณา</string>
+    <string name="gdpr_consent_details">การยอมรับแสดงว่าคุณยินยอมให้รวบรวมและประมวลผลข้อมูลของคุณสำหรับการโฆษณาส่วนบุคคลตาม GDPR (ข้อ 6(1)(a)) คุณสามารถเพิกถอนความยินยอมได้ตลอดเวลาในการตั้งค่าแอปภายใต้ \"โฆษณาส่วนบุคคล\" การปฏิเสธจะยังคงแสดงโฆษณา แต่จะไม่ใช่โฆษณาส่วนบุคคล</string>
+    <string name="gdpr_accept">ยอมรับ</string>
+    <string name="gdpr_decline">ปฏิเสธ</string>
+    <string name="settings_section_title">การตั้งค่า</string>
+    <string name="personalized_ads">โฆษณาส่วนบุคคล</string>
+    <string name="personalized_ads_description">อนุญาตให้รวบรวมข้อมูลสำหรับโฆษณาที่เกี่ยวข้อง</string>
+    <string name="about_app">เกี่ยวกับแอป</string>
+    <string name="about_version">เวอร์ชัน %1$s</string>
+    <string name="about_description">PDF Scanner เป็นเครื่องมือฟรีสำหรับการสแกน ดู แปลง รวม และแยกเอกสาร PDF ขับเคลื่อนโดยเทคโนโลยีการสแกนเอกสาร ML Kit</string>
 </resources>

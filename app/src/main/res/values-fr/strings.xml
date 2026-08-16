@@ -91,5 +91,15 @@
     <string name="error_pdf_memory_limit">Ce document est trop volumineux pour la mémoire de votre appareil. Essayez de le convertir par parties.</string>
     <string name="error_pdf_empty_document">Ce document ne contient aucune page à convertir.</string>
     <string name="error_pdf_unknown">Une erreur inattendue s\'est produite lors de la lecture du fichier. Veuillez réessayer.</string>
-    <string name="dialog_ok">Compris</string>
+    <string name="gdpr_consent_title">Confidentialité &amp; Données</string>
+    <string name="gdpr_consent_message">Cette application affiche des publicités pour rester gratuite. Pour vous montrer des publicités pertinentes, nous et nos partenaires collectons et traitons les identifiants d\'appareils, les données d\'utilisation et les données d\'interaction publicitaire. Ces données peuvent être partagées avec des partenaires publicitaires.</string>
+    <string name="gdpr_consent_details">En acceptant, vous consentez à la collecte et au traitement de vos données pour des publicités personnalisées conformément au RGPD (Art. 6(1)(a)). Vous pouvez retirer votre consentement à tout moment dans les paramètres de l\'application sous \"Annonces personnalisées\". Le refus affichera toujours des annonces, mais elles ne seront pas personnalisées.</string>
+    <string name="gdpr_accept">Accepter</string>
+    <string name="gdpr_decline">Refuser</string>
+    <string name="settings_section_title">Paramètres</string>
+    <string name="personalized_ads">Annonces personnalisées</string>
+    <string name="personalized_ads_description">Autoriser la collecte de données pour des annonces pertinentes</string>
+    <string name="about_app">À propos de l\'application</string>
+    <string name="about_version">Version %1$s</string>
+    <string name="about_description">PDF Scanner est un outil gratuit pour numériser, visualiser, convertir, fusionner et fractionner des documents PDF. Propulsé par la technologie de numérisation de documents ML Kit.</string>
 </resources>

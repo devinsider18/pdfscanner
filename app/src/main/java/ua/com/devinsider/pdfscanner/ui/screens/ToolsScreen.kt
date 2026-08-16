@@ -56,6 +56,7 @@ import androidx.core.content.FileProvider
 fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
     val context = LocalContext.current
     val isDarkMode by viewModel.isDarkMode.collectAsState()
+    val gdprConsent by viewModel.gdprConsent.collectAsState()
     val scope = rememberCoroutineScope()
     var isConverting by remember { mutableStateOf(false) }
     var conversionResultMessage by remember { mutableStateOf<String?>(null) }
@@ -82,6 +83,8 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
     var showSplitPicker by remember { mutableStateOf(false) }
     var showLanguagePicker by remember { mutableStateOf(false) }
     var conversionErrorDialogState by remember { mutableStateOf<ConversionResult.Error?>(null) }
+    var showAboutDialog by remember { mutableStateOf(false) }
+    var showSettingsDialog by remember { mutableStateOf(false) }
 
     var shouldLaunchScanAfterPermission by remember { mutableStateOf(false) }
     var tempCameraImageUri by remember { mutableStateOf<Uri?>(null) }
@@ -384,18 +387,81 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
         Spacer(modifier = Modifier.weight(1f))
 
         HorizontalDivider()
+        Spacer(modifier = Modifier.height(8.dp))
 
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(stringResource(R.string.dark_mode), style = MaterialTheme.typography.titleMedium)
-            Switch(
-                checked = isDarkMode ?: false,
-                onCheckedChange = { viewModel.toggleDarkMode(it) }
+        ToolButton(icon = Icons.Default.Settings, text = stringResource(R.string.settings_section_title), onClick = { showSettingsDialog = true })
+
+        if (showSettingsDialog) {
+            AlertDialog(
+                onDismissRequest = { showSettingsDialog = false },
+                title = { Text(stringResource(R.string.settings_section_title)) },
+                text = {
+                    Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 8.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(stringResource(R.string.dark_mode), style = MaterialTheme.typography.titleMedium)
+                            Switch(
+                                checked = isDarkMode ?: false,
+                                onCheckedChange = { viewModel.toggleDarkMode(it) }
+                            )
+                        }
+
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 8.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text(stringResource(R.string.personalized_ads), style = MaterialTheme.typography.titleMedium)
+                                Text(
+                                    stringResource(R.string.personalized_ads_description),
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                            Spacer(modifier = Modifier.width(16.dp))
+                            Switch(
+                                checked = gdprConsent ?: false,
+                                onCheckedChange = { newValue ->
+                                    viewModel.setGdprConsent(newValue)
+                                    com.ironsource.mediationsdk.IronSource.setConsent(newValue)
+                                }
+                            )
+                        }
+
+                        Spacer(modifier = Modifier.height(16.dp))
+                        OutlinedButton(
+                            onClick = { showLanguagePicker = true },
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Icon(Icons.Default.Language, contentDescription = null)
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(stringResource(R.string.select_language))
+                        }
+
+                        Spacer(modifier = Modifier.height(8.dp))
+                        OutlinedButton(
+                            onClick = { showAboutDialog = true },
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Icon(Icons.Default.Info, contentDescription = null)
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(stringResource(R.string.about_app))
+                        }
+                    }
+                },
+                confirmButton = {
+                    TextButton(onClick = { showSettingsDialog = false }) {
+                        Text(stringResource(R.string.dialog_ok))
+                    }
+                }
             )
         }
 
@@ -442,13 +508,53 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
             )
         }
 
-        OutlinedButton(
-            onClick = { showLanguagePicker = true },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Icon(Icons.Default.Language, contentDescription = null)
-            Spacer(modifier = Modifier.width(8.dp))
-            Text(stringResource(R.string.select_language))
+        if (showAboutDialog) {
+            val packageInfo = try {
+                context.packageManager.getPackageInfo(context.packageName, 0)
+            } catch (_: Exception) { null }
+            val versionName = packageInfo?.versionName ?: "—"
+
+            AlertDialog(
+                onDismissRequest = { showAboutDialog = false },
+                title = null,
+                text = {
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Icon(
+                            imageVector = Icons.Default.Info,
+                            contentDescription = null,
+                            modifier = Modifier.size(64.dp),
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Text(
+                            text = stringResource(R.string.app_name),
+                            style = MaterialTheme.typography.headlineSmall
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text = stringResource(R.string.about_version, versionName),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Spacer(modifier = Modifier.height(24.dp))
+                        Text(
+                            text = "© 2026 PDF Scanner.\nAll rights reserved.",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                        )
+                    }
+                },
+                confirmButton = {
+                    TextButton(onClick = { showAboutDialog = false }) {
+                        Text(stringResource(R.string.ok))
+                    }
+                }
+            )
         }
 
         conversionResultMessage?.let { msg ->

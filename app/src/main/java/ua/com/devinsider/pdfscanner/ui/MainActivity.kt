@@ -24,6 +24,7 @@ import java.nio.charset.StandardCharsets
 import dagger.hilt.android.AndroidEntryPoint
 import ua.com.devinsider.pdfscanner.ui.components.BottomNavBar
 import ua.com.devinsider.pdfscanner.ui.components.BottomTab
+import ua.com.devinsider.pdfscanner.ui.components.GdprConsentDialog
 import ua.com.devinsider.pdfscanner.ui.screens.DocumentListScreen
 import ua.com.devinsider.pdfscanner.ui.screens.PdfViewerScreen
 import ua.com.devinsider.pdfscanner.ui.screens.ToolsScreen
@@ -34,9 +35,12 @@ import com.ironsource.mediationsdk.IronSource
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private var isIronSourceInitialized = false
+    companion object {
+        private var isIronSourceInitialized = false
+        val isAdsSdkReady = mutableStateOf(false)
+    }
     
-    private fun initializeIronSource() {
+    private fun initializeIronSource(consent: Boolean) {
         if (isIronSourceInitialized) return
         isIronSourceInitialized = true
         
@@ -46,57 +50,51 @@ class MainActivity : AppCompatActivity() {
             IronSource.setAdaptersDebug(true)
         }
         
+        // setConsent MUST be called BEFORE init per IronSource docs
+        IronSource.setConsent(consent)
+        
         // TODO: The IronSource App Key is now read from local.properties to keep it out of public repositories.
         // Add IRONSOURCE_APP_KEY="your_key" to your local.properties file.
-        IronSource.init(this, BuildConfig.IRONSOURCE_APP_KEY)
+        IronSource.init(this, BuildConfig.IRONSOURCE_APP_KEY, object : com.ironsource.mediationsdk.sdk.InitializationListener {
+            override fun onInitializationComplete() {
+                android.util.Log.d("IronSource", "IronSource SDK fully initialized, consent=$consent")
+                // Signal to Compose UI that ads are ready to load
+                isAdsSdkReady.value = true
+            }
+        })
+        android.util.Log.d("IronSource", "IronSource init called with consent=$consent")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
-        // Request GDPR/UMP consent before initializing ads
-        val consentInformation = com.google.android.ump.UserMessagingPlatform.getConsentInformation(this)
-        
-        val paramsBuilder = com.google.android.ump.ConsentRequestParameters.Builder()
-        
-        if (BuildConfig.DEBUG) {
-            // Force geography to EEA for testing so the form always shows. 
-            // IMPORTANT: Remove ConsentDebugSettings before releasing to production!
-            val debugSettings = com.google.android.ump.ConsentDebugSettings.Builder(this)
-                .setDebugGeography(com.google.android.ump.ConsentDebugSettings.DebugGeography.DEBUG_GEOGRAPHY_EEA)
-                .build()
-            paramsBuilder.setConsentDebugSettings(debugSettings)
-        }
-            
-        val params = paramsBuilder.build()
-        
-        consentInformation.requestConsentInfoUpdate(
-            this,
-            params,
-            {
-                com.google.android.ump.UserMessagingPlatform.loadAndShowConsentFormIfRequired(this) { formError ->
-                    if (consentInformation.canRequestAds()) {
-                        initializeIronSource()
-                    }
-                }
-            },
-            { requestError ->
-                if (consentInformation.canRequestAds()) {
-                    initializeIronSource()
-                }
-            }
-        )
-        
-        if (consentInformation.canRequestAds()) {
-            initializeIronSource()
-        }
         setContent {
             val viewModel: MainViewModel = hiltViewModel()
             val isDarkMode by viewModel.isDarkMode.collectAsState()
+            val gdprConsent by viewModel.gdprConsent.collectAsState()
+            val adsReady by isAdsSdkReady
+            
+            // Initialize IronSource once consent is known (from DataStore)
+            androidx.compose.runtime.LaunchedEffect(gdprConsent) {
+                if (gdprConsent != null) {
+                    initializeIronSource(gdprConsent!!)
+                }
+            }
             
             MyApplicationTheme(darkTheme = isDarkMode ?: false) {
+                // Show GDPR consent dialog on first launch (gdprConsent == null)
+                if (gdprConsent == null) {
+                    GdprConsentDialog(
+                        onAccept = {
+                            viewModel.setGdprConsent(true)
+                        },
+                        onDecline = {
+                            viewModel.setGdprConsent(false)
+                        }
+                    )
+                }
+                
                 val navController = rememberNavController()
-                var currentTab by remember { mutableStateOf(BottomTab.DOCUMENTS) }
 
                 androidx.compose.runtime.DisposableEffect(navController) {
                     val listener = androidx.navigation.NavController.OnDestinationChangedListener { _, destination, _ ->
@@ -117,17 +115,19 @@ class MainActivity : AppCompatActivity() {
                         val navBackStackEntry by navController.currentBackStackEntryAsState()
                         val currentRoute = navBackStackEntry?.destination?.route
                         val isViewer = currentRoute?.startsWith("viewer") == true
+                        
+                        val activeTab = BottomTab.values().find { it.name == currentRoute } ?: BottomTab.DOCUMENTS
 
                         androidx.compose.foundation.layout.Column {
                             if (!isViewer) {
                                 ua.com.devinsider.pdfscanner.ui.components.LevelPlayBanner(
-                                    bannerSize = com.ironsource.mediationsdk.ISBannerSize.BANNER
+                                    bannerSize = com.ironsource.mediationsdk.ISBannerSize.BANNER,
+                                    isAdsSdkReady = adsReady
                                 )
                             }
                             BottomNavBar(
-                                currentTab = currentTab,
+                                currentTab = activeTab,
                                 onTabSelected = { tab ->
-                                    currentTab = tab
                                     navController.navigate(tab.name) {
                                         popUpTo(navController.graph.startDestinationId) {
                                             saveState = true

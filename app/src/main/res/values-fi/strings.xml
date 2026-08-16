@@ -91,5 +91,15 @@
     <string name="error_pdf_memory_limit">Tämä asiakirja on liian suuri laitteesi muistille. Kokeile muuntaa se osissa.</string>
     <string name="error_pdf_empty_document">Tämä asiakirja ei sisällä muunnettavia sivuja.</string>
     <string name="error_pdf_unknown">PDF-tiedostoa luettaessa tapahtui odottamaton virhe. Yritä uudelleen.</string>
-    <string name="dialog_ok">Selvä</string>
+    <string name="gdpr_consent_title">Yksityisyys &amp; Tiedot</string>
+    <string name="gdpr_consent_message">Tämä sovellus näyttää mainoksia pysyäkseen ilmaisena. Näyttääksemme sinulle osuvia mainoksia me ja kumppanimme keräämme ja käsittelemme laitetunnisteita, käyttötietoja ja mainosten vuorovaikutustietoja. Nämä tiedot voidaan jakaa mainoskumppaneiden kanssa.</string>
+    <string name="gdpr_consent_details">Hyväksymällä suostut tietojesi keräämiseen ja käsittelyyn personoitua mainontaa varten GDPR:n (artikla 6(1)(a)) mukaisesti. Voit peruuttaa suostumuksesi milloin tahansa sovelluksen asetuksissa kohdassa \"Personoidut mainokset\". Hylkääminen näyttää silti mainoksia, mutta niitä ei personoida.</string>
+    <string name="gdpr_accept">Hyväksy</string>
+    <string name="gdpr_decline">Hylkää</string>
+    <string name="settings_section_title">Asetukset</string>
+    <string name="personalized_ads">Personoidut mainokset</string>
+    <string name="personalized_ads_description">Salli tiedonkeruu osuvia mainoksia varten</string>
+    <string name="about_app">Tietoja sovelluksesta</string>
+    <string name="about_version">Versio %1$s</string>
+    <string name="about_description">PDF Scanner on ilmainen työkalu PDF-dokumenttien skannaamiseen, katseluun, muuntamiseen, yhdistämiseen ja jakamiseen. Toimii ML Kit -dokumenttiskannaustekniikalla.</string>
 </resources>

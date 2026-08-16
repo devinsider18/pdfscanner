@@ -92,4 +92,15 @@
     <string name="error_pdf_empty_document">Ten dokument nie zawiera stron do konwersji.</string>
     <string name="error_pdf_unknown">Wystąpił nieoczekiwany błąd podczas odczytu pliku PDF. Spróbuj ponownie.</string>
     <string name="dialog_ok">Rozumiem</string>
+    <string name="gdpr_consent_title">Prywatność i dane</string>
+    <string name="gdpr_consent_message">Ta aplikacja wyświetla reklamy, aby pozostać bezpłatną. Aby wyświetlać odpowiednie reklamy, my i nasi partnerzy zbieramy i przetwarzamy identyfikatory urządzeń, dane o użyciu oraz dane o interakcji z reklamami. Te dane mogą być udostępniane partnerom reklamowym.</string>
+    <string name="gdpr_consent_details">Akceptując, wyrażasz zgodę na zbieranie i przetwarzanie swoich danych w celu spersonalizowanych reklam zgodnie z RODO (Art. 6 ust. 1 lit. a). Możesz wycofać swoją zgodę w dowolnym momencie w ustawieniach aplikacji w sekcji \"Spersonalizowane reklamy\". Odrzucenie nadal będzie wyświetlać reklamy, ale nie będą one spersonalizowane.</string>
+    <string name="gdpr_accept">Akceptuj</string>
+    <string name="gdpr_decline">Odrzuć</string>
+    <string name="settings_section_title">Ustawienia</string>
+    <string name="personalized_ads">Spersonalizowane reklamy</string>
+    <string name="personalized_ads_description">Zezwól na zbieranie danych dla odpowiednich reklam</string>
+    <string name="about_app">O aplikacji</string>
+    <string name="about_version">Wersja %1$s</string>
+    <string name="about_description">PDF Scanner to darmowe narzędzie do skanowania, przeglądania, konwertowania, łączenia i dzielenia dokumentów PDF. Napędzane technologią skanowania dokumentów ML Kit.</string>
 </resources>

@@ -91,5 +91,15 @@
     <string name="error_pdf_memory_limit">यह दस्तावेज़ आपके डिवाइस की मेमोरी के लिए बहुत बड़ा है। कृपया इसे भागों में परिवर्तित करने का प्रयास करें।</string>
     <string name="error_pdf_empty_document">इस दस्तावेज़ में परिवर्तित करने के लिए कोई पृष्ठ नहीं है।</string>
     <string name="error_pdf_unknown">पीडीएफ फाइल पढ़ते समय एक अप्रत्याशित त्रुटि हुई। कृपया पुनः प्रयास करें।</string>
-    <string name="dialog_ok">समझ गया</string>
+    <string name="gdpr_consent_title">गोपनीयता और डेटा</string>
+    <string name="gdpr_consent_message">मुक्त रहने के लिए यह ऐप विज्ञापन प्रदर्शित करता है। आपको प्रासंगिक विज्ञापन दिखाने के लिए, हम और हमारे भागीदार डिवाइस आइडेंटिफ़ायर, उपयोग डेटा और विज्ञापन इंटरैक्शन डेटा एकत्र और संसाधित करते हैं। यह डेटा विज्ञापन भागीदारों के साथ साझा किया जा सकता है।</string>
+    <string name="gdpr_consent_details">स्वीकार करके, आप GDPR (Art. 6(1)(a)) के अनुसार वैयक्तिकृत विज्ञापन के लिए अपने डेटा के संग्रह और प्रसंस्करण के लिए सहमति देते हैं। आप ऐप सेटिंग में \"वैयक्तिकृत विज्ञापन\" के अंतर्गत किसी भी समय अपनी सहमति वापस ले सकते हैं। अस्वीकार करने पर भी विज्ञापन दिखाई देंगे, लेकिन वे वैयक्तिकृत नहीं होंगे।</string>
+    <string name="gdpr_accept">स्वीकार करें</string>
+    <string name="gdpr_decline">अस्वीकार करें</string>
+    <string name="settings_section_title">सेटिंग्स</string>
+    <string name="personalized_ads">वैयक्तिकृत विज्ञापन</string>
+    <string name="personalized_ads_description">प्रासंगिक विज्ञापनों के लिए डेटा संग्रह की अनुमति दें</string>
+    <string name="about_app">ऐप के बारे में</string>
+    <string name="about_version">संस्करण %1$s</string>
+    <string name="about_description">पीडीएफ स्कैनर पीडीएफ दस्तावेजों को स्कैन करने, देखने, परिवर्तित करने, मर्ज करने और विभाजित करने के लिए एक मुफ्त उपकरण है। ML Kit दस्तावेज़ स्कैनिंग तकनीक द्वारा संचालित।</string>
 </resources>

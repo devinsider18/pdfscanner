@@ -92,4 +92,15 @@
     <string name="error_pdf_empty_document">Acest document nu conține pagini de convertit.</string>
     <string name="error_pdf_unknown">A apărut o eroare neașteptată la citirea fișierului PDF. Vă rugăm să încercați din nou.</string>
     <string name="dialog_ok">Am înțeles</string>
+    <string name="gdpr_consent_title">Confidențialitate &amp; Date</string>
+    <string name="gdpr_consent_message">Această aplicație afișează reclame pentru a rămâne gratuită. Pentru a vă arăta reclame relevante, noi și partenerii noștri colectăm și procesăm identificatorii dispozitivelor, datele de utilizare și datele de interacțiune cu reclamele. Aceste date pot fi partajate cu partenerii de publicitate.</string>
+    <string name="gdpr_consent_details">Prin acceptare, sunteți de acord cu colectarea și procesarea datelor dvs. pentru publicitate personalizată în conformitate cu GDPR (Art. 6(1)(a)). Vă puteți retrage consimțământul în orice moment din setările aplicației sub \"Reclame personalizate\". Refuzul va afișa în continuare reclame, dar acestea nu vor fi personalizate.</string>
+    <string name="gdpr_accept">Accept</string>
+    <string name="gdpr_decline">Refuz</string>
+    <string name="settings_section_title">Setări</string>
+    <string name="personalized_ads">Reclame personalizate</string>
+    <string name="personalized_ads_description">Permiteți colectarea datelor pentru reclame relevante</string>
+    <string name="about_app">Despre Aplicație</string>
+    <string name="about_version">Versiune %1$s</string>
+    <string name="about_description">PDF Scanner este un instrument gratuit pentru scanarea, vizualizarea, convertirea, îmbinarea și divizarea documentelor PDF. Alimentat de tehnologia de scanare a documentelor ML Kit.</string>
 </resources>

@@ -92,4 +92,15 @@
     <string name="error_pdf_empty_document">Dette dokumentet inneholder ingen sider å konvertere.</string>
     <string name="error_pdf_unknown">Det oppsto en uventet feil ved lesing av PDF-filen. Prøv på nytt.</string>
     <string name="dialog_ok">Mottatt</string>
+    <string name="gdpr_consent_title">Personvern og data</string>
+    <string name="gdpr_consent_message">Denne appen viser annonser for å forbli gratis. For å vise deg relevante annonser samler og behandler vi og våre partnere enhetsidentifikatorer, bruksdata og annonseinteraksjonsdata. Disse dataene kan deles med annonsepartnere.</string>
+    <string name="gdpr_consent_details">Ved å akseptere samtykker du til innsamling og behandling av dataene dine for personlig annonsering i samsvar med GDPR (art. 6(1)(a)). Du kan når som helst trekke tilbake samtykket i appinnstillingene under \"Personlig tilpassede annonser\". Avslåing vil fortsatt vise annonser, men de vil ikke være personlig tilpasset.</string>
+    <string name="gdpr_accept">Aksepter</string>
+    <string name="gdpr_decline">Avslå</string>
+    <string name="settings_section_title">Innstillinger</string>
+    <string name="personalized_ads">Personlig tilpassede annonser</string>
+    <string name="personalized_ads_description">Tillat datainnsamling for relevante annonser</string>
+    <string name="about_app">Om appen</string>
+    <string name="about_version">Versjon %1$s</string>
+    <string name="about_description">PDF Scanner er et gratis verktøy for å skanne, vise, konvertere, slå sammen og dele PDF-dokumenter. Drevet av ML Kit dokumentskanningsteknologi.</string>
 </resources>

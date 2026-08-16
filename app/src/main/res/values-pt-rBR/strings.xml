@@ -92,4 +92,15 @@
     <string name="error_pdf_empty_document">Este documento não contém páginas para converter.</string>
     <string name="error_pdf_unknown">Ocorreu um erro inesperado ao ler o arquivo PDF. Tente novamente.</string>
     <string name="dialog_ok">Entendi</string>
+    <string name="gdpr_consent_title">Privacidade e Dados</string>
+    <string name="gdpr_consent_message">Este aplicativo exibe anúncios para continuar gratuito. Para mostrar anúncios relevantes, nós e nossos parceiros coletamos e processamos identificadores de dispositivos, dados de uso e dados de interação com anúncios. Esses dados podem ser compartilhados com parceiros de publicidade.</string>
+    <string name="gdpr_consent_details">Ao aceitar, você concorda com a coleta e processamento de seus dados para publicidade personalizada de acordo com o GDPR (Art. 6(1)(a)). Você pode retirar seu consentimento a qualquer momento nas configurações do aplicativo em \"Anúncios Personalizados\". Recusar continuará mostrando anúncios, mas eles não serão personalizados.</string>
+    <string name="gdpr_accept">Aceitar</string>
+    <string name="gdpr_decline">Recusar</string>
+    <string name="settings_section_title">Configurações</string>
+    <string name="personalized_ads">Anúncios Personalizados</string>
+    <string name="personalized_ads_description">Permitir a coleta de dados para anúncios relevantes</string>
+    <string name="about_app">Sobre o Aplicativo</string>
+    <string name="about_version">Versão %1$s</string>
+    <string name="about_description">PDF Scanner é uma ferramenta gratuita para digitalizar, visualizar, converter, mesclar e dividir documentos PDF. Desenvolvido com a tecnologia de digitalização de documentos ML Kit.</string>
 </resources>

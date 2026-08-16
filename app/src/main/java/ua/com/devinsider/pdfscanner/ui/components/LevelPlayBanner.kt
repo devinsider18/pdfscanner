@@ -18,11 +18,15 @@ import android.widget.FrameLayout
 import android.view.Gravity
 
 @Composable
-fun LevelPlayBanner(modifier: Modifier = Modifier, bannerSize: ISBannerSize = ISBannerSize.BANNER) {
+fun LevelPlayBanner(
+    modifier: Modifier = Modifier,
+    bannerSize: ISBannerSize = ISBannerSize.BANNER,
+    isAdsSdkReady: Boolean = false
+) {
     val context = LocalContext.current
     val activity = context as? Activity
     
-    if (activity == null) return
+    if (activity == null || !isAdsSdkReady) return
 
     val bannerContainer = remember { FrameLayout(activity) }
 

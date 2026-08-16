@@ -92,4 +92,15 @@
     <string name="error_pdf_empty_document">Dit document bevat geen pagina\'s om te converteren.</string>
     <string name="error_pdf_unknown">Er is een onverwachte fout opgetreden bij het lezen van het PDF-bestand. Probeer het opnieuw.</string>
     <string name="dialog_ok">Begrepen</string>
+    <string name="gdpr_consent_title">Privacy &amp; Data</string>
+    <string name="gdpr_consent_message">Deze app toont advertenties om gratis te blijven. Om u relevante advertenties te tonen, verzamelen en verwerken wij en onze partners apparaat-ID\'s, gebruiksgegevens en advertentie-interactiegegevens. Deze gegevens kunnen worden gedeeld met advertentiepartners.</string>
+    <string name="gdpr_consent_details">Door te accepteren, stemt u in met het verzamelen en verwerken van uw gegevens voor gepersonaliseerde advertenties in overeenstemming met de AVG (Art. 6(1)(a)). U kunt uw toestemming op elk moment intrekken in de app-instellingen onder \"Gepersonaliseerde advertenties\". Als u weigert, worden er nog steeds advertenties weergegeven, maar deze zijn niet gepersonaliseerd.</string>
+    <string name="gdpr_accept">Accepteren</string>
+    <string name="gdpr_decline">Weigeren</string>
+    <string name="settings_section_title">Instellingen</string>
+    <string name="personalized_ads">Gepersonaliseerde advertenties</string>
+    <string name="personalized_ads_description">Sta gegevensverzameling toe voor relevante advertenties</string>
+    <string name="about_app">Over de app</string>
+    <string name="about_version">Versie %1$s</string>
+    <string name="about_description">PDF Scanner is een gratis tool voor het scannen, bekijken, converteren, samenvoegen en splitsen van PDF-documenten. Mogelijk gemaakt door ML Kit-technologie voor het scannen van documenten.</string>
 </resources>

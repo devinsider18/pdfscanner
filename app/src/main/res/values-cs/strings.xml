@@ -91,5 +91,15 @@
     <string name="error_pdf_memory_limit">Tento dokument je příliš velký pro paměť vašeho zařízení. Zkuste jej převést po částech.</string>
     <string name="error_pdf_empty_document">Tento dokument neobsahuje žádné stránky k převodu.</string>
     <string name="error_pdf_unknown">Při čtení souboru PDF došlo k neočekávané chybě. Zkuste to prosím znovu.</string>
-    <string name="dialog_ok">Rozumím</string>
+    <string name="gdpr_consent_title">Ochrana soukromí a data</string>
+    <string name="gdpr_consent_message">Tato aplikace zobrazuje reklamy, aby zůstala zdarma. Abychom vám mohli zobrazovat relevantní reklamy, my a naši partneři shromažďujeme a zpracováváme identifikátory zařízení, údaje o používání a údaje o interakci s reklamou. Tyto údaje mohou být sdíleny s reklamními partnery.</string>
+    <string name="gdpr_consent_details">Přijetím souhlasíte se shromažďováním a zpracováním vašich údajů pro personalizovanou reklamu v souladu s GDPR (čl. 6 odst. 1 písm. a)). Svůj souhlas můžete kdykoli odvolat v nastavení aplikace v části \"Personalizované reklamy\". Odmítnutí bude stále zobrazovat reklamy, ale nebudou personalizované.</string>
+    <string name="gdpr_accept">Přijmout</string>
+    <string name="gdpr_decline">Odmítnout</string>
+    <string name="settings_section_title">Nastavení</string>
+    <string name="personalized_ads">Personalizované reklamy</string>
+    <string name="personalized_ads_description">Povolit shromažďování dat pro relevantní reklamy</string>
+    <string name="about_app">O aplikaci</string>
+    <string name="about_version">Verze %1$s</string>
+    <string name="about_description">PDF Scanner je bezplatný nástroj pro skenování, prohlížení, převod, slučování a rozdělování dokumentů PDF. Využívá technologii skenování dokumentů ML Kit.</string>
 </resources>

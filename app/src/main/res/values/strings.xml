@@ -91,4 +91,15 @@
     <string name="error_pdf_empty_document">This document contains no pages to convert.</string>
     <string name="error_pdf_unknown">An unexpected error occurred while reading the PDF file. Please try again or select another document.</string>
     <string name="dialog_ok">Got it</string>
+    <string name="gdpr_consent_title">Privacy &amp; Data</string>
+    <string name="gdpr_consent_message">This app displays ads to remain free. To show you relevant ads, we and our partners collect and process device identifiers, usage data, and ad interaction data. This data may be shared with advertising partners.</string>
+    <string name="gdpr_consent_details">By accepting, you consent to the collection and processing of your data for personalized advertising in accordance with GDPR (Art. 6(1)(a)). You can withdraw your consent at any time in the app settings under \"Personalized Ads\". Declining will still show ads, but they will not be personalized.</string>
+    <string name="gdpr_accept">Accept</string>
+    <string name="gdpr_decline">Decline</string>
+    <string name="settings_section_title">Settings</string>
+    <string name="personalized_ads">Personalized Ads</string>
+    <string name="personalized_ads_description">Allow data collection for relevant ads</string>
+    <string name="about_app">About App</string>
+    <string name="about_version">Version %1$s</string>
+    <string name="about_description">PDF Scanner is a free tool for scanning, viewing, converting, merging, and splitting PDF documents. Powered by ML Kit document scanning technology.</string>
 </resources>

@@ -92,4 +92,15 @@
     <string name="error_pdf_empty_document">此文档不包含任何可转换的页面。</string>
     <string name="error_pdf_unknown">读取 PDF 文件时发生未知错误。请重试。</string>
     <string name="dialog_ok">好的</string>
+    <string name="gdpr_consent_title">隐私与数据</string>
+    <string name="gdpr_consent_message">此应用通过显示广告来保持免费。为了向您展示相关的广告，我们和我们的合作伙伴会收集和处理设备标识符、使用数据和广告交互数据。这些数据可能会与广告合作伙伴共享。</string>
+    <string name="gdpr_consent_details">接受即表示您同意我们根据 GDPR（第 6 条第 1 款 a 项）收集和处理您的数据以进行个性化广告。您可以随时在应用设置中的“个性化广告”下撤回您的同意。拒绝仍会显示广告，但不会是个性化广告。</string>
+    <string name="gdpr_accept">接受</string>
+    <string name="gdpr_decline">拒绝</string>
+    <string name="settings_section_title">设置</string>
+    <string name="personalized_ads">个性化广告</string>
+    <string name="personalized_ads_description">允许收集相关广告的数据</string>
+    <string name="about_app">关于应用</string>
+    <string name="about_version">版本 %1$s</string>
+    <string name="about_description">PDF Scanner 是一款用于扫描、查看、转换、合并和拆分 PDF 文档的免费工具。由 ML Kit 文档扫描技术提供支持。</string>
 </resources>

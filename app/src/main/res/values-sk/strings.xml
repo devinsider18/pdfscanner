@@ -92,4 +92,15 @@
     <string name="error_pdf_empty_document">Tento dokument neobsahuje žiadne strany na konverziu.</string>
     <string name="error_pdf_unknown">Pri čítaní súboru PDF vyskytla neočakávaná chyba. Skúste to znova.</string>
     <string name="dialog_ok">Rozumiem</string>
+    <string name="gdpr_consent_title">Súkromie a údaje</string>
+    <string name="gdpr_consent_message">Táto aplikácia zobrazuje reklamy, aby zostala bezplatná. Aby sme vám mohli zobrazovať relevantné reklamy, my a naši partneri zhromažďujeme a spracúvame identifikátory zariadení, údaje o používaní a údaje o interakcii s reklamami. Tieto údaje môžu byť zdieľané s reklamnými partnermi.</string>
+    <string name="gdpr_consent_details">Prijatím vyjadrujete súhlas so zhromažďovaním a spracovaním vašich údajov pre personalizovanú reklamu v súlade s GDPR (čl. 6 ods. 1 písm. a)). Svoj súhlas môžete kedykoľvek odvolať v nastaveniach aplikácie v časti \"Personalizované reklamy\". Odmietnutie bude naďalej zobrazovať reklamy, ale nebudú personalizované.</string>
+    <string name="gdpr_accept">Prijať</string>
+    <string name="gdpr_decline">Odmietnuť</string>
+    <string name="settings_section_title">Nastavenia</string>
+    <string name="personalized_ads">Personalizované reklamy</string>
+    <string name="personalized_ads_description">Povoliť zber údajov pre relevantné reklamy</string>
+    <string name="about_app">O aplikácii</string>
+    <string name="about_version">Verzia %1$s</string>
+    <string name="about_description">PDF Scanner je bezplatný nástroj na skenovanie, prezeranie, konvertovanie, zlučovanie a rozdeľovanie dokumentov PDF. Beží na technológii skenovania dokumentov ML Kit.</string>
 </resources>

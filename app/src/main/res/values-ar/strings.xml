@@ -91,5 +91,15 @@
     <string name="error_pdf_memory_limit">هذا المستند كبير جدًا بالنسبة لذاكرة جهازك. حاول تحويله على أجزاء.</string>
     <string name="error_pdf_empty_document">لا يحتوي هذا المستند على أي صفحات لتحويلها.</string>
     <string name="error_pdf_unknown">حدث خطأ غير متوقع أثناء قراءة ملف PDF. يرجى المحاولة مرة أخرى.</string>
-    <string name="dialog_ok">حسناً</string>
+    <string name="gdpr_consent_title">الخصوصية والبيانات</string>
+    <string name="gdpr_consent_message">يعرض هذا التطبيق إعلانات ليبقى مجانيًا. لنعرض لك إعلانات ذات صلة، نقوم نحن وشركاؤنا بجمع ومعالجة معرفات الأجهزة وبيانات الاستخدام وبيانات التفاعل مع الإعلانات. قد تتم مشاركة هذه البيانات مع شركاء الإعلانات.</string>
+    <string name="gdpr_consent_details">بقبولك، فإنك توافق على جمع ومعالجة بياناتك للإعلانات المخصصة وفقًا للقانون العام لحماية البيانات (المادة 6(1)(أ)). يمكنك سحب موافقتك في أي وقت في إعدادات التطبيق ضمن \"الإعلانات المخصصة\". سيؤدي الرفض إلى الاستمرار في عرض الإعلانات، ولكنها لن تكون مخصصة.</string>
+    <string name="gdpr_accept">قبول</string>
+    <string name="gdpr_decline">رفض</string>
+    <string name="settings_section_title">الإعدادات</string>
+    <string name="personalized_ads">الإعلانات المخصصة</string>
+    <string name="personalized_ads_description">السماح بجمع البيانات للإعلانات ذات الصلة</string>
+    <string name="about_app">حول التطبيق</string>
+    <string name="about_version">الإصدار %1$s</string>
+    <string name="about_description">ماسح PDF هو أداة مجانية لمسح وعرض وتحويل ودمج وتقسيم مستندات PDF. مدعوم بتقنية مسح المستندات ML Kit.</string>
 </resources>

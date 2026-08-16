@@ -92,4 +92,15 @@
     <string name="error_pdf_empty_document">Dokumen ini tidak berisi halaman untuk dikonversi.</string>
     <string name="error_pdf_unknown">Terjadi kesalahan tak terduga saat membaca file PDF. Silakan coba lagi.</string>
     <string name="dialog_ok">Paham</string>
+    <string name="gdpr_consent_title">Privasi &amp; Data</string>
+    <string name="gdpr_consent_message">Aplikasi ini menampilkan iklan agar tetap gratis. Untuk menampilkan iklan yang relevan, kami dan mitra kami mengumpulkan dan memproses pengidentifikasi perangkat, data penggunaan, dan data interaksi iklan. Data ini mungkin dibagikan dengan mitra periklanan.</string>
+    <string name="gdpr_consent_details">Dengan menerima, Anda menyetujui pengumpulan dan pemrosesan data Anda untuk iklan hasil personalisasi sesuai dengan GDPR (Pasal 6(1)(a)). Anda dapat menarik persetujuan kapan saja di pengaturan aplikasi di bawah \"Iklan Hasil Personalisasi\". Menolak akan tetap menampilkan iklan, namun tidak akan dipersonalisasi.</string>
+    <string name="gdpr_accept">Terima</string>
+    <string name="gdpr_decline">Tolak</string>
+    <string name="settings_section_title">Pengaturan</string>
+    <string name="personalized_ads">Iklan Hasil Personalisasi</string>
+    <string name="personalized_ads_description">Izinkan pengumpulan data untuk iklan yang relevan</string>
+    <string name="about_app">Tentang Aplikasi</string>
+    <string name="about_version">Versi %1$s</string>
+    <string name="about_description">PDF Scanner adalah alat gratis untuk memindai, melihat, mengonversi, menggabungkan, dan memisahkan dokumen PDF. Didukung oleh teknologi pemindaian dokumen ML Kit.</string>
 </resources>
