@@ -5,7 +5,11 @@ val localPropertiesFile = rootProject.file("local.properties")
 if (localPropertiesFile.exists()) {
     localProperties.load(localPropertiesFile.inputStream())
 }
-val ironSourceAppKey = localProperties.getProperty("IRONSOURCE_APP_KEY") ?: "YOUR_IRONSOURCE_APP_KEY"
+val ironSourceAppKey = localProperties.getProperty("IRONSOURCE_APP_KEY")
+val releaseStoreFile = localProperties.getProperty("RELEASE_STORE_FILE")
+val releaseStorePassword = localProperties.getProperty("RELEASE_STORE_PASSWORD")
+val releaseKeyAlias = localProperties.getProperty("RELEASE_KEY_ALIAS")
+val releaseKeyPassword = localProperties.getProperty("RELEASE_KEY_PASSWORD")
 
 plugins {
     alias(libs.plugins.android.application)
@@ -19,18 +23,30 @@ plugins {
 android {
     namespace = "ua.com.devinsider.pdfscanner"
     compileSdk = 37
+    ndkVersion = "26.1.10909125"
     defaultConfig {
         applicationId = "ua.com.devinsider.pdfscanner"
         minSdk = 24
         targetSdk = 37
-        versionCode = 9
-        versionName = "1.5"
+        versionCode = 13
+        versionName = "1.9"
         testInstrumentationRunner = "ua.com.devinsider.pdfscanner.HiltTestRunner"
 
         ndk {
             abiFilters += setOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
         }
         buildConfigField("String", "IRONSOURCE_APP_KEY", "\"$ironSourceAppKey\"")
+    }
+    signingConfigs {
+        if (releaseStoreFile != null && releaseStorePassword != null &&
+            releaseKeyAlias != null && releaseKeyPassword != null) {
+            create("release") {
+                storeFile = rootProject.file(releaseStoreFile)
+                storePassword = releaseStorePassword
+                keyAlias = releaseKeyAlias
+                keyPassword = releaseKeyPassword
+            }
+        }
     }
     buildTypes {
         getByName("release") {
@@ -39,6 +55,9 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             ndk {
                 debugSymbolLevel = "FULL"
+            }
+            signingConfigs.findByName("release")?.let {
+                signingConfig = it
             }
         }
     }
@@ -53,11 +72,17 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    bundle {
+        language {
+            enableSplit = false
+        }
+    }
 }
 ksp {
     arg("room.schemaLocation", "$projectDir/schemas")
 }
 dependencies {
+    implementation(libs.play.billing)
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.crashlytics)
@@ -99,9 +124,10 @@ dependencies {
     implementation(libs.androidx.camera.view)
     implementation(libs.mlkit.text.recognition)
     implementation(libs.pdfbox.android)
-    implementation("com.unity3d.ads-mediation:mediation-sdk:8.2.1")
-    implementation("com.google.android.gms:play-services-ads-identifier:18.1.0")
-    implementation("com.google.android.gms:play-services-basement:18.4.0")
+    implementation(libs.unity3d.ads.mediation)
+    implementation(libs.unity3d.ads)
+    implementation(libs.play.services.ads.identifier)
+    implementation(libs.play.services.basement)
 }
 
 configurations.all {

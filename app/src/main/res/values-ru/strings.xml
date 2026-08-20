@@ -54,7 +54,6 @@
     <string name="invalid_pdf">Неверный формат PDF или файл поврежден.</string>
     <string name="nav_recent">Недавние</string>
     <string name="nav_bookmarks">Закладки</string>
-    <string name="scanner_launch_error">Ошибка запуска сканера. Проверьте обновление Google Play Services.</string>
     <string name="task_merge_bg">Задача объединения добавлена в фон</string>
     <string name="task_convert_bg">Конвертация запущена в фоне</string>
     <string name="task_long_image_bg">Создание картинки в фоне</string>
@@ -71,14 +70,10 @@
     <string name="camera_permission_required">Требуется разрешение на камеру для сканирования документов</string>
     <string name="failed_photo_to_pdf">Не удалось конвертировать фото в PDF</string>
     <string name="error_opening_camera">Ошибка открытия камеры: %1$s</string>
-    <string name="scanner_returned_null">Сканер документов вернул пустой результат</string>
     <string name="error_saving_scanned_pdf">Ошибка сохранения отсканированного PDF: %1$s</string>
     <string name="failed_process_scanned_pages">Не удалось обработать отсканированные страницы</string>
     <string name="page_image_uri_null">URI изображения страницы пуст</string>
-    <string name="no_scanned_pdf_returned">Не возвращено отсканированных PDF или страниц</string>
-    <string name="scanner_error">Ошибка сканера: %1$s</string>
     <string name="activity_not_found">Активность не найдена</string>
-    <string name="scanner_intent_null">Интент сканера пуст</string>
     <string name="no_app_to_open_file">Не найдено приложение для открытия этого файла</string>
     <string name="error_title">Ошибка</string>
     <string name="back">Назад</string>
@@ -103,5 +98,4 @@
     <string name="personalized_ads_description">Разрешить сбор данных для релевантной рекламы</string>
     <string name="about_app">О приложении</string>
     <string name="about_version">Версия %1$s</string>
-    <string name="about_description">PDF Scanner — бесплатный инструмент для сканирования, просмотра, конвертации, объединения и разделения PDF-документов. Работает на базе технологии ML Kit.</string>
 </resources>

@@ -37,10 +37,10 @@
     <string name="select_language">اختر اللغة</string>
     <string name="nav_documents">المستندات</string>
     <string name="nav_tools">أدوات</string>
-    <string name="converting_to_images">التحويل إلى صور...</string>
-    <string name="converting_to_long_image">التحويل إلى صورة طويلة...</string>
+    <string name="converting_to_images">التحويل إلى صور…</string>
+    <string name="converting_to_long_image">التحويل إلى صورة طويلة…</string>
     <string name="splitting_pdf">تقسيم قوات الدفاع الشعبي…</string>
-    <string name="merging_pdfs">دمج ملفات PDF...</string>
+    <string name="merging_pdfs">دمج ملفات PDF…</string>
     <string name="saved_to_pictures">تم الحفظ بنجاح في الصور/PDFScanner</string>
     <string name="saved_to_downloads">تم الحفظ بنجاح في Downloads/PDFScanner</string>
     <string name="failed_to_convert">فشل في تحويل PDF</string>
@@ -53,7 +53,6 @@
     <string name="invalid_pdf">تنسيق PDF غير صالح أو الملف تالف.</string>
     <string name="nav_recent">الأخيرة</string>
     <string name="nav_bookmarks">الإشارات المرجعية</string>
-    <string name="scanner_launch_error">فشل تشغيل الماسح الضوئي. يرجى تحديث خدمات Google Play.</string>
     <string name="task_merge_bg">تمت إضافة مهمة الدمج إلى الخلفية</string>
     <string name="task_convert_bg">بدأ التحويل في الخلفية</string>
     <string name="task_long_image_bg">بدأ إنشاء الصور في الخلفية</string>
@@ -70,14 +69,10 @@
     <string name="camera_permission_required">مطلوب إذن الكاميرا لمسح المستندات ضوئيًا</string>
     <string name="failed_photo_to_pdf">فشل في تحويل الصورة إلى PDF</string>
     <string name="error_opening_camera">خطأ في فتح الكاميرا: %1$s</string>
-    <string name="scanner_returned_null">أعاد الماسح الضوئي للمستندات نتيجة فارغة</string>
     <string name="error_saving_scanned_pdf">حدث خطأ أثناء حفظ ملف PDF الممسوح ضوئيًا: %1$s</string>
     <string name="failed_process_scanned_pages">فشلت معالجة الصفحات الممسوحة ضوئيًا</string>
     <string name="page_image_uri_null">URI لصورة الصفحة فارغ</string>
-    <string name="no_scanned_pdf_returned">لم يتم إرجاع أي ملف PDF أو صفحات ممسوحة ضوئيًا</string>
-    <string name="scanner_error">خطأ في الماسح الضوئي: %1$s</string>
     <string name="activity_not_found">لم يتم العثور على النشاط</string>
-    <string name="scanner_intent_null">نية الماسح الضوئي فارغة</string>
     <string name="no_app_to_open_file">لم يتم العثور على تطبيق لفتح هذا الملف</string>
     <string name="error_title">خطأ</string>
     <string name="back">العودة</string>
@@ -101,5 +96,4 @@
     <string name="personalized_ads_description">السماح بجمع البيانات للإعلانات ذات الصلة</string>
     <string name="about_app">حول التطبيق</string>
     <string name="about_version">الإصدار %1$s</string>
-    <string name="about_description">ماسح PDF هو أداة مجانية لمسح وعرض وتحويل ودمج وتقسيم مستندات PDF. مدعوم بتقنية مسح المستندات ML Kit.</string>
 </resources>

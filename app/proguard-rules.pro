@@ -43,3 +43,14 @@
 -dontwarn com.ironsource.adapters.**
 -keepclassmembers class com.ironsource.** { public *; }
 -keep public class com.ironsource.**
+
+# Google Play Billing
+-keep class com.android.vending.billing.** { *; }
+-keep class com.android.billingclient.** { *; }
+-dontwarn com.android.billingclient.**
+
+# Firebase Crashlytics
+-keepattributes SourceFile,LineNumberTable
+-keep public class * extends java.lang.Exception
+-keep class com.google.firebase.crashlytics.** { *; }
+-dontwarn com.google.firebase.crashlytics.**

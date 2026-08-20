@@ -53,7 +53,6 @@
     <string name="invalid_pdf">Geçersiz PDF formatı veya dosyası bozuk.</string>
     <string name="nav_recent">Son</string>
     <string name="nav_bookmarks">Yer imleri</string>
-    <string name="scanner_launch_error">Tarayıcı başlatılamadı. Lütfen Google Play Hizmetlerini güncelleyin.</string>
     <string name="task_merge_bg">Birleştirme görevi arka plana eklendi</string>
     <string name="task_convert_bg">Dönüşüm arka planda başladı</string>
     <string name="task_long_image_bg">Resim oluşturma arka planda başladı</string>
@@ -70,14 +69,10 @@
     <string name="camera_permission_required">Belgeleri taramak için kamera izni gerekiyor</string>
     <string name="failed_photo_to_pdf">Fotoğraf PDF\'ye dönüştürülemedi</string>
     <string name="error_opening_camera">Kamera açılırken hata oluştu: %1$s</string>
-    <string name="scanner_returned_null">Belge tarayıcısı boş sonuç döndürdü</string>
     <string name="error_saving_scanned_pdf">Taranmış PDF kaydedilirken hata oluştu: %1$s</string>
     <string name="failed_process_scanned_pages">Taranan sayfalar işlenemedi</string>
     <string name="page_image_uri_null">Sayfa resmi URI\'sı boş</string>
-    <string name="no_scanned_pdf_returned">Taranmış PDF veya sayfa döndürülmedi</string>
-    <string name="scanner_error">Tarayıcı hatası: %1$s</string>
     <string name="activity_not_found">Etkinlik bulunamadı</string>
-    <string name="scanner_intent_null">Tarayıcı amacı boş</string>
     <string name="no_app_to_open_file">Bu dosyayı açacak uygulama bulunamadı</string>
     <string name="error_title">Hata</string>
     <string name="back">Geri</string>
@@ -102,5 +97,4 @@
     <string name="personalized_ads_description">Alakalı reklamlar için veri toplamaya izin ver</string>
     <string name="about_app">Uygulama Hakkında</string>
     <string name="about_version">Sürüm %1$s</string>
-    <string name="about_description">PDF Scanner, PDF belgelerini taramak, görüntülemek, dönüştürmek, birleştirmek ve bölmek için ücretsiz bir araçtır. ML Kit belge tarama teknolojisiyle desteklenmektedir.</string>
 </resources>

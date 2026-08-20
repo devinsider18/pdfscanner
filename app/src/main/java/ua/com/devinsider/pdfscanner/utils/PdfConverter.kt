@@ -481,6 +481,77 @@ object PdfConverter {
         }
     }
 
+    suspend fun addSignatureToPdf(
+        context: Context,
+        pdfFilePath: String,
+        signatureBitmap: Bitmap,
+        pageIndex: Int = 0,
+        relativeX: Float = 0.1f,
+        relativeY: Float = 0.1f
+    ): Boolean = withContext(Dispatchers.IO) {
+        try {
+            // Support both plain file paths and content:// URIs.
+            val inputStream = if (pdfFilePath.startsWith("content://") || pdfFilePath.startsWith("file://")) {
+                context.contentResolver.openInputStream(pdfFilePath.toUri())
+            } else {
+                val f = File(pdfFilePath)
+                if (f.exists()) f.inputStream() else context.contentResolver.openInputStream(pdfFilePath.toUri())
+            } ?: return@withContext false
+
+            val document = PDDocument.load(inputStream)
+            inputStream.close()
+
+            if (document.numberOfPages <= pageIndex) {
+                document.close()
+                return@withContext false
+            }
+
+            val page = document.getPage(pageIndex)
+
+            // Use LosslessFactory to preserve transparent-background signature, ensuring only strokes are visible without a white rectangle covering the content.
+            val pdImage = try {
+                com.tom_roush.pdfbox.pdmodel.graphics.image.LosslessFactory.createFromImage(document, signatureBitmap)
+            } catch (_: Exception) {
+                com.tom_roush.pdfbox.pdmodel.graphics.image.JPEGFactory.createFromImage(document, signatureBitmap)
+            }
+
+            val contentStream = com.tom_roush.pdfbox.pdmodel.PDPageContentStream(
+                document, page, com.tom_roush.pdfbox.pdmodel.PDPageContentStream.AppendMode.APPEND, true, true
+            )
+
+            // relativeX / relativeY are 0..1 from top-left corner.
+            // PDF coordinates originate at the bottom-left, so we flip Y.
+            val mediaBox = page.mediaBox
+            val pdfWidth = mediaBox.width
+            val pdfHeight = mediaBox.height
+
+            // Match the 25 % width scale used in the on-screen preview.
+            val sigWidth = pdfWidth * 0.25f
+            val aspectRatio = if (signatureBitmap.height > 0) {
+                signatureBitmap.width.toFloat() / signatureBitmap.height.toFloat()
+            } else 1f
+            val sigHeight = sigWidth / aspectRatio
+
+            val pdfX = mediaBox.lowerLeftX + (relativeX * pdfWidth)
+            val pdfY = mediaBox.lowerLeftY + pdfHeight - (relativeY * pdfHeight) - sigHeight
+
+            contentStream.drawImage(pdImage, pdfX, pdfY, sigWidth, sigHeight)
+            contentStream.close()
+
+            val newFileName = "Signed_${System.currentTimeMillis()}.pdf"
+            val tempFile = File(context.cacheDir, newFileName)
+            document.save(tempFile)
+            document.close()
+
+            savePdfToMediaStore(context, tempFile, newFileName)
+            tempFile.delete()
+            return@withContext true
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return@withContext false
+        }
+    }
+
     fun savePdfToMediaStore(context: Context, documentFile: File, displayName: String) {
         try {
             val resolver = context.contentResolver

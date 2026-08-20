@@ -53,7 +53,6 @@
     <string name="invalid_pdf">Nieprawidłowy format PDF lub plik jest uszkodzony.</string>
     <string name="nav_recent">Najnowsze</string>
     <string name="nav_bookmarks">Zakładki</string>
-    <string name="scanner_launch_error">Uruchomienie skanera nie powiodło się. Zaktualizuj Usługi Google Play.</string>
     <string name="task_merge_bg">Scal zadanie dodane do tła</string>
     <string name="task_convert_bg">Konwersja rozpoczęła się w tle</string>
     <string name="task_long_image_bg">Tworzenie obrazu rozpoczęło się w tle</string>
@@ -70,14 +69,10 @@
     <string name="camera_permission_required">Do skanowania dokumentów wymagane jest pozwolenie na aparat</string>
     <string name="failed_photo_to_pdf">Nie udało się przekonwertować zdjęcia do formatu PDF</string>
     <string name="error_opening_camera">Błąd podczas otwierania aparatu: %1$s</string>
-    <string name="scanner_returned_null">Skaner dokumentów zwrócił wynik zerowy</string>
     <string name="error_saving_scanned_pdf">Błąd podczas zapisywania zeskanowanego pliku PDF: %1$s</string>
     <string name="failed_process_scanned_pages">Nie udało się przetworzyć zeskanowanych stron</string>
     <string name="page_image_uri_null">URI obrazu strony ma wartość null</string>
-    <string name="no_scanned_pdf_returned">Nie zwrócono żadnych zeskanowanych plików PDF ani stron</string>
-    <string name="scanner_error">Błąd skanera: %1$s</string>
     <string name="activity_not_found">Nie znaleziono aktywności</string>
-    <string name="scanner_intent_null">Intencja skanera jest pusta</string>
     <string name="no_app_to_open_file">Nie znaleziono aplikacji umożliwiającej otwarcie tego pliku</string>
     <string name="error_title">Błąd</string>
     <string name="back">Powrót</string>
@@ -102,5 +97,4 @@
     <string name="personalized_ads_description">Zezwól na zbieranie danych dla odpowiednich reklam</string>
     <string name="about_app">O aplikacji</string>
     <string name="about_version">Wersja %1$s</string>
-    <string name="about_description">PDF Scanner to darmowe narzędzie do skanowania, przeglądania, konwertowania, łączenia i dzielenia dokumentów PDF. Napędzane technologią skanowania dokumentów ML Kit.</string>
 </resources>

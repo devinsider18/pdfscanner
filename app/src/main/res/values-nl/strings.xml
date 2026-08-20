@@ -49,11 +49,10 @@
         <item quantity="one">%1$d geselecteerd</item>
         <item quantity="other">%1$d geselecteerd</item>
     </plurals>
-    <string name="loading_pdf">Laden...</string>
+    <string name="loading_pdf">Laden…</string>
     <string name="invalid_pdf">Ongeldig PDF-formaat of bestand is beschadigd.</string>
     <string name="nav_recent">Recent</string>
     <string name="nav_bookmarks">Bladwijzers</string>
-    <string name="scanner_launch_error">Het starten van de scanner is mislukt. Update Google Play-services.</string>
     <string name="task_merge_bg">Samenvoegtaak toegevoegd aan de achtergrond</string>
     <string name="task_convert_bg">De conversie is op de achtergrond gestart</string>
     <string name="task_long_image_bg">Het maken van afbeeldingen begon op de achtergrond</string>
@@ -70,14 +69,10 @@
     <string name="camera_permission_required">Voor het scannen van documenten is cameratoestemming vereist</string>
     <string name="failed_photo_to_pdf">Kan foto niet naar PDF converteren</string>
     <string name="error_opening_camera">Fout bij openen camera: %1$s</string>
-    <string name="scanner_returned_null">Documentscanner heeft een nulresultaat geretourneerd</string>
     <string name="error_saving_scanned_pdf">Fout bij opslaan van gescande PDF: %1$s</string>
     <string name="failed_process_scanned_pages">Kan gescande pagina\'s niet verwerken</string>
     <string name="page_image_uri_null">URI van paginaafbeelding is nul</string>
-    <string name="no_scanned_pdf_returned">Er zijn geen gescande PDF\'s of pagina\'s geretourneerd</string>
-    <string name="scanner_error">Scannerfout: %1$s</string>
     <string name="activity_not_found">Activiteit niet gevonden</string>
-    <string name="scanner_intent_null">De scannerintentie is nul</string>
     <string name="no_app_to_open_file">Er is geen applicatie gevonden om dit bestand te openen</string>
     <string name="error_title">Fout</string>
     <string name="back">Terug</string>
@@ -102,5 +97,4 @@
     <string name="personalized_ads_description">Sta gegevensverzameling toe voor relevante advertenties</string>
     <string name="about_app">Over de app</string>
     <string name="about_version">Versie %1$s</string>
-    <string name="about_description">PDF Scanner is een gratis tool voor het scannen, bekijken, converteren, samenvoegen en splitsen van PDF-documenten. Mogelijk gemaakt door ML Kit-technologie voor het scannen van documenten.</string>
 </resources>

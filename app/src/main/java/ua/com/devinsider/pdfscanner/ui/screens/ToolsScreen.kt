@@ -53,7 +53,7 @@ import androidx.core.content.FileProvider
 
 
 @Composable
-fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
+fun ToolsScreen(viewModel: MainViewModel = hiltViewModel(), onNavigateToViewer: (String) -> Unit = {}) {
     val context = LocalContext.current
     val isDarkMode by viewModel.isDarkMode.collectAsState()
     val gdprConsent by viewModel.gdprConsent.collectAsState()
@@ -63,6 +63,9 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
     val snackbarHostState = remember { SnackbarHostState() }
     val documents by viewModel.documents.collectAsState()
     val pdfDocuments = documents.filter { it.type == DocumentType.PDF }
+    
+    val billingManager = viewModel.billingManager
+    val isPro by billingManager.isPro.collectAsState()
     
     val convertingToLongImageMsg = stringResource(R.string.converting_to_long_image)
     val convertingToImagesMsg = stringResource(R.string.converting_to_images)
@@ -81,6 +84,7 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
 
     var showMergePicker by remember { mutableStateOf(false) }
     var showSplitPicker by remember { mutableStateOf(false) }
+    var showSignPicker by remember { mutableStateOf(false) }
     var showLanguagePicker by remember { mutableStateOf(false) }
     var conversionErrorDialogState by remember { mutableStateOf<ConversionResult.Error?>(null) }
     var showAboutDialog by remember { mutableStateOf(false) }
@@ -324,18 +328,44 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
         Text(stringResource(R.string.pdf_tools), style = MaterialTheme.typography.headlineMedium)
         Spacer(modifier = Modifier.height(16.dp))
 
-        ToolButton(icon = Icons.Default.CameraAlt, text = stringResource(R.string.scan_document), onClick = {
-            checkAndStartScanTools()
-        })
-        ToolButton(icon = Icons.Default.Image, text = stringResource(R.string.pdf_to_long_image), onClick = { pdfToLongImageLauncher.launch("application/pdf") })
-        ToolButton(icon = Icons.Default.PhotoLibrary, text = stringResource(R.string.pdf_to_image), onClick = { pdfToImagesLauncher.launch("application/pdf") })
-        ToolButton(icon = Icons.AutoMirrored.Filled.CallMerge, text = stringResource(R.string.merge_pdfs), onClick = { showMergePicker = true })
-        ToolButton(icon = Icons.AutoMirrored.Filled.CallSplit, text = stringResource(R.string.split_pdf), onClick = { showSplitPicker = true })
+        if (!isPro) {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp)
+                    .clickable { billingManager.purchasePremium(context as Activity) },
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
+            ) {
+                Row(
+                    modifier = Modifier.padding(16.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(Icons.Default.Star, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+                    Spacer(modifier = Modifier.width(16.dp))
+                    Text("Upgrade to Pro", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onPrimaryContainer)
+                }
+            }
+            Spacer(modifier = Modifier.height(8.dp))
+        }
+
+        Row(modifier = Modifier.fillMaxWidth()) {
+            ToolButton(icon = Icons.Default.CameraAlt, text = stringResource(R.string.scan_document), onClick = { checkAndStartScanTools() }, modifier = Modifier.weight(1f))
+            ToolButton(icon = Icons.Default.Image, text = stringResource(R.string.pdf_to_long_image), onClick = { pdfToLongImageLauncher.launch("application/pdf") }, modifier = Modifier.weight(1f))
+        }
+        Row(modifier = Modifier.fillMaxWidth()) {
+            ToolButton(icon = Icons.Default.PhotoLibrary, text = stringResource(R.string.pdf_to_image), onClick = { pdfToImagesLauncher.launch("application/pdf") }, modifier = Modifier.weight(1f))
+            ToolButton(icon = Icons.AutoMirrored.Filled.CallMerge, text = stringResource(R.string.merge_pdfs), onClick = { showMergePicker = true }, modifier = Modifier.weight(1f))
+        }
+        Row(modifier = Modifier.fillMaxWidth()) {
+            ToolButton(icon = Icons.AutoMirrored.Filled.CallSplit, text = stringResource(R.string.split_pdf), onClick = { showSplitPicker = true }, modifier = Modifier.weight(1f))
+            ToolButton(icon = Icons.Default.Create, text = stringResource(R.string.sign_pdf), onClick = { showSignPicker = true }, modifier = Modifier.weight(1f))
+        }
 
 
 
         if (showMergePicker) {
             DocumentPickerDialog(
+                title = stringResource(R.string.select_pdfs_to_merge),
                 documents = pdfDocuments,
                 isMultipleSelection = true,
                 onDismiss = { showMergePicker = false },
@@ -360,6 +390,7 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
 
         if (showSplitPicker) {
             DocumentPickerDialog(
+                title = stringResource(R.string.select_pdf_to_split),
                 documents = pdfDocuments,
                 isMultipleSelection = false,
                 onDismiss = { showSplitPicker = false },
@@ -379,6 +410,21 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
                             }
                             isConverting = false
                         }
+                    }
+                }
+            )
+        }
+
+        if (showSignPicker) {
+            DocumentPickerDialog(
+                title = stringResource(R.string.select_pdf_to_sign),
+                documents = pdfDocuments,
+                isMultipleSelection = false,
+                onDismiss = { showSignPicker = false },
+                onConfirm = { selectedDocs ->
+                    showSignPicker = false
+                    selectedDocs.firstOrNull()?.let { doc ->
+                        onNavigateToViewer(doc.path)
                     }
                 }
             )
@@ -431,7 +477,7 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
                                 checked = gdprConsent ?: false,
                                 onCheckedChange = { newValue ->
                                     viewModel.setGdprConsent(newValue)
-                                    com.ironsource.mediationsdk.IronSource.setConsent(newValue)
+                                    
                                 }
                             )
                         }
@@ -579,27 +625,28 @@ fun ToolsScreen(viewModel: MainViewModel = hiltViewModel()) {
 }
 
 @Composable
-fun ToolButton(icon: ImageVector, text: String, onClick: () -> Unit) {
+fun ToolButton(icon: ImageVector, text: String, onClick: () -> Unit, modifier: Modifier = Modifier) {
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 8.dp)
+        modifier = modifier
+            .padding(4.dp)
             .clickable(onClick = onClick),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
     ) {
-        Row(
-            modifier = Modifier.padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
+        Column(
+            modifier = Modifier.padding(12.dp).fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
             Icon(icon, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
-            Spacer(modifier = Modifier.width(16.dp))
-            Text(text, style = MaterialTheme.typography.titleMedium)
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(text, style = MaterialTheme.typography.titleSmall, textAlign = androidx.compose.ui.text.style.TextAlign.Center, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
         }
     }
 }
 
 @Composable
 fun DocumentPickerDialog(
+    title: String,
     documents: List<DocumentItem>,
     isMultipleSelection: Boolean,
     onDismiss: () -> Unit,
@@ -609,7 +656,7 @@ fun DocumentPickerDialog(
     
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(if (isMultipleSelection) stringResource(R.string.select_pdfs_to_merge) else stringResource(R.string.select_pdf_to_split)) },
+        title = { Text(title) },
         text = {
             if (documents.isEmpty()) {
                 Text(stringResource(R.string.no_pdf_documents))

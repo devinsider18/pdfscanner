@@ -1,15 +1,16 @@
 [versions]
+playBilling = "9.1.0"
 androidGradlePlugin = "9.3.1"
 androidxCore = "1.19.0"
 androidxLifecycle = "2.11.0"
 androidxActivity = "1.13.0"
-androidxComposeBom = "2026.06.01"
+androidxComposeBom = "2026.08.00"
 androidxHilt = "1.4.0"
 androidxRoom = "2.8.4"
 androidxTest = "1.7.0"
 androidxTestExt = "1.3.0"
 androidxTestRunner = "1.7.0"
-appcompat = "1.7.1"
+appcompat = "1.8.0"
 coroutines = "1.11.0"
 datastorePreferences = "1.2.1"
 firebaseBom = "34.17.0"
@@ -18,7 +19,7 @@ hiltNavigationCompose = "1.4.0"
 junit = "4.13.2"
 kotlin = "2.4.10"
 ksp = "2.3.9"
-nav3Core = "1.1.5"
+nav3Core = "1.1.6"
 lifecycleViewmodelNav3 = "2.11.0"
 navigationCompose = "2.9.8"
 playServicesMlkitDocumentScanner = "16.0.0"
@@ -26,7 +27,12 @@ workRuntimeKtx = "2.11.2"
 camerax = "1.6.1"
 mlkitText = "16.0.1"
 pdfboxAndroid = "2.0.27.0"
+unityAdsMediation = "9.6.0"
+unityAds = "4.20.0"
+playServicesAdsIdentifier = "18.3.0"
+playServicesBasement = "18.10.0"
 [libraries]
+play-billing = { module = "com.android.billingclient:billing-ktx", version.ref = "playBilling" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
@@ -71,6 +77,10 @@ androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.r
 androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "camerax" }
 androidx-camera-view = { module = "androidx.camera:camera-view", version.ref = "camerax" }
 mlkit-text-recognition = { module = "com.google.mlkit:text-recognition", version.ref = "mlkitText" }
+unity3d-ads-mediation = { module = "com.unity3d.ads-mediation:mediation-sdk", version.ref = "unityAdsMediation" }
+unity3d-ads = { module = "com.unity3d.ads:unity-ads", version.ref = "unityAds" }
+play-services-ads-identifier = { module = "com.google.android.gms:play-services-ads-identifier", version.ref = "playServicesAdsIdentifier" }
+play-services-basement = { module = "com.google.android.gms:play-services-basement", version.ref = "playServicesBasement" }
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

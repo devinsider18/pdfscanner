@@ -53,7 +53,6 @@
     <string name="invalid_pdf">Neplatný formát PDF alebo súbor je poškodený.</string>
     <string name="nav_recent">Nedávne</string>
     <string name="nav_bookmarks">Záložky</string>
-    <string name="scanner_launch_error">Spustenie skenera zlyhalo. Aktualizujte služby Google Play.</string>
     <string name="task_merge_bg">Úloha zlúčenia bola pridaná na pozadie</string>
     <string name="task_convert_bg">Konverzia začala na pozadí</string>
     <string name="task_long_image_bg">Vytváranie obrázkov sa začalo na pozadí</string>
@@ -70,14 +69,10 @@
     <string name="camera_permission_required">Na skenovanie dokumentov sa vyžaduje povolenie fotoaparátu</string>
     <string name="failed_photo_to_pdf">Nepodarilo sa previesť fotografiu do PDF</string>
     <string name="error_opening_camera">Chyba pri otváraní fotoaparátu: %1$s</string>
-    <string name="scanner_returned_null">Skener dokumentov vrátil výsledok nula</string>
     <string name="error_saving_scanned_pdf">Chyba pri ukladaní naskenovaného PDF: %1$s</string>
     <string name="failed_process_scanned_pages">Nepodarilo sa spracovať naskenované strany</string>
     <string name="page_image_uri_null">Identifikátor URI obrázka stránky je nulový</string>
-    <string name="no_scanned_pdf_returned">Nevrátili sa žiadne naskenované súbory PDF ani strany</string>
-    <string name="scanner_error">Chyba skenera: %1$s</string>
     <string name="activity_not_found">Aktivita sa nenašla</string>
-    <string name="scanner_intent_null">Zámer skenera je nulový</string>
     <string name="no_app_to_open_file">Nenašla sa žiadna aplikácia na otvorenie tohto súboru</string>
     <string name="error_title">Chyba</string>
     <string name="back">Späť</string>
@@ -102,5 +97,4 @@
     <string name="personalized_ads_description">Povoliť zber údajov pre relevantné reklamy</string>
     <string name="about_app">O aplikácii</string>
     <string name="about_version">Verzia %1$s</string>
-    <string name="about_description">PDF Scanner je bezplatný nástroj na skenovanie, prezeranie, konvertovanie, zlučovanie a rozdeľovanie dokumentov PDF. Beží na technológii skenovania dokumentov ML Kit.</string>
 </resources>

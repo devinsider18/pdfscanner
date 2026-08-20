@@ -53,7 +53,6 @@
     <string name="invalid_pdf">Formato PDF inválido ou arquivo corrompido.</string>
     <string name="nav_recent">Recente</string>
     <string name="nav_bookmarks">Favoritos</string>
-    <string name="scanner_launch_error">Falha na inicialização do scanner. Atualize o Google Play Services.</string>
     <string name="task_merge_bg">Mesclar tarefa adicionada ao plano de fundo</string>
     <string name="task_convert_bg">A conversão começou em segundo plano</string>
     <string name="task_long_image_bg">A criação da imagem começou em segundo plano</string>
@@ -70,14 +69,10 @@
     <string name="camera_permission_required">É necessária permissão da câmera para digitalizar documentos</string>
     <string name="failed_photo_to_pdf">Falha ao converter foto em PDF</string>
     <string name="error_opening_camera">Erro ao abrir a câmera: %1$s</string>
-    <string name="scanner_returned_null">O scanner de documentos retornou resultado nulo</string>
     <string name="error_saving_scanned_pdf">Erro ao salvar PDF digitalizado: %1$s</string>
     <string name="failed_process_scanned_pages">Falha ao processar páginas digitalizadas</string>
     <string name="page_image_uri_null">O URI da imagem da página é nulo</string>
-    <string name="no_scanned_pdf_returned">Nenhum PDF digitalizado ou páginas devolvidas</string>
-    <string name="scanner_error">Erro do scanner: %1$s</string>
     <string name="activity_not_found">Atividade não encontrada</string>
-    <string name="scanner_intent_null">A intenção do scanner é nula</string>
     <string name="no_app_to_open_file">Nenhum aplicativo encontrado para abrir este arquivo</string>
     <string name="error_title">Erro</string>
     <string name="back">Voltar</string>
@@ -102,5 +97,4 @@
     <string name="personalized_ads_description">Permitir a coleta de dados para anúncios relevantes</string>
     <string name="about_app">Sobre o Aplicativo</string>
     <string name="about_version">Versão %1$s</string>
-    <string name="about_description">PDF Scanner é uma ferramenta gratuita para digitalizar, visualizar, converter, mesclar e dividir documentos PDF. Desenvolvido com a tecnologia de digitalização de documentos ML Kit.</string>
 </resources>

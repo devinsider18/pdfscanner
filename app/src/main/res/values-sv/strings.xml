@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">PDF Scanner</string>
-    <string name="search">Sök...</string>
+    <string name="search">Sök…</string>
     <string name="merge_pdfs">Slå samman PDF-filer</string>
     <string name="split_pdf">Dela upp PDF</string>
     <string name="share">Dela</string>
@@ -37,10 +37,10 @@
     <string name="select_language">Välj Språk</string>
     <string name="nav_documents">Dokument</string>
     <string name="nav_tools">Verktyg</string>
-    <string name="converting_to_images">Konverterar till bilder...</string>
-    <string name="converting_to_long_image">Konverterar till lång bild...</string>
-    <string name="splitting_pdf">Delar upp PDF...</string>
-    <string name="merging_pdfs">Slår ihop PDF-filer...</string>
+    <string name="converting_to_images">Konverterar till bilder…</string>
+    <string name="converting_to_long_image">Konverterar till lång bild…</string>
+    <string name="splitting_pdf">Delar upp PDF…</string>
+    <string name="merging_pdfs">Slår ihop PDF-filer…</string>
     <string name="saved_to_pictures">Har sparats till Pictures/PDFScanner</string>
     <string name="saved_to_downloads">Har sparats till Downloads/PDFScanner</string>
     <string name="failed_to_convert">Det gick inte att konvertera PDF</string>
@@ -49,11 +49,10 @@
         <item quantity="one">%1$d valt</item>
         <item quantity="other">%1$d valt</item>
     </plurals>
-    <string name="loading_pdf">Laddar...</string>
+    <string name="loading_pdf">Laddar…</string>
     <string name="invalid_pdf">Ogiltigt PDF-format eller filen är skadad.</string>
     <string name="nav_recent">Nyligen</string>
     <string name="nav_bookmarks">Bokmärken</string>
-    <string name="scanner_launch_error">Skannerstart misslyckades. Uppdatera Google Play Services.</string>
     <string name="task_merge_bg">Sammanfoga uppgift har lagts till i bakgrunden</string>
     <string name="task_convert_bg">Konverteringen startade i bakgrunden</string>
     <string name="task_long_image_bg">Bildskapandet började i bakgrunden</string>
@@ -70,14 +69,10 @@
     <string name="camera_permission_required">Kameratillstånd krävs för att skanna dokument</string>
     <string name="failed_photo_to_pdf">Det gick inte att konvertera fotot till PDF</string>
     <string name="error_opening_camera">Fel vid öppning av kamera: %1$s</string>
-    <string name="scanner_returned_null">Dokumentskannern gav nullresultat</string>
     <string name="error_saving_scanned_pdf">Fel när skannad PDF sparades: %1$s</string>
     <string name="failed_process_scanned_pages">Det gick inte att bearbeta skannade sidor</string>
     <string name="page_image_uri_null">Sidbildens URI är null</string>
-    <string name="no_scanned_pdf_returned">Inga skannade PDF-filer eller sidor returnerades</string>
-    <string name="scanner_error">Skannerfel: %1$s</string>
     <string name="activity_not_found">Aktiviteten hittades inte</string>
-    <string name="scanner_intent_null">Skannerns avsikt är null</string>
     <string name="no_app_to_open_file">Inget program hittades för att öppna den här filen</string>
     <string name="error_title">Fel</string>
     <string name="back">Tillbaka</string>
@@ -102,5 +97,4 @@
     <string name="personalized_ads_description">Tillåt datainsamling för relevanta annonser</string>
     <string name="about_app">Om appen</string>
     <string name="about_version">Version %1$s</string>
-    <string name="about_description">PDF Scanner är ett gratisverktyg för att skanna, visa, konvertera, slå samman och dela PDF-dokument. Drivs av ML Kit-dokumentskanningsteknik.</string>
 </resources>

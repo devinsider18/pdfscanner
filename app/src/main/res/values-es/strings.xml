@@ -40,7 +40,7 @@
     <string name="converting_to_images">Convirtiendo a imágenes…</string>
     <string name="converting_to_long_image">Convirtiendo a imagen larga…</string>
     <string name="splitting_pdf">Dividiendo PDF…</string>
-    <string name="merging_pdfs">Fusionando archivos PDF...</string>
+    <string name="merging_pdfs">Fusionando archivos PDF…</string>
     <string name="saved_to_pictures">Guardado correctamente en Imágenes/PDFScanner</string>
     <string name="saved_to_downloads">Guardado correctamente en Descargas/PDFScanner</string>
     <string name="failed_to_convert">No se pudo convertir el PDF</string>
@@ -53,7 +53,6 @@
     <string name="invalid_pdf">El formato PDF no válido o el archivo está dañado.</string>
     <string name="nav_recent">Reciente</string>
     <string name="nav_bookmarks">Marcadores</string>
-    <string name="scanner_launch_error">Error al iniciar el escáner. Actualice los servicios de Google Play.</string>
     <string name="task_merge_bg">Fusionar tarea agregada al fondo</string>
     <string name="task_convert_bg">La conversión comenzó en segundo plano.</string>
     <string name="task_long_image_bg">La creación de imágenes comenzó en segundo plano.</string>
@@ -70,14 +69,10 @@
     <string name="camera_permission_required">Se requiere permiso de la cámara para escanear documentos</string>
     <string name="failed_photo_to_pdf">No se pudo convertir la foto a PDF</string>
     <string name="error_opening_camera">Error al abrir cámara: %1$s</string>
-    <string name="scanner_returned_null">El escáner de documentos arrojó un resultado nulo</string>
     <string name="error_saving_scanned_pdf">Error al guardar PDF escaneado: %1$s</string>
     <string name="failed_process_scanned_pages">No se pudieron procesar las páginas escaneadas</string>
     <string name="page_image_uri_null">El URI de la imagen de la página es nulo</string>
-    <string name="no_scanned_pdf_returned">No se devuelve ningún PDF escaneado ni páginas</string>
-    <string name="scanner_error">Error del escáner: %1$s</string>
     <string name="activity_not_found">Actividad no encontrada</string>
-    <string name="scanner_intent_null">La intención del escáner es nula</string>
     <string name="no_app_to_open_file">No se encontró ninguna aplicación para abrir este archivo.</string>
     <string name="error_title">error</string>
     <string name="back">Atrás</string>
@@ -101,5 +96,4 @@
     <string name="personalized_ads_description">Permitir la recopilación de datos para anuncios relevantes</string>
     <string name="about_app">Acerca de la aplicación</string>
     <string name="about_version">Versión %1$s</string>
-    <string name="about_description">PDF Scanner es una herramienta gratuita para escanear, ver, convertir, fusionar y dividir documentos PDF. Impulsado por la tecnología de escaneo de documentos ML Kit.</string>
 </resources>

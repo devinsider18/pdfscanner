@@ -33,3 +33,6 @@ local.properties
 ehthumbs.db
 Thumbs.db
 google-services.json
+
+# Agent files
+AGENT.md

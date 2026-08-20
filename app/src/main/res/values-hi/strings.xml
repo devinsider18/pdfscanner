@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">PDF Scanner</string>
-    <string name="search">खोजें...</string>
+    <string name="search">खोजें…</string>
     <string name="merge_pdfs">पीडीएफ़ मर्ज करें</string>
     <string name="split_pdf">पीडीएफ को विभाजित करें</string>
     <string name="share">साझा करें</string>
@@ -37,10 +37,10 @@
     <string name="select_language">भाषा चुनें</string>
     <string name="nav_documents">दस्तावेज़</string>
     <string name="nav_tools">उपकरण</string>
-    <string name="converting_to_images">छवियों में कनवर्ट किया जा रहा है...</string>
+    <string name="converting_to_images">छवियों में कनवर्ट किया जा रहा है…</string>
     <string name="converting_to_long_image">लंबी छवि में कनवर्ट किया जा रहा है…</string>
-    <string name="splitting_pdf">पीडीएफ को विभाजित किया जा रहा है...</string>
-    <string name="merging_pdfs">पीडीएफ़ मर्ज किया जा रहा है...</string>
+    <string name="splitting_pdf">पीडीएफ को विभाजित किया जा रहा है…</string>
+    <string name="merging_pdfs">पीडीएफ़ मर्ज किया जा रहा है…</string>
     <string name="saved_to_pictures">पिक्चर्स/पीडीएफस्कैनर में सफलतापूर्वक सहेजा गया</string>
     <string name="saved_to_downloads">डाउनलोड/पीडीएफस्कैनर में सफलतापूर्वक सहेजा गया</string>
     <string name="failed_to_convert">पीडीएफ परिवर्तित करने में विफल</string>
@@ -49,11 +49,10 @@
         <item quantity="one">%1$d चयनित</item>
         <item quantity="other">%1$d चयनित</item>
     </plurals>
-    <string name="loading_pdf">लोड हो रहा है...</string>
+    <string name="loading_pdf">लोड हो रहा है…</string>
     <string name="invalid_pdf">अमान्य पीडीएफ प्रारूप या फ़ाइल दूषित है.</string>
     <string name="nav_recent">हाल का</string>
     <string name="nav_bookmarks">बुकमार्क</string>
-    <string name="scanner_launch_error">स्कैनर लॉन्च विफल रहा. कृपया Google Play सेवाएं अपडेट करें.</string>
     <string name="task_merge_bg">मर्ज कार्य पृष्ठभूमि में जोड़ा गया</string>
     <string name="task_convert_bg">पृष्ठभूमि में रूपांतरण प्रारंभ हो गया</string>
     <string name="task_long_image_bg">पृष्ठभूमि में छवि निर्माण प्रारंभ हुआ</string>
@@ -70,14 +69,10 @@
     <string name="camera_permission_required">दस्तावेज़ों को स्कैन करने के लिए कैमरे की अनुमति आवश्यक है</string>
     <string name="failed_photo_to_pdf">फ़ोटो को पीडीएफ में परिवर्तित करने में विफल</string>
     <string name="error_opening_camera">कैमरा खोलने में त्रुटि: %1$s</string>
-    <string name="scanner_returned_null">दस्तावेज़ स्कैनर ने शून्य परिणाम लौटाया</string>
     <string name="error_saving_scanned_pdf">स्कैन की गई पीडीएफ को सहेजने में त्रुटि: %1$s</string>
     <string name="failed_process_scanned_pages">स्कैन किए गए पृष्ठों को संसाधित करने में विफल</string>
     <string name="page_image_uri_null">पृष्ठ छवि यूआरआई शून्य है</string>
-    <string name="no_scanned_pdf_returned">कोई स्कैन किया हुआ पीडीएफ या पेज वापस नहीं आया</string>
-    <string name="scanner_error">स्कैनर त्रुटि: %1$s</string>
     <string name="activity_not_found">गतिविधि नहीं मिली</string>
-    <string name="scanner_intent_null">स्कैनर का अभिप्राय शून्य है</string>
     <string name="no_app_to_open_file">इस फ़ाइल को खोलने के लिए कोई एप्लिकेशन नहीं मिला</string>
     <string name="error_title">त्रुटि</string>
     <string name="back">वापस</string>
@@ -101,5 +96,4 @@
     <string name="personalized_ads_description">प्रासंगिक विज्ञापनों के लिए डेटा संग्रह की अनुमति दें</string>
     <string name="about_app">ऐप के बारे में</string>
     <string name="about_version">संस्करण %1$s</string>
-    <string name="about_description">पीडीएफ स्कैनर पीडीएफ दस्तावेजों को स्कैन करने, देखने, परिवर्तित करने, मर्ज करने और विभाजित करने के लिए एक मुफ्त उपकरण है। ML Kit दस्तावेज़ स्कैनिंग तकनीक द्वारा संचालित।</string>
 </resources>

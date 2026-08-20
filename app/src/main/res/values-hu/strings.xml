@@ -53,7 +53,6 @@
     <string name="invalid_pdf">Érvénytelen PDF formátum, vagy a fájl sérült.</string>
     <string name="nav_recent">Legutóbbi</string>
     <string name="nav_bookmarks">Könyvjelzők</string>
-    <string name="scanner_launch_error">A szkenner indítása nem sikerült. Kérjük, frissítse a Google Play-szolgáltatásokat.</string>
     <string name="task_merge_bg">Egyesítési feladat hozzáadva a háttérhez</string>
     <string name="task_convert_bg">Az átalakítás a háttérben kezdődött</string>
     <string name="task_long_image_bg">A háttérben elkezdődött a képkészítés</string>
@@ -70,14 +69,10 @@
     <string name="camera_permission_required">A dokumentumok beolvasásához kameraengedély szükséges</string>
     <string name="failed_photo_to_pdf">Nem sikerült a fényképet PDF-be konvertálni</string>
     <string name="error_opening_camera">Hiba a kamera megnyitásakor: %1$s</string>
-    <string name="scanner_returned_null">A dokumentumszkenner null eredményt adott vissza</string>
     <string name="error_saving_scanned_pdf">Hiba a beolvasott PDF mentésekor: %1$s</string>
     <string name="failed_process_scanned_pages">Nem sikerült feldolgozni a beolvasott oldalakat</string>
     <string name="page_image_uri_null">Az oldalkép URI értéke null</string>
-    <string name="no_scanned_pdf_returned">Nem érkezett vissza beolvasott PDF vagy oldal</string>
-    <string name="scanner_error">Szkenner hiba: %1$s</string>
     <string name="activity_not_found">A tevékenység nem található</string>
-    <string name="scanner_intent_null">A szkenner szándéka nulla</string>
     <string name="no_app_to_open_file">Nem található alkalmazás a fájl megnyitásához</string>
     <string name="error_title">Hiba</string>
     <string name="back">Vissza</string>
@@ -102,5 +97,4 @@
     <string name="personalized_ads_description">Adatgyűjtés engedélyezése a releváns hirdetésekhez</string>
     <string name="about_app">Az alkalmazásról</string>
     <string name="about_version">Verzió: %1$s</string>
-    <string name="about_description">A PDF Scanner egy ingyenes eszköz PDF dokumentumok beolvasására, megtekintésére, konvertálására, egyesítésére és felosztására. Az ML Kit dokumentumszkennelési technológiájával működik.</string>
 </resources>

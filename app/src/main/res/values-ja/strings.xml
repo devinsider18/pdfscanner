@@ -53,7 +53,6 @@
     <string name="invalid_pdf">PDF 形式が無効であるか、ファイルが破損しています。</string>
     <string name="nav_recent">最近の</string>
     <string name="nav_bookmarks">ブックマーク</string>
-    <string name="scanner_launch_error">スキャナーの起動に失敗しました。 Google Play サービスを更新してください。</string>
     <string name="task_merge_bg">マージタスクがバックグラウンドに追加されました</string>
     <string name="task_convert_bg">バックグラウンドで変換が開始されました</string>
     <string name="task_long_image_bg">バックグラウンドで画像作成が開始されました</string>
@@ -70,14 +69,10 @@
     <string name="camera_permission_required">ドキュメントをスキャンするにはカメラの許可が必要です</string>
     <string name="failed_photo_to_pdf">写真を PDF に変換できませんでした</string>
     <string name="error_opening_camera">カメラを開くときにエラーが発生しました: %1$s</string>
-    <string name="scanner_returned_null">ドキュメント スキャナが null の結果を返しました</string>
     <string name="error_saving_scanned_pdf">スキャンした PDF の保存中にエラーが発生しました: %1$s</string>
     <string name="failed_process_scanned_pages">スキャンしたページの処理に失敗しました</string>
     <string name="page_image_uri_null">ページ画像 URI が null です</string>
-    <string name="no_scanned_pdf_returned">スキャンされた PDF またはページは返されませんでした</string>
-    <string name="scanner_error">スキャナー エラー: %1$s</string>
     <string name="activity_not_found">アクティビティが見つかりません</string>
-    <string name="scanner_intent_null">スキャナーの意図が null です</string>
     <string name="no_app_to_open_file">このファイルを開くアプリケーションが見つかりませんでした</string>
     <string name="error_title">エラー</string>
     <string name="back">戻る</string>
@@ -102,5 +97,4 @@
     <string name="personalized_ads_description">関連する広告のためのデータ収集を許可する</string>
     <string name="about_app">アプリについて</string>
     <string name="about_version">バージョン %1$s</string>
-    <string name="about_description">PDF Scanner は、PDF ドキュメントのスキャン、表示、変換、結合、分割を行うための無料ツールです。ML Kit のドキュメント スキャン テクノロジーを搭載しています。</string>
 </resources>

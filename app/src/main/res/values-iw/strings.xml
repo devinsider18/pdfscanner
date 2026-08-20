@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">PDF Scanner</string>
-    <string name="search">חפש...</string>
+    <string name="search">חפש…</string>
     <string name="merge_pdfs">מיזוג קובצי PDF</string>
     <string name="split_pdf">פיצול PDF</string>
     <string name="share">שתף</string>
@@ -37,10 +37,10 @@
     <string name="select_language">בחר שפה</string>
     <string name="nav_documents">מסמכים</string>
     <string name="nav_tools">כלים</string>
-    <string name="converting_to_images">ממיר לתמונות...</string>
-    <string name="converting_to_long_image">ממיר לתמונה ארוכה...</string>
-    <string name="splitting_pdf">מפצל PDF...</string>
-    <string name="merging_pdfs">ממזג קובצי PDF...</string>
+    <string name="converting_to_images">ממיר לתמונות…</string>
+    <string name="converting_to_long_image">ממיר לתמונה ארוכה…</string>
+    <string name="splitting_pdf">מפצל PDF…</string>
+    <string name="merging_pdfs">ממזג קובצי PDF…</string>
     <string name="saved_to_pictures">נשמר בהצלחה בתמונות/PDFScanner</string>
     <string name="saved_to_downloads">נשמר בהצלחה בהורדות/PDFScanner</string>
     <string name="failed_to_convert">המרת PDF נכשלה</string>
@@ -49,11 +49,10 @@
         <item quantity="one">%1$d נבחר</item>
         <item quantity="other">%1$d נבחר</item>
     </plurals>
-    <string name="loading_pdf">טוען...</string>
+    <string name="loading_pdf">טוען…</string>
     <string name="invalid_pdf">פורמט PDF לא חוקי או קובץ פגום.</string>
     <string name="nav_recent">לאחרונה</string>
     <string name="nav_bookmarks">סימניות</string>
-    <string name="scanner_launch_error">הפעלת הסורק נכשלה. אנא עדכן את שירותי Google Play.</string>
     <string name="task_merge_bg">מיזוג משימה שנוספה לרקע</string>
     <string name="task_convert_bg">המרה החלה ברקע</string>
     <string name="task_long_image_bg">יצירת תמונה החלה ברקע</string>
@@ -70,14 +69,10 @@
     <string name="camera_permission_required">נדרשת הרשאת מצלמה כדי לסרוק מסמכים</string>
     <string name="failed_photo_to_pdf">המרת התמונה ל-PDF נכשלה</string>
     <string name="error_opening_camera">שגיאה בפתיחת מצלמה: %1$s</string>
-    <string name="scanner_returned_null">סורק המסמכים החזיר תוצאה אפסית</string>
     <string name="error_saving_scanned_pdf">שגיאה בשמירת PDF סרוק: %1$s</string>
     <string name="failed_process_scanned_pages">עיבוד הדפים הסרוקים נכשל</string>
     <string name="page_image_uri_null">URI של תמונת דף הוא ריק</string>
-    <string name="no_scanned_pdf_returned">לא הוחזרו עמודים סרוקים או PDF</string>
-    <string name="scanner_error">שגיאת סורק: %1$s</string>
     <string name="activity_not_found">הפעילות לא נמצאה</string>
-    <string name="scanner_intent_null">כוונת הסורק היא ריק</string>
     <string name="no_app_to_open_file">לא נמצאה אפליקציה לפתיחת קובץ זה</string>
     <string name="error_title">שגיאה</string>
     <string name="back">חזרה</string>
@@ -102,5 +97,4 @@
     <string name="personalized_ads_description">אפשר איסוף נתונים עבור מודעות רלוונטיות</string>
     <string name="about_app">אודות האפליקציה</string>
     <string name="about_version">גרסה %1$s</string>
-    <string name="about_description">PDF Scanner הוא כלי חינמי לסריקה, הצגה, המרה, מיזוג ופיצול מסמכי PDF. מופעל על ידי טכנולוגיית סריקת מסמכים ML Kit.</string>
 </resources>

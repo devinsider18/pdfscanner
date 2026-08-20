@@ -35,4 +35,10 @@ object AppModule {
     fun provideAppCreatedFileDao(appDatabase: AppDatabase): AppCreatedFileDao {
         return appDatabase.appCreatedFileDao()
     }
+
+    @Provides
+    @Singleton
+    fun provideBillingManager(@ApplicationContext appContext: Context): ua.com.devinsider.pdfscanner.data.repository.BillingManager {
+        return ua.com.devinsider.pdfscanner.data.repository.BillingManager(appContext)
+    }
 }

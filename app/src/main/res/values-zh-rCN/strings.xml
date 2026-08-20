@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">PDF Scanner</string>
-    <string name="search">搜索...</string>
+    <string name="search">搜索…</string>
     <string name="merge_pdfs">合并 PDF</string>
     <string name="split_pdf">分割PDF</string>
     <string name="share">分享</string>
@@ -37,10 +37,10 @@
     <string name="select_language">选择语言</string>
     <string name="nav_documents">文件</string>
     <string name="nav_tools">工具</string>
-    <string name="converting_to_images">转换为图像...</string>
-    <string name="converting_to_long_image">正在转换为长图像...</string>
-    <string name="splitting_pdf">分割 PDF...</string>
-    <string name="merging_pdfs">合并 PDF...</string>
+    <string name="converting_to_images">转换为图像…</string>
+    <string name="converting_to_long_image">正在转换为长图像…</string>
+    <string name="splitting_pdf">分割 PDF…</string>
+    <string name="merging_pdfs">合并 PDF…</string>
     <string name="saved_to_pictures">已成功保存到图片/PDFScanner</string>
     <string name="saved_to_downloads">已成功保存到下载/PDFScanner</string>
     <string name="failed_to_convert">转换 PDF 失败</string>
@@ -49,11 +49,10 @@
         <item quantity="one">选择了%1$d</item>
         <item quantity="other">选择了%1$d</item>
     </plurals>
-    <string name="loading_pdf">加载中...</string>
+    <string name="loading_pdf">加载中…</string>
     <string name="invalid_pdf">PDF 格式无效或文件已损坏。</string>
     <string name="nav_recent">最近</string>
     <string name="nav_bookmarks">书签</string>
-    <string name="scanner_launch_error">扫描仪启动失败。请更新 Google Play 服务。</string>
     <string name="task_merge_bg">合并任务添加到后台</string>
     <string name="task_convert_bg">转换在后台开始</string>
     <string name="task_long_image_bg">图像创建在后台开始</string>
@@ -70,14 +69,10 @@
     <string name="camera_permission_required">扫描文档需要相机许可</string>
     <string name="failed_photo_to_pdf">无法将照片转换为 PDF</string>
     <string name="error_opening_camera">打开相机时出错：%1$s</string>
-    <string name="scanner_returned_null">文档扫描仪返回空结果</string>
     <string name="error_saving_scanned_pdf">保存扫描的 PDF 时出错：%1$s</string>
     <string name="failed_process_scanned_pages">处理扫描页面失败</string>
     <string name="page_image_uri_null">页面图像 URI 为空</string>
-    <string name="no_scanned_pdf_returned">没有扫描的 PDF 或返回的页面</string>
-    <string name="scanner_error">扫描仪错误：%1$s</string>
     <string name="activity_not_found">未找到活动</string>
-    <string name="scanner_intent_null">扫描仪意图为空</string>
     <string name="no_app_to_open_file">找不到打开此文件的应用程序</string>
     <string name="error_title">错误</string>
     <string name="back">返回</string>
@@ -102,5 +97,4 @@
     <string name="personalized_ads_description">允许收集相关广告的数据</string>
     <string name="about_app">关于应用</string>
     <string name="about_version">版本 %1$s</string>
-    <string name="about_description">PDF Scanner 是一款用于扫描、查看、转换、合并和拆分 PDF 文档的免费工具。由 ML Kit 文档扫描技术提供支持。</string>
 </resources>

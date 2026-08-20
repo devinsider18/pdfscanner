@@ -53,7 +53,6 @@
     <string name="invalid_pdf">Format PDF tidak valid atau file rusak.</string>
     <string name="nav_recent">Baru-baru ini</string>
     <string name="nav_bookmarks">Bookmark</string>
-    <string name="scanner_launch_error">Peluncuran pemindai gagal. Harap perbarui Layanan Google Play.</string>
     <string name="task_merge_bg">Gabungkan tugas ditambahkan ke latar belakang</string>
     <string name="task_convert_bg">Konversi dimulai di latar belakang</string>
     <string name="task_long_image_bg">Pembuatan gambar dimulai di latar belakang</string>
@@ -70,14 +69,10 @@
     <string name="camera_permission_required">Izin kamera diperlukan untuk memindai dokumen</string>
     <string name="failed_photo_to_pdf">Gagal mengonversi foto ke PDF</string>
     <string name="error_opening_camera">Kesalahan saat membuka kamera: %1$s</string>
-    <string name="scanner_returned_null">Pemindai dokumen mengembalikan hasil nol</string>
     <string name="error_saving_scanned_pdf">Terjadi kesalahan saat menyimpan PDF yang dipindai: %1$s</string>
     <string name="failed_process_scanned_pages">Gagal memproses halaman yang dipindai</string>
     <string name="page_image_uri_null">URI gambar halaman adalah nol</string>
-    <string name="no_scanned_pdf_returned">Tidak ada PDF atau halaman yang dipindai yang dikembalikan</string>
-    <string name="scanner_error">Kesalahan pemindai: %1$s</string>
     <string name="activity_not_found">Aktivitas tidak ditemukan</string>
-    <string name="scanner_intent_null">Maksud pemindai adalah nol</string>
     <string name="no_app_to_open_file">Tidak ditemukan aplikasi untuk membuka file ini</string>
     <string name="error_title">Kesalahan</string>
     <string name="back">Kembali</string>
@@ -102,5 +97,4 @@
     <string name="personalized_ads_description">Izinkan pengumpulan data untuk iklan yang relevan</string>
     <string name="about_app">Tentang Aplikasi</string>
     <string name="about_version">Versi %1$s</string>
-    <string name="about_description">PDF Scanner adalah alat gratis untuk memindai, melihat, mengonversi, menggabungkan, dan memisahkan dokumen PDF. Didukung oleh teknologi pemindaian dokumen ML Kit.</string>
 </resources>

@@ -17,13 +17,15 @@ import ua.com.devinsider.pdfscanner.data.model.DocumentItem
 import ua.com.devinsider.pdfscanner.data.model.SortOption
 import ua.com.devinsider.pdfscanner.data.repository.AppPreferencesRepository
 import ua.com.devinsider.pdfscanner.data.repository.DocumentRepository
+import ua.com.devinsider.pdfscanner.data.repository.BillingManager
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
     @param:ApplicationContext private val context: Context,
     private val documentRepository: DocumentRepository,
-    private val appPreferencesRepository: AppPreferencesRepository
+    private val appPreferencesRepository: AppPreferencesRepository,
+    val billingManager: BillingManager
 ) : ViewModel() {
 
     val searchQuery = MutableStateFlow("")

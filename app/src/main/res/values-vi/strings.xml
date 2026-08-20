@@ -53,7 +53,6 @@
     <string name="invalid_pdf">Định dạng PDF không hợp lệ hoặc tệp bị hỏng.</string>
     <string name="nav_recent">Gần đây</string>
     <string name="nav_bookmarks">Dấu trang</string>
-    <string name="scanner_launch_error">Khởi động máy quét không thành công. Vui lòng cập nhật Dịch vụ của Google Play.</string>
     <string name="task_merge_bg">Hợp nhất nhiệm vụ được thêm vào nền</string>
     <string name="task_convert_bg">Chuyển đổi bắt đầu ở chế độ nền</string>
     <string name="task_long_image_bg">Quá trình tạo hình ảnh bắt đầu ở chế độ nền</string>
@@ -70,14 +69,10 @@
     <string name="camera_permission_required">Cần có sự cho phép của máy ảnh để quét tài liệu</string>
     <string name="failed_photo_to_pdf">Không thể chuyển đổi ảnh sang PDF</string>
     <string name="error_opening_camera">Lỗi mở camera: %1$s</string>
-    <string name="scanner_returned_null">Máy quét tài liệu trả về kết quả null</string>
     <string name="error_saving_scanned_pdf">Lỗi lưu bản PDF đã quét: %1$s</string>
     <string name="failed_process_scanned_pages">Không thể xử lý các trang được quét</string>
     <string name="page_image_uri_null">URI hình ảnh trang là null</string>
-    <string name="no_scanned_pdf_returned">Không có bản PDF hoặc trang được quét nào được trả lại</string>
-    <string name="scanner_error">Lỗi máy quét: %1$s</string>
     <string name="activity_not_found">Không tìm thấy hoạt động</string>
-    <string name="scanner_intent_null">Mục đích của máy quét là vô giá trị</string>
     <string name="no_app_to_open_file">Không tìm thấy ứng dụng nào để mở tệp này</string>
     <string name="error_title">Lỗi</string>
     <string name="back">Quay lại</string>
@@ -102,5 +97,4 @@
     <string name="personalized_ads_description">Cho phép thu thập dữ liệu cho quảng cáo có liên quan</string>
     <string name="about_app">Giới thiệu ứng dụng</string>
     <string name="about_version">Phiên bản %1$s</string>
-    <string name="about_description">PDF Scanner là một công cụ miễn phí để quét, xem, chuyển đổi, hợp nhất và tách tài liệu PDF. Được hỗ trợ bởi công nghệ quét tài liệu ML Kit.</string>
 </resources>

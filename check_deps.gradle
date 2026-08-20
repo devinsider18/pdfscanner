@@ -1,0 +1,12 @@
+initscript {
+    repositories {
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.51.0'
+    }
+}
+
+rootProject {
+    apply plugin: com.github.benmanes.gradle.versions.VersionsPlugin
+}

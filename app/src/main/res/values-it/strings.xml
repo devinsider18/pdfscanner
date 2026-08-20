@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">PDF Scanner</string>
-    <string name="search">Cerca...</string>
+    <string name="search">Cerca…</string>
     <string name="merge_pdfs">Unisci PDF</string>
     <string name="split_pdf">PDF diviso</string>
     <string name="share">Condividi</string>
@@ -39,7 +39,7 @@
     <string name="nav_tools">Strumenti</string>
     <string name="converting_to_images">Conversione in immagini…</string>
     <string name="converting_to_long_image">Conversione in immagine lunga…</string>
-    <string name="splitting_pdf">Divisione del PDF...</string>
+    <string name="splitting_pdf">Divisione del PDF…</string>
     <string name="merging_pdfs">Unione di PDF…</string>
     <string name="saved_to_pictures">Salvataggio in Immagini/PDFScanner riuscito</string>
     <string name="saved_to_downloads">Salvataggio in Download/PDFScanner riuscito</string>
@@ -53,7 +53,6 @@
     <string name="invalid_pdf">Il formato PDF non valido o il file sono danneggiati.</string>
     <string name="nav_recent">Recente</string>
     <string name="nav_bookmarks">Segnalibri</string>
-    <string name="scanner_launch_error">Avvio dello scanner non riuscito. Aggiorna Google Play Services.</string>
     <string name="task_merge_bg">Unisci attività aggiunte allo sfondo</string>
     <string name="task_convert_bg">La conversione è iniziata in background</string>
     <string name="task_long_image_bg">La creazione dell\'immagine è iniziata in background</string>
@@ -70,14 +69,10 @@
     <string name="camera_permission_required">Per eseguire la scansione dei documenti è necessaria l\'autorizzazione della fotocamera</string>
     <string name="failed_photo_to_pdf">Impossibile convertire la foto in PDF</string>
     <string name="error_opening_camera">Errore durante l\'apertura della fotocamera: %1$s</string>
-    <string name="scanner_returned_null">Lo scanner dei documenti ha restituito un risultato nullo</string>
     <string name="error_saving_scanned_pdf">Errore durante il salvataggio del PDF scansionato: %1$s</string>
     <string name="failed_process_scanned_pages">Impossibile elaborare le pagine scansionate</string>
     <string name="page_image_uri_null">L\'URI dell\'immagine della pagina è nullo</string>
-    <string name="no_scanned_pdf_returned">Nessun PDF o pagina scansionata restituita</string>
-    <string name="scanner_error">Errore scanner: %1$s</string>
     <string name="activity_not_found">Attività non trovata</string>
-    <string name="scanner_intent_null">L\'intento dello scanner è nullo</string>
     <string name="no_app_to_open_file">Nessuna applicazione trovata per aprire questo file</string>
     <string name="error_title">Errore</string>
     <string name="back">Indietro</string>
@@ -102,5 +97,4 @@
     <string name="personalized_ads_description">Consenti la raccolta dei dati per annunci pertinenti</string>
     <string name="about_app">Informazioni sull\'app</string>
     <string name="about_version">Versione %1$s</string>
-    <string name="about_description">PDF Scanner è uno strumento gratuito per scansionare, visualizzare, convertire, unire e dividere documenti PDF. Basato sulla tecnologia di scansione dei documenti ML Kit.</string>
 </resources>

@@ -53,7 +53,6 @@
     <string name="invalid_pdf">Virheellinen PDF-muoto tai tiedosto on vioittunut.</string>
     <string name="nav_recent">Viimeaikaiset</string>
     <string name="nav_bookmarks">Kirjanmerkit</string>
-    <string name="scanner_launch_error">Skannerin käynnistys epäonnistui. Päivitä Google Play Palvelut.</string>
     <string name="task_merge_bg">Yhdistä tehtävä lisätty taustalle</string>
     <string name="task_convert_bg">Muuntaminen aloitettiin taustalla</string>
     <string name="task_long_image_bg">Kuvan luominen aloitettiin taustalla</string>
@@ -70,14 +69,10 @@
     <string name="camera_permission_required">Asiakirjojen skannaamiseen tarvitaan kameran lupa</string>
     <string name="failed_photo_to_pdf">Valokuvan muuntaminen PDF-muotoon epäonnistui</string>
     <string name="error_opening_camera">Virhe avattaessa kameraa: %1$s</string>
-    <string name="scanner_returned_null">Asiakirjan skanneri palautti tyhjän tuloksen</string>
     <string name="error_saving_scanned_pdf">Virhe tallennettaessa skannattua PDF-tiedostoa: %1$s</string>
     <string name="failed_process_scanned_pages">Skannattujen sivujen käsittely epäonnistui</string>
     <string name="page_image_uri_null">Sivukuvan URI on tyhjä</string>
-    <string name="no_scanned_pdf_returned">Skannattuja PDF-tiedostoja tai sivuja ei palautettu</string>
-    <string name="scanner_error">Skannerivirhe: %1$s</string>
     <string name="activity_not_found">Toimintoa ei löydy</string>
-    <string name="scanner_intent_null">Skannerin tarkoitus on tyhjä</string>
     <string name="no_app_to_open_file">Tämän tiedoston avaamiseen ei löytynyt sovellusta</string>
     <string name="error_title">Virhe</string>
     <string name="back">Takaisin</string>
@@ -101,5 +96,4 @@
     <string name="personalized_ads_description">Salli tiedonkeruu osuvia mainoksia varten</string>
     <string name="about_app">Tietoja sovelluksesta</string>
     <string name="about_version">Versio %1$s</string>
-    <string name="about_description">PDF Scanner on ilmainen työkalu PDF-dokumenttien skannaamiseen, katseluun, muuntamiseen, yhdistämiseen ja jakamiseen. Toimii ML Kit -dokumenttiskannaustekniikalla.</string>
 </resources>

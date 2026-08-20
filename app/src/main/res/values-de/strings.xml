@@ -53,7 +53,6 @@
     <string name="invalid_pdf">Ungültiges PDF-Format oder Datei ist beschädigt.</string>
     <string name="nav_recent">Neu</string>
     <string name="nav_bookmarks">Lesezeichen</string>
-    <string name="scanner_launch_error">Der Start des Scanners ist fehlgeschlagen. Bitte aktualisieren Sie die Google Play-Dienste.</string>
     <string name="task_merge_bg">Zusammenführungsaufgabe zum Hintergrund hinzugefügt</string>
     <string name="task_convert_bg">Die Konvertierung wurde im Hintergrund gestartet</string>
     <string name="task_long_image_bg">Die Bilderstellung wurde im Hintergrund gestartet</string>
@@ -70,14 +69,10 @@
     <string name="camera_permission_required">Zum Scannen von Dokumenten ist eine Kameraerlaubnis erforderlich</string>
     <string name="failed_photo_to_pdf">Foto konnte nicht in PDF konvertiert werden</string>
     <string name="error_opening_camera">Fehler beim Öffnen der Kamera: %1$s</string>
-    <string name="scanner_returned_null">Der Dokumentenscanner hat ein Null-Ergebnis zurückgegeben</string>
     <string name="error_saving_scanned_pdf">Fehler beim Speichern des gescannten PDF: %1$s</string>
     <string name="failed_process_scanned_pages">Die gescannten Seiten konnten nicht verarbeitet werden</string>
     <string name="page_image_uri_null">Der Seitenbild-URI ist null</string>
-    <string name="no_scanned_pdf_returned">Es wurden keine gescannten PDFs oder Seiten zurückgegeben</string>
-    <string name="scanner_error">Scannerfehler: %1$s</string>
     <string name="activity_not_found">Aktivität nicht gefunden</string>
-    <string name="scanner_intent_null">Die Scannerabsicht ist null</string>
     <string name="no_app_to_open_file">Es wurde keine Anwendung zum Öffnen dieser Datei gefunden</string>
     <string name="error_title">Fehler</string>
     <string name="back">Zurück</string>
@@ -101,5 +96,4 @@
     <string name="personalized_ads_description">Datenerfassung für relevante Anzeigen zulassen</string>
     <string name="about_app">Über die App</string>
     <string name="about_version">Version %1$s</string>
-    <string name="about_description">PDF Scanner ist ein kostenloses Tool zum Scannen, Anzeigen, Konvertieren, Zusammenführen und Teilen von PDF-Dokumenten. Unterstützt von ML Kit-Dokumentscan-Technologie.</string>
 </resources>

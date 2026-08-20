@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">PDF Scanner</string>
-    <string name="search">ค้นหา...</string>
+    <string name="search">ค้นหา…</string>
     <string name="merge_pdfs">รวม PDF</string>
     <string name="split_pdf">แยก PDF</string>
     <string name="share">แบ่งปัน</string>
@@ -37,10 +37,10 @@
     <string name="select_language">เลือกภาษา</string>
     <string name="nav_documents">เอกสาร</string>
     <string name="nav_tools">เครื่องมือ</string>
-    <string name="converting_to_images">กำลังแปลงเป็นรูปภาพ...</string>
-    <string name="converting_to_long_image">กำลังแปลงเป็นรูปภาพขนาดยาว...</string>
-    <string name="splitting_pdf">กำลังแยก PDF...</string>
-    <string name="merging_pdfs">กำลังรวม PDF...</string>
+    <string name="converting_to_images">กำลังแปลงเป็นรูปภาพ…</string>
+    <string name="converting_to_long_image">กำลังแปลงเป็นรูปภาพขนาดยาว…</string>
+    <string name="splitting_pdf">กำลังแยก PDF…</string>
+    <string name="merging_pdfs">กำลังรวม PDF…</string>
     <string name="saved_to_pictures">บันทึกลงใน Pictures/PDFScanner เรียบร้อยแล้ว</string>
     <string name="saved_to_downloads">บันทึกลงใน Downloads/PDFScanner เรียบร้อยแล้ว</string>
     <string name="failed_to_convert">ไม่สามารถแปลง PDF</string>
@@ -49,11 +49,10 @@
         <item quantity="one">เลือก %1$d แล้ว</item>
         <item quantity="other">เลือก %1$d แล้ว</item>
     </plurals>
-    <string name="loading_pdf">กำลังโหลด...</string>
+    <string name="loading_pdf">กำลังโหลด…</string>
     <string name="invalid_pdf">รูปแบบ PDF ไม่ถูกต้องหรือไฟล์เสียหาย</string>
     <string name="nav_recent">ล่าสุด</string>
     <string name="nav_bookmarks">บุ๊กมาร์ก</string>
-    <string name="scanner_launch_error">การเปิดตัวสแกนเนอร์ล้มเหลว โปรดอัปเดตบริการ Google Play</string>
     <string name="task_merge_bg">รวมงานที่เพิ่มเข้ากับพื้นหลัง</string>
     <string name="task_convert_bg">การแปลงเริ่มต้นในเบื้องหลัง</string>
     <string name="task_long_image_bg">การสร้างภาพเริ่มต้นในพื้นหลัง</string>
@@ -70,14 +69,10 @@
     <string name="camera_permission_required">ต้องได้รับอนุญาตจากกล้องเพื่อสแกนเอกสาร</string>
     <string name="failed_photo_to_pdf">ไม่สามารถแปลงรูปภาพเป็น PDF</string>
     <string name="error_opening_camera">เกิดข้อผิดพลาดในการเปิดกล้อง: %1$s</string>
-    <string name="scanner_returned_null">เครื่องสแกนเอกสารส่งคืนผลลัพธ์เป็นโมฆะ</string>
     <string name="error_saving_scanned_pdf">เกิดข้อผิดพลาดในการบันทึก PDF ที่สแกน: %1$s</string>
     <string name="failed_process_scanned_pages">ไม่สามารถประมวลผลหน้าที่สแกนได้</string>
     <string name="page_image_uri_null">URI รูปภาพของเพจเป็นโมฆะ</string>
-    <string name="no_scanned_pdf_returned">ไม่มีการสแกน PDF หรือหน้าที่ส่งคืน</string>
-    <string name="scanner_error">ข้อผิดพลาดของสแกนเนอร์: %1$s</string>
     <string name="activity_not_found">ไม่พบกิจกรรม</string>
-    <string name="scanner_intent_null">จุดประสงค์ของสแกนเนอร์เป็นโมฆะ</string>
     <string name="no_app_to_open_file">ไม่พบแอปพลิเคชันสำหรับเปิดไฟล์นี้</string>
     <string name="error_title">เกิดข้อผิดพลาด</string>
     <string name="back">กลับ</string>
@@ -102,5 +97,4 @@
     <string name="personalized_ads_description">อนุญาตให้รวบรวมข้อมูลสำหรับโฆษณาที่เกี่ยวข้อง</string>
     <string name="about_app">เกี่ยวกับแอป</string>
     <string name="about_version">เวอร์ชัน %1$s</string>
-    <string name="about_description">PDF Scanner เป็นเครื่องมือฟรีสำหรับการสแกน ดู แปลง รวม และแยกเอกสาร PDF ขับเคลื่อนโดยเทคโนโลยีการสแกนเอกสาร ML Kit</string>
 </resources>

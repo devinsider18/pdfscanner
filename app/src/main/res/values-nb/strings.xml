@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">PDF Scanner</string>
-    <string name="search">Søk...</string>
+    <string name="search">Søk…</string>
     <string name="merge_pdfs">Slå sammen PDF-er</string>
     <string name="split_pdf">Del opp PDF</string>
     <string name="share">Del</string>
@@ -39,7 +39,7 @@
     <string name="nav_tools">Verktøy</string>
     <string name="converting_to_images">Konverterer til bilder …</string>
     <string name="converting_to_long_image">Konverterer til langt bilde …</string>
-    <string name="splitting_pdf">Deler opp PDF...</string>
+    <string name="splitting_pdf">Deler opp PDF…</string>
     <string name="merging_pdfs">Slår sammen PDF-er …</string>
     <string name="saved_to_pictures">Vellykket lagret i Bilder/PDFScanner</string>
     <string name="saved_to_downloads">Vellykket lagret i Nedlastinger/PDFScanner</string>
@@ -53,7 +53,6 @@
     <string name="invalid_pdf">Ugyldig PDF-format eller fil er ødelagt.</string>
     <string name="nav_recent">Nylig</string>
     <string name="nav_bookmarks">Bokmerker</string>
-    <string name="scanner_launch_error">Skannerstart mislyktes. Oppdater Google Play-tjenester.</string>
     <string name="task_merge_bg">Slå sammen oppgave lagt til i bakgrunnen</string>
     <string name="task_convert_bg">Konverteringen startet i bakgrunnen</string>
     <string name="task_long_image_bg">Bildeoppretting startet i bakgrunnen</string>
@@ -70,14 +69,10 @@
     <string name="camera_permission_required">Kameratillatelse kreves for å skanne dokumenter</string>
     <string name="failed_photo_to_pdf">Kunne ikke konvertere bildet til PDF</string>
     <string name="error_opening_camera">Feil ved åpning av kamera: %1$s</string>
-    <string name="scanner_returned_null">Dokumentskanneren returnerte nullresultat</string>
     <string name="error_saving_scanned_pdf">Feil ved lagring av skannet PDF: %1$s</string>
     <string name="failed_process_scanned_pages">Kunne ikke behandle skannede sider</string>
     <string name="page_image_uri_null">URI for sidebilde er null</string>
-    <string name="no_scanned_pdf_returned">Ingen skannet PDF eller sider returnert</string>
-    <string name="scanner_error">Skannerfeil: %1$s</string>
     <string name="activity_not_found">Finner ikke aktivitet</string>
-    <string name="scanner_intent_null">Skannerens hensikt er null</string>
     <string name="no_app_to_open_file">Finner ingen app for å åpne denne filen</string>
     <string name="error_title">Feil</string>
     <string name="back">Tilbake</string>
@@ -102,5 +97,4 @@
     <string name="personalized_ads_description">Tillat datainnsamling for relevante annonser</string>
     <string name="about_app">Om appen</string>
     <string name="about_version">Versjon %1$s</string>
-    <string name="about_description">PDF Scanner er et gratis verktøy for å skanne, vise, konvertere, slå sammen og dele PDF-dokumenter. Drevet av ML Kit dokumentskanningsteknologi.</string>
 </resources>

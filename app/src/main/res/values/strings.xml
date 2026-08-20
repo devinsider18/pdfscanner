@@ -28,8 +28,10 @@
     <string name="pdf_tools">PDF Tools</string>
     <string name="pdf_to_long_image">PDF to Long Image</string>
     <string name="pdf_to_image">PDF to Image</string>
+    <string name="sign_pdf" translatable="false">Sign PDF</string>
     <string name="select_pdfs_to_merge">Select PDFs to Merge</string>
     <string name="select_pdf_to_split">Select PDF to Split</string>
+    <string name="select_pdf_to_sign" translatable="false">Select PDF to Sign</string>
     <string name="no_pdf_documents">No PDF documents available.</string>
     <string name="confirm">Confirm</string>
     <string name="dark_mode">Dark Mode</string>
@@ -52,7 +54,6 @@
     <string name="invalid_pdf">Invalid PDF format or file is corrupted.</string>
     <string name="nav_recent">Recent</string>
     <string name="nav_bookmarks">Bookmarks</string>
-    <string name="scanner_launch_error">Scanner launch failed. Please update Google Play Services.</string>
     <string name="task_merge_bg">Merge task added to background</string>
     <string name="task_convert_bg">Conversion started in background</string>
     <string name="task_long_image_bg">Image creation started in background</string>
@@ -69,14 +70,10 @@
     <string name="camera_permission_required">Camera permission is required to scan documents</string>
     <string name="failed_photo_to_pdf">Failed to convert photo to PDF</string>
     <string name="error_opening_camera">Error opening camera: %1$s</string>
-    <string name="scanner_returned_null">Document scanner returned null result</string>
     <string name="error_saving_scanned_pdf">Error saving scanned PDF: %1$s</string>
     <string name="failed_process_scanned_pages">Failed to process scanned pages</string>
     <string name="page_image_uri_null">Page image URI is null</string>
-    <string name="no_scanned_pdf_returned">No scanned PDF or pages returned</string>
-    <string name="scanner_error">Scanner error: %1$s</string>
     <string name="activity_not_found">Activity not found</string>
-    <string name="scanner_intent_null">Scanner intent is null</string>
     <string name="no_app_to_open_file">No application found to open this file</string>
     <string name="error_title">Error</string>
     <string name="back">Back</string>
@@ -90,7 +87,7 @@
     <string name="error_pdf_memory_limit">This document is too large for your device\'s available memory. Please try converting smaller sections.</string>
     <string name="error_pdf_empty_document">This document contains no pages to convert.</string>
     <string name="error_pdf_unknown">An unexpected error occurred while reading the PDF file. Please try again or select another document.</string>
-    <string name="dialog_ok">Got it</string>
+    <string name="dialog_ok" translatable="false">Got it</string>
     <string name="gdpr_consent_title">Privacy &amp; Data</string>
     <string name="gdpr_consent_message">This app displays ads to remain free. To show you relevant ads, we and our partners collect and process device identifiers, usage data, and ad interaction data. This data may be shared with advertising partners.</string>
     <string name="gdpr_consent_details">By accepting, you consent to the collection and processing of your data for personalized advertising in accordance with GDPR (Art. 6(1)(a)). You can withdraw your consent at any time in the app settings under \"Personalized Ads\". Declining will still show ads, but they will not be personalized.</string>
@@ -101,5 +98,11 @@
     <string name="personalized_ads_description">Allow data collection for relevant ads</string>
     <string name="about_app">About App</string>
     <string name="about_version">Version %1$s</string>
-    <string name="about_description">PDF Scanner is a free tool for scanning, viewing, converting, merging, and splitting PDF documents. Powered by ML Kit document scanning technology.</string>
+    <string name="signature_feature_title" translatable="false">Signature Feature</string>
+    <string name="clear" translatable="false">Clear</string>
+    <string name="save" translatable="false">Save</string>
+    <string name="sign" translatable="false">Sign</string>
+    <string name="pay_for_feature" translatable="false">Pay for Feature</string>
+    <string name="watch_ad" translatable="false">Watch Ad</string>
+    <string name="premium_feature_required" translatable="false">This is a premium feature. Please pay or watch an ad to continue.</string>
 </resources>

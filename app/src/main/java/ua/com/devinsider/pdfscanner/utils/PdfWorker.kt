@@ -80,6 +80,10 @@ class PdfWorker(
             .setAutoCancel(true)
             .build()
             
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && 
+            androidx.core.content.ContextCompat.checkSelfPermission(context, android.Manifest.permission.POST_NOTIFICATIONS) != android.content.pm.PackageManager.PERMISSION_GRANTED) {
+            return
+        }
         notificationManager.notify(System.currentTimeMillis().toInt(), notification)
     }
 }

@@ -53,7 +53,6 @@
     <string name="invalid_pdf">잘못된 PDF 형식이거나 파일이 손상되었습니다.</string>
     <string name="nav_recent">최근</string>
     <string name="nav_bookmarks">북마크</string>
-    <string name="scanner_launch_error">스캐너 실행에 실패했습니다. Google Play 서비스를 업데이트하세요.</string>
     <string name="task_merge_bg">배경에 병합 작업이 추가되었습니다.</string>
     <string name="task_convert_bg">백그라운드에서 변환이 시작되었습니다.</string>
     <string name="task_long_image_bg">백그라운드에서 이미지 생성이 시작되었습니다.</string>
@@ -70,14 +69,10 @@
     <string name="camera_permission_required">문서를 스캔하려면 카메라 권한이 필요합니다</string>
     <string name="failed_photo_to_pdf">사진을 PDF로 변환하지 못했습니다.</string>
     <string name="error_opening_camera">카메라 열기 오류: %1$s</string>
-    <string name="scanner_returned_null">문서 스캐너가 null 결과를 반환했습니다.</string>
     <string name="error_saving_scanned_pdf">스캔한 PDF 저장 오류: %1$s</string>
     <string name="failed_process_scanned_pages">스캔한 페이지를 처리하지 못했습니다.</string>
     <string name="page_image_uri_null">페이지 이미지 URI가 null입니다.</string>
-    <string name="no_scanned_pdf_returned">스캔한 PDF 또는 페이지가 반환되지 않았습니다.</string>
-    <string name="scanner_error">스캐너 오류: %1$s</string>
     <string name="activity_not_found">활동을 찾을 수 없습니다.</string>
-    <string name="scanner_intent_null">스캐너 의도가 null입니다.</string>
     <string name="no_app_to_open_file">이 파일을 열 수 있는 애플리케이션을 찾을 수 없습니다.</string>
     <string name="error_title">오류</string>
     <string name="back">뒤로</string>
@@ -102,5 +97,4 @@
     <string name="personalized_ads_description">관련 광고를 위한 데이터 수집 허용</string>
     <string name="about_app">앱 정보</string>
     <string name="about_version">버전 %1$s</string>
-    <string name="about_description">PDF Scanner는 PDF 문서를 스캔, 보기, 변환, 병합 및 분할하기 위한 무료 도구입니다. ML Kit 문서 스캔 기술로 구동됩니다.</string>
 </resources>

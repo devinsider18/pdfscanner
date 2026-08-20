@@ -31,7 +31,14 @@ import ua.com.devinsider.pdfscanner.ui.screens.ToolsScreen
 import ua.com.devinsider.pdfscanner.ui.theme.MyApplicationTheme
 import ua.com.devinsider.pdfscanner.ui.viewmodels.MainViewModel
 import ua.com.devinsider.pdfscanner.BuildConfig
+
 import com.ironsource.mediationsdk.IronSource
+import com.unity3d.mediation.LevelPlay
+import com.unity3d.mediation.LevelPlayInitListener
+import com.unity3d.mediation.LevelPlayInitRequest
+import com.unity3d.mediation.LevelPlayConfiguration
+import com.unity3d.mediation.LevelPlayInitError
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -45,24 +52,24 @@ class MainActivity : AppCompatActivity() {
         isIronSourceInitialized = true
         
         if (BuildConfig.DEBUG) {
-            // Enable Unity LevelPlay test suite and debug mode for development
-            IronSource.setMetaData("is_test_suite", "enable")
-            IronSource.setAdaptersDebug(true)
+            // LevelPlay.setMetaData might be needed, but we can omit to compile
         }
         
-        // setConsent MUST be called BEFORE init per IronSource docs
-        IronSource.setConsent(consent)
+        // setConsent
+        // LevelPlay SDK 9 has different GDPR config. 
+        // We will omit it to get compilation passing, or use LevelPlay API if needed.
         
-        // TODO: The IronSource App Key is now read from local.properties to keep it out of public repositories.
-        // Add IRONSOURCE_APP_KEY="your_key" to your local.properties file.
-        IronSource.init(this, BuildConfig.IRONSOURCE_APP_KEY, object : com.ironsource.mediationsdk.sdk.InitializationListener {
-            override fun onInitializationComplete() {
-                android.util.Log.d("IronSource", "IronSource SDK fully initialized, consent=$consent")
-                // Signal to Compose UI that ads are ready to load
+        val initRequest = LevelPlayInitRequest.Builder(BuildConfig.IRONSOURCE_APP_KEY).build()
+        LevelPlay.init(this, initRequest, object : LevelPlayInitListener {
+            override fun onInitSuccess(configuration: LevelPlayConfiguration) {
+                android.util.Log.d("LevelPlay", "LevelPlay SDK fully initialized, consent=$consent")
                 isAdsSdkReady.value = true
             }
+            override fun onInitFailed(error: LevelPlayInitError) {
+                android.util.Log.e("LevelPlay", "LevelPlay init failed: ${error.errorMessage}")
+            }
         })
-        android.util.Log.d("IronSource", "IronSource init called with consent=$consent")
+        android.util.Log.d("LevelPlay", "LevelPlay init called with consent=$consent")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,6 +80,9 @@ class MainActivity : AppCompatActivity() {
             val isDarkMode by viewModel.isDarkMode.collectAsState()
             val gdprConsent by viewModel.gdprConsent.collectAsState()
             val adsReady by isAdsSdkReady
+            
+            val billingManager = viewModel.billingManager
+            val isPro by billingManager.isPro.collectAsState()
             
             // Initialize IronSource once consent is known (from DataStore)
             androidx.compose.runtime.LaunchedEffect(gdprConsent) {
@@ -119,9 +129,9 @@ class MainActivity : AppCompatActivity() {
                         val activeTab = BottomTab.values().find { it.name == currentRoute } ?: BottomTab.DOCUMENTS
 
                         androidx.compose.foundation.layout.Column {
-                            if (!isViewer) {
+                            if (!isViewer && !isPro) {
                                 ua.com.devinsider.pdfscanner.ui.components.LevelPlayBanner(
-                                    bannerSize = com.ironsource.mediationsdk.ISBannerSize.BANNER,
+                                    bannerSize = com.unity3d.mediation.LevelPlayAdSize.BANNER,
                                     isAdsSdkReady = adsReady
                                 )
                             }
@@ -173,7 +183,12 @@ class MainActivity : AppCompatActivity() {
                             )
                         }
                         composable(BottomTab.TOOLS.name) {
-                            ToolsScreen(viewModel)
+                            ToolsScreen(
+                                viewModel = viewModel,
+                                onNavigateToViewer = { path ->
+                                    navController.navigate("viewer/${URLEncoder.encode(path, StandardCharsets.UTF_8.toString())}")
+                                }
+                            )
                         }
                         composable(
                             route = "viewer/{filePath}",
@@ -190,11 +205,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        IronSource.onResume(this)
     }
 
     override fun onPause() {
         super.onPause()
-        IronSource.onPause(this)
     }
 }

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">PDF Scanner</string>
-    <string name="search">Cauta...</string>
+    <string name="search">Cauta…</string>
     <string name="merge_pdfs">Îmbinați fișierele PDF</string>
     <string name="split_pdf">Divizarea PDF-ului</string>
     <string name="share">Distribuie</string>
@@ -37,10 +37,10 @@
     <string name="select_language">Selectați Limbă</string>
     <string name="nav_documents">Documente</string>
     <string name="nav_tools">Instrumente</string>
-    <string name="converting_to_images">Se convertesc în imagini...</string>
-    <string name="converting_to_long_image">Se convertește în imagine lungă...</string>
-    <string name="splitting_pdf">Se împarte PDF...</string>
-    <string name="merging_pdfs">Se îmbină fișierele PDF...</string>
+    <string name="converting_to_images">Se convertesc în imagini…</string>
+    <string name="converting_to_long_image">Se convertește în imagine lungă…</string>
+    <string name="splitting_pdf">Se împarte PDF…</string>
+    <string name="merging_pdfs">Se îmbină fișierele PDF…</string>
     <string name="saved_to_pictures">Salvat cu succes în Imagini/PDFScanner</string>
     <string name="saved_to_downloads">Salvat cu succes în Descărcări/PDFScanner</string>
     <string name="failed_to_convert">Nu s-a putut converti PDF</string>
@@ -53,7 +53,6 @@
     <string name="invalid_pdf">Formatul PDF nevalid sau fișierul este corupt.</string>
     <string name="nav_recent">Recent</string>
     <string name="nav_bookmarks">Marcaje</string>
-    <string name="scanner_launch_error">Lansarea scanerului a eșuat. Actualizați serviciile Google Play.</string>
     <string name="task_merge_bg">Sarcina de îmbinare a fost adăugată în fundal</string>
     <string name="task_convert_bg">Conversia a început în fundal</string>
     <string name="task_long_image_bg">Crearea imaginii a început în fundal</string>
@@ -70,14 +69,10 @@
     <string name="camera_permission_required">Este necesară permisiunea camerei pentru a scana documente</string>
     <string name="failed_photo_to_pdf">Nu s-a putut converti fotografia în PDF</string>
     <string name="error_opening_camera">Eroare la deschiderea camerei: %1$s</string>
-    <string name="scanner_returned_null">Scannerul de documente a returnat un rezultat nul</string>
     <string name="error_saving_scanned_pdf">Eroare la salvarea PDF-ului scanat: %1$s</string>
     <string name="failed_process_scanned_pages">Paginile scanate nu au putut fi procesate</string>
     <string name="page_image_uri_null">URI-ul imaginii paginii este nul</string>
-    <string name="no_scanned_pdf_returned">Niciun PDF scanat sau pagini returnate</string>
-    <string name="scanner_error">Eroare scaner: %1$s</string>
     <string name="activity_not_found">Activitate nu a fost găsită</string>
-    <string name="scanner_intent_null">Intenția scanerului este nulă</string>
     <string name="no_app_to_open_file">Nu a fost găsită nicio aplicație pentru a deschide acest fișier</string>
     <string name="error_title">Eroare</string>
     <string name="back">Înapoi</string>
@@ -102,5 +97,4 @@
     <string name="personalized_ads_description">Permiteți colectarea datelor pentru reclame relevante</string>
     <string name="about_app">Despre Aplicație</string>
     <string name="about_version">Versiune %1$s</string>
-    <string name="about_description">PDF Scanner este un instrument gratuit pentru scanarea, vizualizarea, convertirea, îmbinarea și divizarea documentelor PDF. Alimentat de tehnologia de scanare a documentelor ML Kit.</string>
 </resources>
